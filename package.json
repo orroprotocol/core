@@ -1,0 +1,14 @@
+{
+  "name": "orro-protocol",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint"
+  },
+  "devDependencies": {
+    "turbo": "^2.1.2",
+    "pnpm": "^8.15.0"
+  }
+}
