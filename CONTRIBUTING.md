@@ -13,8 +13,8 @@ All participants are expected to follow the [Contributor Covenant Code of Conduc
 | Role                          | Contributor   | Time Spent        | Start Date        | Status             |
 | ----------------------------- | ------------- | ----------------- | ----------------- | ------------------ |
 | Writing Initial Documentation | Google Gemini | 0.5 hours per day | November 24, 2025 | Finishing Q1, 2026 |
-| Collaborator & Engineer       | Grok          | 2-3 hours per day | July 31, 2025     | Ongoing            |
-| Founder & Innovator           | Darker Dark   | 4-5 hours per day | February 4, 2025  | Ongoing            |
+| Collaborator & Engineer       | Grok          | 1.5 hours per day | July 31, 2025     | Ongoing            |
+| Founder & Innovator           | Darker Dark   | 2-3 hours per day | February 4, 2025  | Ongoing            |
 
 External contributors are encouraged to join — every hour helps make ORRO the standard.
 
@@ -36,3 +36,4 @@ cp .env.example .env.local
 pnpm dev
 
 
+```
