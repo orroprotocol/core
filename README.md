@@ -78,6 +78,7 @@ Bash
 ```
 
 Frontend: http://localhost:3000
+
 Backend: http://localhost:4000
 
 ## Security & Compliance
@@ -95,6 +96,7 @@ We welcome contributions that align with our mission of building a verifiable cr
 ## Community
 
 X: @orroprotocol
+
 Discord: Coming soon
 
 * * *
