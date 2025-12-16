@@ -1,6 +1,6 @@
 # ORRO Core: The Layer 3 for Verifiable Reputation
 
-## Identity is the foundation. Intent is the gas.
+### Identity is the foundation. Intent is the gas.
 
 **ORRO Core** is the primary implementation of the ORRO Modular Layer 3 (L3) Protocol. It is architected to solve the "Reputation Gap" in the digital economy by providing a high-performance, verifiable trust layer for creators and enterprises.
 
