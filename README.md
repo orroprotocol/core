@@ -1,8 +1,10 @@
-# ORRO Protocol: The Decentralized Trust Layer for Creators
+# ORRO Core: The Layer 3 for Verifiable Reputation
 
-ORRO Protocol is an open-source **decentralized credit rating agency** and foundational trust service designed to function as the go to destination for digital creators. We move beyond simple proof-of-ownership (NFTs) to establish **verifiable, time-proven reputation** based on consistent intent and execution (**Proof-of-Intent**), enforced by a Zero-Trust architecture.
+#### Identity is the foundation. Intent is the gas.
 
-Our core mission is to provide neutral, privacy-preserving proof of reliability (**KYA Trust Score**) that can be syndicated to any third-party marketplace via a public API.
+**ORRO Core** is the primary implementation of the ORRO Modular Layer 3 (L3) Protocol. It is architected to solve the "Reputation Gap" in the digital economy by providing a high-performance, verifiable trust layer for creators and enterprises.
+
+By bridging the gap between **On-Chain Anchoring** (immutable L2 proofs) and **Off-Chain Aggregation** (high-speed reputation logic), ORRO provides the world’s first decentralized "credit rating" for creativity—the **KYA (Know Your Artist) Trust Layer**.
 
 **GitHub Badges**
     ![Base](https://img.shields.io/badge/Base-L2-0055FF)
@@ -10,57 +12,98 @@ Our core mission is to provide neutral, privacy-preserving proof of reliability 
     ![Solidity](https://img.shields.io/badge/Solidity-0.8.24-363636)
     ![License](https://img.shields.io/badge/License-MIT-blue)
 
-## Core Architecture: The Hybrid Ledger System
+***
 
-ORRO operates on a secure **Hybrid Ledger Architecture** to balance the performance required for a global application with the immutability required for cryptographic proof.
+## Quick Links
 
-| Component                                          | Purpose                                                                                           | Technology Stack                                 | Key Output                           |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------ | ------------------------------------ |
-| **Global Activity DB Table**                       | High-speed, queryable record of all platform activity (on-chain & off-chain).                     | PostgreSQL / Firestore                           | Data source for KYA Trust Score      |
-| **Advanced Protocol Implementation System (APIS)** | The central Gatekeeper. Enforces governance rules (Trust Score, Zero Trust Key) before anchoring. | Node.js / TypeScript                             | `compressedHash` (Validated Payload) |
-| **Immutable Proof Layer**                          | Anchors the cryptographic proof of event to the blockchain (PoE).                                 | Layer 2 Blockchain (e.g., Base) / `Registry.sol` | `&tran_id` (Immutable Proof Hash)    |
-| **KYA Trust Layer**                                | Calculates the user's **Trust Score** based on verified activity from the DB.                     | ZKML Subgraph / Python Backend                   | KYA Trust Score / Badge              |
+- [Website](https://orroprotocol.io)
+- [Docs](docs/)
+- [Whitepaper](docs/whitepaper.md)
+- [Security Strategy](docs/security/hybrid-multi-layer-encryption-strategy.md)
+- [Trust Charter](docs/ethics/trust-charter.md)
 
-## Canonical Identity Model (The Four Keys)
+* * *
 
-Every critical governance action within ORRO is defined and secured by a canonical set of four 32-Byte Hex64 identifiers. These keys are the inputs to the APIS and the core data anchored on the L2 Registry.
+## The Architecture
 
-| Parameter  | Canonical Name | Description                                                                                 | Purpose                           |
-| ---------- | -------------- | ------------------------------------------------------------------------------------------- | --------------------------------- |
-| `&user_id` | `memberId`     | The unique, immutable identifier for the acting creator.                                    | Identity & Trust Score Accrual    |
-| `&proj_id` | `projectId`    | The unique identifier for the creation container or project.                                | Contextual Proof of Intent        |
-| `&cont_id` | `containerId`  | The specific digital container within the project being acted on (e.g., a file checkpoint). | Granular Asset Traceability       |
-| `&intent`  | `intentId`     | The cryptographic hash representing the user's explicit intent (e.g., 'Seal Project').      | PoI Enforcement                   |
-| `&tran_id` | `tranId`       | The L2 transaction hash for the immutable proof.                                            | Immutability Verification Linkage |
+ORRO operates as a **Hybrid L3 Protocol**, decoupling security from performance to ensure enterprise-grade scalability:
 
-## Security Foundation: Zero Trust Key Validation
+* **Layer 2 (The Anchor):** Inherits the immutable security of the Polygon/Ethereum ecosystem for identity anchoring and proof verification.
 
-The APIS layer enforces the **Zero Trust Key Validation** on every transaction. This principle treats all four canonical keys as potentially compromised or "Dummy / Negative Trust Keys" unless they are actively and positively asserted as valid (signature/ML-DSA verified). This eliminates systemic weak links and guarantees data integrity before any state change.
+* **Layer 3 (The Application):** A hardened, off-chain aggregation environment optimized for complex reputation queries, real-time KYA scoring, and Enterprise API syndication.
 
-## Integration (KYA API)
+* **Hardened Ledger:** Built on a "Hybrid Multi-Layer Encryption" strategy, utilizing **AES-256-GCM** and **Keccak256** hashing to ensure data sovereignty and zero-knowledge consistency.
 
-Third-party platforms can integrate the KYA Trust Layer via a simple REST API call to verify a user's status:
-    # Example: Query for a creator's verified status and Trust Score proof
-    curl -X GET https://api.orroprotocol.io/v1/kyc/proofs?member_id=0x...
+Key Features
+---------------
 
-**Partners must adhere to the ORRO Third Party Licensing Terms**, including linking the badge to the official verifier (`orroprotocol.io/verify/[memberId]`) and **not modifying or hiding the attribution**.
+* **KYA Trust Score:** A dynamic, multi-dimensional reputation metric based on the 3 C’s: _Character, Competence, and Communication._
 
-## Contribution
+* **Modular Reputation Modules:** Pluggable logic for different creative industries (e.g., Music, Design, Software).
 
-This entire protocol, including the architectural design and documentation, will become **Creative Commons certified** 36,000 seconds (approx. 10 hours) after the project launch date. We welcome contributions, especially in:
+* **Enterprise Gateway:** High-performance mTLS-secured APIs for third-party platforms to verify creator credentials without compromising privacy.
 
-* **Solidity:** Auditing and optimizing the `Registry.sol` contract.
+* **Privacy-First Design:** Full End-to-End Encryption (E2EE) for peer-to-peer interactions and irreversible MTC (My Trust Code) hashing.
 
-* **ZKML:** Developing optimized `circom` circuits for TS and MTC verification.
+Tech Stack
+-------------
 
-* **TypeScript:** Extending the APIS logic for new governance actions.
+* **Core Logic:** [Insert Language, e.g., Go / Node.js / Rust]
 
-Please refer to the `CONTRIBUTING.md` (to be created) for detailed guidelines.
+* **Data Engine:** PostgreSQL / BigQuery (with multi-layer TDE)
 
-## Timeline
+* **Identity:** Keccak256 Hashing & Polygon-anchored proofs
 
-Protocol Launch: TBA
+* **Security:** AES-256-GCM Authenticated Encryption & TLS 1.3
 
-## License
+* * *
 
-ORRO Protocol is licensed under the **MIT License**, with additional terms (including a **$5.00 limitation on liability** and a full disclaimer of warranty) as detailed in `ORRO Software Usage Rights.md`.
+Getting Started
+------------------
+
+### Prerequisites
+
+* [Specific requirement 1, e.g., Docker]
+
+* [Specific requirement 2, e.g., Node.js 20+]
+
+* A secure KMS provider or local HSM for key management.
+
+### Installation
+
+```
+Bash
+    # Clone the repository
+    git clone https://github.com/orroprotocol/core.git
+
+    # Enter the directory
+    cd core
+
+    # Install dependencies
+    npm install  # or your specific install command
+
+    # Initialize the hardened configuration
+    cp .env.example .env
+```
+
+* * *
+
+Security & Compliance
+------------------------
+
+ORRO Core is built for high-trust environments.
+
+* **GDPR/CCPA Compliant:** Native support for "crypto-shredding" and the right to be forgotten.
+
+* **Audited:** Subject to annual third-party security audits for L3 classification.
+
+Contributing
+---------------
+
+We welcome contributions that align with our mission of building a verifiable creative economy. Please see [CONTRIBUTING.md](https://www.google.com/search?q=CONTRIBUTING.md) for our technical standards and code of conduct.
+
+* * *
+
+**ORRO Protocol: Security inherited. Performance forged.**
+
+
