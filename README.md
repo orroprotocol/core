@@ -77,6 +77,9 @@ Bash
     cp .env.example .env
 ```
 
+Frontend: http://localhost:3000
+Backend: http://localhost:4000
+
 ## Security & Compliance
 
 ORRO Core is built for high-trust environments.
@@ -89,8 +92,14 @@ ORRO Core is built for high-trust environments.
 
 We welcome contributions that align with our mission of building a verifiable creative economy. Please see [CONTRIBUTING.md](https://www.google.com/search?q=CONTRIBUTING.md) for our technical standards and code of conduct.
 
+## Community
+
+X: @orroprotocol
+Discord: Coming soon
+
 * * *
 
-**ORRO Protocol: Security inherited. Performance forged.**
+ORRO Protocol Core Repository
+Copyright © 2025 ORRO Protocol. MIT Licensed.
 
 
