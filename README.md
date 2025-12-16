@@ -13,8 +13,6 @@ By bridging the gap between **On-Chain Anchoring** (immutable L2 proofs) and **O
     ![Solidity](https://img.shields.io/badge/Solidity-0.8.24-363636)
     ![License](https://img.shields.io/badge/License-MIT-blue)
 
-***
-
 ## Quick Links
 
 - [Website](https://orroprotocol.io)
@@ -22,8 +20,6 @@ By bridging the gap between **On-Chain Anchoring** (immutable L2 proofs) and **O
 - [Whitepaper](docs/whitepaper.md)
 - [Security Strategy](docs/security/hybrid-multi-layer-encryption-strategy.md)
 - [Trust Charter](docs/ethics/trust-charter.md)
-
-* * *
 
 ## The Architecture
 
@@ -35,8 +31,7 @@ ORRO operates as a **Hybrid L3 Protocol**, decoupling security from performance 
 
 * **Hardened Ledger:** Built on a "Hybrid Multi-Layer Encryption" strategy, utilizing **AES-256-GCM** and **Keccak256** hashing to ensure data sovereignty and zero-knowledge consistency.
 
-Key Features
----------------
+### Key Features
 
 * **KYA Trust Score:** A dynamic, multi-dimensional reputation metric based on the 3 C’s: _Character, Competence, and Communication._
 
@@ -46,8 +41,7 @@ Key Features
 
 * **Privacy-First Design:** Full End-to-End Encryption (E2EE) for peer-to-peer interactions and irreversible MTC (My Trust Code) hashing.
 
-Tech Stack
--------------
+### Tech Stack
 
 * **Core Logic:** [Insert Language, e.g., Go / Node.js / Rust]
 
@@ -57,10 +51,7 @@ Tech Stack
 
 * **Security:** AES-256-GCM Authenticated Encryption & TLS 1.3
 
-* * *
-
-Getting Started
-------------------
+## Getting Started
 
 ### Prerequisites
 
@@ -87,10 +78,7 @@ Bash
     cp .env.example .env
 ```
 
-* * *
-
-Security & Compliance
-------------------------
+## Security & Compliance
 
 ORRO Core is built for high-trust environments.
 
@@ -98,8 +86,7 @@ ORRO Core is built for high-trust environments.
 
 * **Audited:** Subject to annual third-party security audits for L3 classification.
 
-Contributing
----------------
+## Contributing
 
 We welcome contributions that align with our mission of building a verifiable creative economy. Please see [CONTRIBUTING.md](https://www.google.com/search?q=CONTRIBUTING.md) for our technical standards and code of conduct.
 
