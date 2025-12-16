@@ -1,4 +1,5 @@
-# ORRO Core: The Layer 3 for Verifiable Reputation
+ORRO Core: The Layer 3 for Verifiable Reputation
+=====================================================
 
 #### Identity is the foundation. Intent is the gas.
 
