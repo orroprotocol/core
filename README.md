@@ -19,6 +19,7 @@ By bridging the gap between **On-Chain Anchoring** (immutable L2 proofs) and **O
 - [Whitepaper](docs/whitepaper.md)
 - [Security Strategy](docs/security/hybrid-multi-layer-encryption-strategy.md)
 - [Trust Charter](docs/ethics/trust-charter.md)
+- [Legal](docs/legal/)
 
 ## The Architecture
 
