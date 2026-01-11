@@ -1,7 +1,7 @@
 # ORRO Protocol: The Live Creation Lead
 
 <p align="center">
-  <img src="https://github.com/orroprotocol/core/docs/images/orro-logo-header.png" alt="ORRO Protocol Logo" width="180">
+  <img src="./orro-logo-header.png" alt="ORRO Protocol Logo" width="180">
 </p>
 
 <p align="center"><strong>The world's first decentralized reputation and trust engine for the creative economy.</strong></p>
@@ -18,6 +18,8 @@
 * [Usage](https://www.google.com/search?q=%23-usage)
 
 * [Roadmap](https://www.google.com/search?q=%23-roadmap)
+
+* [Tokenomics](https://www.google.com/search?q=%23-tokenomics)
 
 * [Community](https://www.google.com/search?q=%23-community)
 
@@ -105,9 +107,21 @@ For full API, see [https://github.com/orroprotocol/core/docs/api-reference](http
 
 ## Roadmap
 
-![](https://github.com/orroprotocol/core/docs/images/orro-roadmap.png)
+![](./orro-roadmap.png)
 
 Pre-beta: Security audit in progress. To join the beta test apply for an invite code by PM at the discord community [@orroprotocol](https://discord.gg).
+
+## Tokenomics
+
+To keep ORRO fair, stable, and truly creator-owned, we use a simple utility token called ORROT — never designed for speculation, but as a tool for reputation and system stability.
+
+- **Fair Start for Everyone** Total supply: 1 billion tokens. To prevent whales, every account is capped at ~\$100 worth (10,000 ORROT). This means the platform can only ever be fully owned by up to 100,000 real users — not a handful of investors.
+
+- **The ORROC Community Fund** No "developer slush fund." Instead, a small 5% fee from system activity flows into the ORRO Community Contingency (ORROC) fund. This grows quietly and is used only for emergencies (e.g., network congestion compensation) or community initiatives — fully transparent and governed by reputation-weighted votes.
+
+- **Pay-As-You-Go (No Subscriptions)** Using ORRO is extremely affordable. Most users preload ~\$10 in ORROT to cover everyday actions (saving fragments, voting, etc.). For typical creators, this lasts months — costing less than \$1.49 per month to keep your Live Creation Lead active.
+
+- **Safety & Compliance** To meet global age-verification laws (e.g., under-16 restrictions in Australia and the UK) and enhance credibility, users can earn a Verified Badge by securely confirming age (email + optional phone). This keeps the community safe and makes your reputation even more valuable to partners.
 
 ## Community
 
