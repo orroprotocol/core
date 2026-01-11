@@ -1,7 +1,7 @@
 # ORRO Protocol: The Live Creation Lead
 
 <p align="center">
-  <img src="https://github.com/orroprotocol/core/docs/images/orro-logo-header.png" alt="ORRO Protocol Logo" width="180">
+  <img src="https://github.com/orroprotocol/core/blob/main/docs/images/orro-logo-header.png" alt="ORRO Protocol Logo" width="180">
 </p>
 
 <p align="center"><strong>The world's first decentralized reputation and trust engine for the creative economy.</strong></p>
@@ -107,7 +107,7 @@ For full API, see [https://github.com/orroprotocol/core/docs/api-reference](http
 
 ## Roadmap
 
-![](https://github.com/orroprotocol/core/docs/images/orro-roadmap.png)
+![](https://github.com/orroprotocol/core/blob/main/docs/images/orro-roadmap.png)
 
 Pre-beta: Security audit in progress. To join the beta test apply for an invite code by PM at the discord community [@orroprotocol](https://discord.gg).
 
