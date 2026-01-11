@@ -1,7 +1,7 @@
 # ORRO Protocol: The Live Creation Lead
 
 <p align="center">
-  <img src="./orro-logo-header.png" alt="ORRO Protocol Logo" width="180">
+  <img src="./images/orro-logo-header.png" alt="ORRO Protocol Logo" width="180">
 </p>
 
 <p align="center"><strong>The world's first decentralized reputation and trust engine for the creative economy.</strong></p>
