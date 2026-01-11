@@ -107,7 +107,7 @@ For full API, see [https://github.com/orroprotocol/core/docs/api-reference](http
 
 ## Roadmap
 
-![](./orro-roadmap.png)
+![](https://github.com/orroprotocol/core/docs/images/orro-roadmap.png)
 
 Pre-beta: Security audit in progress. To join the beta test apply for an invite code by PM at the discord community [@orroprotocol](https://discord.gg).
 
