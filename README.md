@@ -145,7 +145,7 @@ Issues/PRs for OIPs (ORRO Improvement Proposals) especially encouraged.
 ## Security
 
 * **Audits**: Pre-beta security audit in progress (OtterSec/Kudelski).
-* **Breaches**: Report to [breaches@orro.io](mailto:breaches@orro.io?referrer=grok.com) — bounties up to 1000 ORROT for critical finds.
+* **Breaches**: Report to [breaches@orroprotocol.io](mailto:breaches@orroprotocol.io?referrer=grok.com) — bounties up to 1000 ORROT for critical finds.
 
 ## License
 
