@@ -151,7 +151,21 @@ We designed the **ORROT** token to be the fuel for a fair, human-centric economy
 
 ### 6. Technical Architecture: The Proof of Humanity
 
-![](https://github.com/orroprotocol/core/blob/main/docs/images/orro-architectural-diamgram.png)
+```
+Application Technical Architecture Diagram
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+[ USER SPACE ]        [ LOGIC LAYER (Rust/Anchor) ]       [ ON-CHAIN (Solana) ]
+      |                         |                             |
+  (Fragment)  ------>   [ Grit Engine (MTC) ]   ------>   ( PDA: Rep State )
+      |                         |                             |
+ [Trust Mode] ------>   [ ZK-Proof Logic ]      ------>   ( PDA: ZK-Hash )
+      |                         |                             |
+ (Community)  ------>   [ Endorsement (YTC) ]   ------>   ( PDA: Trust Map )
+                                |
+                        [ ORROC Treasury ] <--- (5% Fee)
+
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+```
 
 To stay ahead of the AIF Line, we need more than just a place to store files; we need a way to prove that human thought was behind every step of a project.
 
@@ -230,7 +244,28 @@ To protect the system’s long-term survival, we established the **ORRO Communit
 
 ### 9. Roadmap: Beyond the Finality Line
 
-![](https://github.com/orroprotocol/core/blob/main/docs/images/orro-roadmap-2026-2027.png)
+```
+Application Development Roadmap (2026-2027)
+―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+        | 2026 Q1      | 2026 Q2      | 2026 Q3      | 2026 Q4      | 2027 Q1      | 2027 Q2      | 2027 Q3      | 2027 Q4      |
+        |              |              |              |              |              |              |              |              |
+ BETA   | (Phase 1)    |              |              |              |              |              |              |              |
+        | [Core Launch: Solana Wallet & Bucket System with 10% Early Adopter Rewards]             |              |              |
+        |              |              |              |              |              |              |              |              |
+ GROWTH |              | (Phase 2)    |              |              |              |              |              |              |
+        |              | [Verified Badge Integration, Age-Gating, and Global Legal Compliance Frameworks]        |              |
+        |              |              |              |              |              |              |              |              |
+ HARDEN |              |              | (Phase 3)    |              |              |              |              |              |
+        |              |              | [ZK-SNARK Integration: Trust Mode Activation for Private Provenance]     |              |
+        |              |              |              |              |              |              |              |              |
+ AUDIT  |              |              |              | (Phase 4)    |              |              |              |              |
+        |              |              |              | [Third-Party Security Audit & ORROC Fund Community Grants]|              |
+        |              |              |              |              |              |              |              |              |
+ SCALE  |              |              |              |              | (Phase 5)    |              |              |              |
+        |              |              |              |              | [DAO Governance & Global API Partnerships (Adobe/META Integrations)]
+        |              |              |              |              |              |              |              |              |
+―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+```
 
 The goal of ORRO is to move from a beta test to a global standard for human creative provenance.
 
@@ -450,3 +485,5 @@ Bash
 
 orro gossip "Just solved the ZK-circuit bottleneck. Feeling the magic!"
 ```
+
+
