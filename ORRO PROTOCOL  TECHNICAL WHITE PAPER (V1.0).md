@@ -1,14 +1,10 @@
-<img title="" src="./paint-bucket-explosion.png" alt="" style="zoom:150%;">
+<img title="" src="https://github.com/orroprotocol/core/blob/main/docs/images/orro-creative-explosion.png" alt="" style="zoom:100%;">
 
 # ORRO PROTOCOL: TECHNICAL WHITE PAPER (V1.0)
 
 ### _A Decentralized Framework for Live Reputation & Experience Provenance_
 
 Lead Author @darkerdarkofficial, with contributions from Grok AI
-
-
-
-
 
 * * *
 
