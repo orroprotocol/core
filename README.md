@@ -109,19 +109,54 @@ For full API, see [https://github.com/orroprotocol/core/blob/main/docs/api-refer
 
 ## Architecture
 
-![](https://github.com/orroprotocol/core/blob/main/docs/images/architecture-diagram.png)
+```
+Application Architecture Diagram
+―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+[ USER SPACE ]        [ LOGIC LAYER (Rust/Anchor) ]       [ ON-CHAIN (Solana) ]
+      |                         |                             |
+  (Fragment)  ------>   [ Grit Engine (MTC) ]   ------>   ( PDA: Rep State )
+      |                         |                             |
+ [Trust Mode] ------>   [ ZK-Proof Logic ]      ------>   ( PDA: ZK-Hash )
+      |                         |                             |
+ (Community)  ------>   [ Endorsement (YTC) ]   ------>   ( PDA: Trust Map )
+                                |
+                        [ ORROC Treasury ] <--- (5% Fee)
+
+―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+```
 
 ## Roadmap
 
-![](https://github.com/orroprotocol/core/blob/main/docs/images/orro-roadmap-2026-2027.png)
+```
+Application Development Roadmap (2026-2027)
+―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+        | 2026 Q1      | 2026 Q2      | 2026 Q3      | 2026 Q4      | 2027 Q1      | 2027 Q2      | 2027 Q3      | 2027 Q4      |
+        |              |              |              |              |              |              |              |              |
+ BETA   | (Phase 1)    |              |              |              |              |              |              |              |
+        | [Core Launch: Solana Wallet & Bucket System with 10% Early Adopter Rewards]        |              |              |      |
+        |              |              |              |              |              |              |              |              |
+ GROWTH |              | (Phase 2)    |              |              |              |              |              |              |
+        |              | [Verified Badge Integration, Age-Gating, and Global Legal Compliance Frameworks]     |              |      |
+        |              |              |              |              |              |              |              |              |
+ HARDEN |              |              | (Phase 3)    |              |              |              |              |              |
+        |              |              | [ZK-SNARK Integration: Trust Mode Activation for Private Provenance]  |              |      |
+        |              |              |              |              |              |              |              |              |
+ AUDIT  |              |              |              | (Phase 4)    |              |              |              |              |
+        |              |              |              | [Third-Party Security Audit & ORROC Fund Community Grants]    |              |
+        |              |              |              |              |              |              |              |              |
+ SCALE  |              |              |              |              | (Phase 5)    |              |              |              |
+        |              |              |              |              | [DAO Governance & Global API Partnerships (Adobe/Meta Integrations)]
+        |              |              |              |              |              |              |              |              |
+―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+```
 
-Pre-beta: Security audit in progress. To join the beta test apply for an invite code in the discord community chat here: [@orroprotocol](https://discord.gg).
+Pre-beta: Security audit in progress. To join the beta test apply for an invite code in the discord community here: [@orroprotocol](https://discord.gg).
 
 ## Tokenomics
 
 To keep ORRO fair, stable, and truly creator-owned, we use a simple utility token called ORROT — never designed for speculation, but as a tool for reputation and system stability.
 
-- **Fair Start for Everyone** Total supply: 1 billion tokens. To prevent whales, every account is capped at ~\$100 worth (10,000 ORROT). This means the platform can only ever be fully owned by up to 100,000 real users — not a handful of investors.
+- **Fair Start for Everyone** Total supply: 1 billion tokens. To prevent whales accumulation, every account is capped at ~\$100 worth (10,000 ORROT). This means the platform can only ever be fully owned by up to 100,000 real users — not a handful of investors.
 
 - **The ORROC Community Fund** No "developer slush fund." Instead, a small 5% fee from system activity flows into the ORRO Community Contingency (ORROC) fund. This grows quietly and is used only for emergencies (e.g., network congestion compensation) or community initiatives — fully transparent and governed by reputation-weighted votes.
 
