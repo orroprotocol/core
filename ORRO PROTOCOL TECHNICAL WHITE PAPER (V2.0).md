@@ -252,39 +252,33 @@ The AIF Line is not something to fear, but something to prepare for. By turning 
 
 ### 11. Disclaimer of Liability & Asset Status
 
-**11.1 The "As-Is" Infrastructure Provision** The ORRO Protocol is provided as decentralized infrastructure "as-is" and "as-available". ORRO acts solely as a facilitator for cryptographic provenance and does not control, curate, or assume liability for the data transmitted via its PDAs (Program Derived Addresses).
+* **11.1 The "As-Is" Infrastructure Provision:** The ORRO Protocol is decentralized infrastructure provided "as-is". The development team assumes no liability for content transmitted via Program Derived Addresses (PDAs).
 
-**11.2 Digital Asset Classification** The native ORRO token is classified as a **Utility Token** under the **MiCA (Markets in Crypto-Assets)** framework. It provides access to protocol services (Buckets, Fragments) and does not represent an investment contract, equity, or debt in any entity. Users in restricted jurisdictions are responsible for their own compliance with local securities laws.
+* **11.2 Digital Asset Classification:** The native ORRO token is classified as a **Utility Token** under the **MiCA (Markets in Crypto-Assets)** framework. It is not an investment contract or equity.
 
-**11.3 User Autonomy & Signatures** All data is published with the author’s explicit permission through a cryptographic signature. This signature constitutes a legal affirmation that the content is human-originated and complies with the **Human Lead** standards of the protocol.
+* **11.3 User Autonomy:** All on-chain actions require a cryptographic signature, which serves as a legal affirmation of human-originated content and compliance with protocol standards.
 
 ### 12. The Gossip Box Standards (Community Rules)
 
-**12.1 Anti-Bot & Anti-Sybil Conduct** To preserve the "Human Lead," any attempt to automate "Winks" or "Voices" using AI agents without disclosure is considered a breach of protocol integrity. Such accounts are subject to **Cluster Decay** and **MTC Slashing** as determined by the ML layer.
+* **12.1 Anti-Bot Conduct:** Automated "Winking" or AI-agent activity without disclosure is a breach of integrity. Such accounts face **Cluster Decay** and **MTC Slashing**.
 
-**12.2 Prohibited Content** While ORRO is decentralized, the **Live Ticker** interface and community gateways adhere to global safety standards. Prohibited content includes:
+* **12.2 Prohibited Content:** Gateways adhere to the **EU AI Act** safety thresholds and prohibit the incitement of harm or copyright violation.
 
-* Content violating the **EU AI Act** safety thresholds (e.g., prohibited biometric categorization).
-
-* Direct incitement of harm or illegal activities.
-
-* Copyrighted material for which the user does not hold the "Recipe" (provenance).
-
-**12.3 De-escalation Protocol** Disputes regarding reputation or "Magic" authenticity are handled via **Randomized Jury Selection**. Jurors are rewarded from the **ORROC Fund** for providing neutral arbitration to ensure the Gossip Box remains a high-trust environment.
+* **12.3 De-escalation Protocol:** Disputes are handled via **Randomized Jury Selection**, with jurors rewarded from the **ORROC Fund** for neutral arbitration.
 
 ### 13. Compliance & Risk Management
 
-**13.1 Privacy & GDPR Alignment** ORRO utilizes **ZK-SNARKs** (Zero-Knowledge Proofs) to satisfy GDPR’s "Data Minimization" principle. By storing only cryptographic proofs on-chain while keeping sensitive creative "Recipes" off-chain, ORRO enables the **Right to be Forgotten**—once off-chain data is deleted, the on-chain proof becomes functionally null.
+* **13.1 Privacy & GDPR:** ORRO uses **ZK-SNARKs** to satisfy the "Data Minimization" principle. Off-chain creative "Recipes" remain private, enabling the **Right to be Forgotten**.
 
-**13.2 Regulatory Alignment (MiCA & AI Act)** The protocol is designed for 2026 readiness, featuring mandatory transparency for **General Purpose AI (GPAI)** integrations. Any "Creative Avatar" utilizing AI-assistive tools must disclose the compute-to-human ratio to maintain their **Verified Badge** status.
+* **13.2 Regulatory Alignment:** In alignment with 2026 standards, any AI-assistive tool integration must disclose the compute-to-human ratio to maintain a **Verified Badge**.
 
-**13.3 Intellectual Property Protection** ORRO protects creators by creating a **Genesis Certificate** for every project. This hash-linked evidence serves as prior art in legal proceedings, defending human creators against unauthorized AI model training (scraping).
+* **13.3 Intellectual Property:** Every project receives a **Genesis Certificate** on-chain, providing legal proof of prior art against unauthorized AI scraping.
 
 ### 14. Reporting & Incident Response
 
-**14.1 Breach Reporting** If you identify content that violates legal standards or the **AIF Defense Strategy**, report it immediately to **breaches@orro.io**. Reports are reviewed by **Moderators** and can lead to a temporary de-listing from the public Ticker pending a community vote.
+* **14.1 Breach Reporting:** Content violating legal or safety standards can be reported to **breaches@orro.io** for moderator review and potential de-listing.
 
-**14.2 Emergency Pause & Governance** The **ORROC Fund** (5% Stability Accrual) maintains a reserve to address protocol-level exploits. In the event of a critical "Revival Attack" or smart contract vulnerability, the governance layer can vote to trigger a **Technical Pause** to protect the community’s verified data.
+* **14.2 Emergency Governance:** The **ORROC Fund** maintains a reserve to mitigate technical exploits. Governance can vote for a **Technical Pause** during critical security events.
 
 ## VI. Appendix
 
