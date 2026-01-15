@@ -13,8 +13,6 @@ Lead Author @darkerdarkofficial, with contributions from Grok AI
 | V1.0    | 2026-01-01 | Initial release                                   |
 | V2.0    | 2026-01-18 | Added code examples, security section, ZK details |
 
-* * *
-
 ## Technical White Paper: Table of Contents
 
 ### Part I: The Vision & The Voice
@@ -111,8 +109,6 @@ Lead Author @darkerdarkofficial, with contributions from Grok AI
 
 * Appendix C: Developer Quick-Start (Alpha)
 
-* * *
-
 ## Part I: The Vision & The Voice
 
 ### 1. Introduction: Our Creative Future
@@ -121,15 +117,11 @@ We are entering a golden age of creativity where technology and human imaginatio
 
 The ORRO Protocol is here to celebrate this unique human contribution. As we approach the **Artificial Intelligence Finality (AIF) Line**, ORRO provides a secure, decentralized stage to prove that your grit and your ideas are yours alone. We aren't here to fear the future; we are here to ensure that human creators remain the verified leaders of it.
 
-* * *
-
 ### 2. The AIF Line: Protecting Humanity
 
 The **AIF Line** represents the threshold where AI systems might begin to eclipse human strategic control. Without a way to verify human effort, our unique "Grit" risks being lost in a sea of generated content.
 
 ORRO acts as a defensive and celebratory boundary. By creating a **Live Creation Lead** on the Solana blockchain, we provide a permanent record of the time, effort, and human intent behind every project. This ensures that even as AI evolves, the world can always distinguish and reward real human talent.
-
-* * *
 
 ### 3. The Core Of The Lead
 
@@ -139,8 +131,6 @@ At the center of the ORRO ecosystem is your **Live Creation Lead**. This is a be
 
 * **3.2 YTC (Your Trust Code):** This is the "Community Wink." It is the reputation you build through the trust of your peers. When other high-grit creators recognize your skills and integrity, they give you a **Wink**. This ensures that your reputation is built on real human connections that cannot be faked by a machine.
 
-* * *
-
 ### 4. Strategic Identity: The Creative Avatar
 
 In the ORRO world, we believe the role of "Artist" is evolving into something even more meaningful. You are a **Guide**, a **Trailblazer**, and a **Creative Avatar**—a human leader navigating the vast possibilities of technology.
@@ -148,8 +138,6 @@ In the ORRO world, we believe the role of "Artist" is evolving into something ev
 * **4.1 Global Recognition:** Modern leaders like "Meta for Creators" and "Google for Developers" are looking for the next generation of human talent. ORRO provides the verified "Lead" they need to find people with the grit and vision to tackle the world's most exciting challenges.
 
 * **4.2 Your Verified Badge:** To keep our community safe and professional, we use a simple **Verified Badge** system. This confirms you are a real person, allowing you to share your work with confidence across borders while staying compliant with global safety standards (like those in Australia and the UK).
-
-* * *
 
 ## Part II: Identity & Achievement
 
@@ -160,8 +148,6 @@ We designed the **ORROT** token to be the fuel for a fair, human-centric economy
 * **5.1 Empowering Everyone:** To prevent any single person from having too much influence, we have a **10,000 ORROT cap** per account. This ensures that our community is made up of thousands of individual creators rather than a few large corporations.
 
 * **5.2 The ORROC Fund:** We believe in looking out for one another. A small 5% fee from protocol actions goes into the **Community Contingency (ORROC) Fund**. This acts as a shared safety net, ensuring the protocol stays healthy, stable, and ready to support our members for years to come.
-
-* * *
 
 ### 6. Technical Architecture: The Proof of Humanity
 
@@ -222,8 +208,6 @@ pub fn verify_trust_session(ctx: Context<VerifyTrust>, proof: Vec<u8>) -> Result
 }
 ```
 
-* * *
-
 ## Part III: The Technical Engine
 
 ### 7. Tokenomics: Fueling the Human Economy
@@ -234,8 +218,6 @@ The **ORROT** token is the utility that powers the ORRO ecosystem. It is designe
 
 * **7.2 The Cost of Creation:** Using the protocol is designed to be affordable for everyone. Most "Creation Leads" (saving Fragments or Winking) cost very little, meaning a typical creator can stay active for less than **$1.49 per month**.
 
-* * *
-
 ## Part IV: Future & Governance
 
 ### 8. Governance: The ORROC Fund
@@ -245,8 +227,6 @@ To protect the system’s long-term survival, we established the **ORRO Communit
 * **8.1 Stability Accrual:** A **5% fee** from all protocol actions is automatically sent to the ORROC fund. This treasury is used to keep the system stable and provide grants for new **Guides** and **Creative Avatars**.
 
 * **8.2 Community Defense:** The fund acts as a safety net. If the protocol faces an emergency—such as an external attack or a sudden market shift—the ORROC fund provides the resources needed to adapt and protect the community's verified data.
-
-* * *
 
 ### 9. Roadmap: Beyond the Finality Line
 
@@ -263,8 +243,6 @@ The goal of ORRO is to move from a beta test to a global standard for human crea
 * **Phase 4 (Security Audit & Community Incentives):** Conducting a full-scale **third-party audit** of the protocol’s smart contracts and launching the **ORROC Fund** to reward "Guides" who help verify the community’s creative integrity.
 
 * **Phase 5 (Governance & Scaling):** Transitioning to a **DAO-led governance** model where ORROT holders vote on technical standards (OIPs), and scaling the protocol through API partnerships with global platforms like Adobe and META.
-
-* * *
 
 ### 10. Conclusion: Humanity’s Lead
 
@@ -336,9 +314,7 @@ The AIF Line is not something to fear, but something to prepare for. By turning 
 | **Zero-Knowledge (ZK)**   | A cryptographic technology that allows you to prove you are working on a project without exposing any intellectual property. |
 | **ZK-SNARKs**             | Efficient ZK-proofs used to keep Solana transaction costs low (~$1.49/mo).                                                   |
 
- * * *
-
-### ### **Appendix B: Preserving the Human Lead (Security & Mitigations)**
+### **Appendix B: Preserving the Human Lead (Security & Mitigations)**
 
 A decentralized reputation protocol is only as strong as its resistance to manipulation. In an era where AI can simulate output, ORRO ensures that only genuine **Human Grit** can build a "Lead." We use a **Defense-in-Depth** strategy to harden the Bucket against these primary vectors.
 
@@ -373,8 +349,6 @@ A decentralized reputation protocol is only as strong as its resistance to manip
 **The Threat:** A user uses a script to fake "Inspired" moods or 10-hour work sessions to inflate their "Pulse" metadata.
 
 * **The Human Defense (Gossip Validation):** If a user claims high-intensity "Magic" but never produces an **Artifact Hash** that matches that effort, the Gossip Box community can flag the discrepancy. This triggers a human-led audit of the account's verification status.
-
-* * *
 
 ### Summary of Appendix B:
 
@@ -484,5 +458,3 @@ Bash
 
 orro gossip "Just solved the ZK-circuit bottleneck. Feeling the magic!"
 ```
-
-*  
