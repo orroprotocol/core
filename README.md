@@ -115,7 +115,7 @@ For full API, see [https://github.com/orroprotocol/core/blob/main/docs/api-refer
 
 ![](https://github.com/orroprotocol/core/blob/main/docs/images/orro-roadmap-2026-2027.png)
 
-Pre-beta: Security audit in progress. To join the beta test apply for an invite code by PM at the discord community [@orroprotocol](https://discord.gg).
+Pre-beta: Security audit in progress. To join the beta test apply for an invite code in the discord community chat here: [@orroprotocol](https://discord.gg).
 
 ## Tokenomics
 
