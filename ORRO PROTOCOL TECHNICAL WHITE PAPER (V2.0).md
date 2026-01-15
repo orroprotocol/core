@@ -354,8 +354,6 @@ A decentralized reputation protocol is only as strong as its resistance to manip
 
 By combining Mathematical Friction (Fees), Cryptographic Truth (ZK-Proofs), and Human Curation (Winks/Gossip), ORRO ensures that the only way to "Get Ahead" of the AIF Line is to actually do the human work.
 
-* * *
-
 ### Appendix C: Developer Quick-Start (Alpha)
 
 This guide provides the CLI-level instructions to initialize your first **Bucket** and commit your first **Fragment**. To follow this, you should have the Solana CLI and the `orro-cli` (Alpha) installed.
