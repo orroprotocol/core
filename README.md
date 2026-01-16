@@ -121,8 +121,6 @@ Application Architecture Diagram
  (Community)  ------>   [ Endorsement (YTC) ]   ------>   ( PDA: Trust Map )
                                 |
                         [ ORROC Treasury ] <--- (5% Fee)
-
-――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 ```
 
 ## Roadmap
@@ -147,10 +145,9 @@ Application Development Roadmap (2026-2027)
  SCALE  |              |              |              |              | (Phase 5)    |              |              |              |
         |              |              |              |              | [DAO Governance & Global API Partnerships (Adobe/Meta Integrations)]
         |              |              |              |              |              |              |              |              |
-―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 ```
 
-Pre-beta: Security audit in progress. To join the beta test apply for an invite code in the discord community here: [@orroprotocol](https://discord.gg).
+Pre-beta: Security audit in progress. To join the beta test apply for an invite code in the Telegram community here: [@orroprotocol]([https://discord.gg](https://t.me/orroprotocol)).
 
 ## Tokenomics
 
@@ -170,7 +167,7 @@ Join our community today!
 
 X: [@orroprotocol](https://twitter.com/orroprotocol)
 
-Discord: [@orroprotocol](https://discord.gg)
+Telegram: [@orroprotocol](https://t.me/orroprotocol)
 
 ## Contributing
 
