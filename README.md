@@ -165,9 +165,9 @@ To keep ORRO fair, stable, and truly creator-owned, we use a simple utility toke
 
 Join our community today!
 
-X: [@orroprotocol](https://twitter.com/orroprotocol)
+X: [https://twitter.com/orroprotocol](https://twitter.com/orroprotocol)
 
-Telegram: [@orroprotocol](https://t.me/orroprotocol)
+Telegram: [https://t.me/orroprotocol](https://t.me/orroprotocol)
 
 ## Contributing
 
