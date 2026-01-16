@@ -189,8 +189,6 @@ Application Technical Architecture Diagram
  (Community)  ------>   [ Endorsement (YTC) ]   ------>   ( PDA: Trust Map )
                                 |
                         [ ORROC Treasury ] <--- (5% Fee)
-
-
 ```
 
 To stay ahead of the AIF Line, we need more than just a place to store files; we need a way to prove that human thought was behind every step of a project.
@@ -294,7 +292,6 @@ Application Development Roadmap (2026-2027)
  SCALE  |              |              |              |              | (Phase 5)    |              |              |              |
         |              |              |              |              | [DAO Governance & Global API Partnerships (Adobe/Meta Integrations)]
         |              |              |              |              |              |              |              |              |
-
 ```
 
 The goal of ORRO is to move from a beta test to a global standard for human creative provenance.
