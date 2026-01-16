@@ -2,8 +2,27 @@
 
 # ORRO PROTOCOL TECHNICAL WHITEPAPER (V2.0)
 
-A Decentralized Framework for Creators
-------------------------------------------
+## A Decentralized Framework for Next Generation Creators
+
+If it's Art, Writing, or Design that's your spiced jam or cup of tea, then you might be the perfect fit for **ORRO**, a new decentralized framework for creators. To sum things up in short, it's a simple and effective way to prove that human effort created the artwork and not just some AI.
+
+### What is ORRO?
+
+ORRO is a new vision for the creator economy that aims to provide a high-quality, low-cost alternative to present mainstream decentralized platforms for creators like Sora, Manifold, and OpenSea. It acts as a digital ledger that tracks the "Grit" behind a project—proving not just who owns it, but how it was made.
+
+### Who is it for?
+
+Savvy individuals who know what they want and have a keen eye for the latest innovations in the art and technology spaces globally. It is designed for the **Guides**—the humans who provide the strategic and creative direction.
+
+### What can it do?
+
+ORRO gives you a permanent digital receipt for all of your hard work. It tracks your progress in real-time—from the first sketch to the final product—so the world can see the concerted effort or **"Grit"** you put in. It also lets you build a reputation based on actual human trust **"Winks"** rather than just how many followers you have. If you’re working on something top-secret, it even has a **"Trust Mode"** that proves you’re working without showing your unfinished work to AI scrapers and associated intellectual property thieves.
+
+### What are the alternatives?
+
+Most social media platforms provide some way to connect creatively, but these large platforms are usually full of distractions that can get in the way of immersing oneself in work. ORRO intends to be in the middle somewhere—not too busy but also not too overloaded. Unlike big-tech platforms that want to "feed" your art to their AI models, ORRO is built to keep the human in the lead.
+
+## Authors & Contributors
 
 **Lead Author:** @darkerdarkofficial
 
@@ -11,7 +30,7 @@ A Decentralized Framework for Creators
 
 _(A strategically asymmetrical human and machine based project)_
 
-## Revisions
+## Whitepaper Revisions
 
 | Version | Date       | Changes                                                                      |
 | ------- | ---------- | ---------------------------------------------------------------------------- |
@@ -510,18 +529,64 @@ When a user meets the technical requirements (MTC/YTC thresholds) for a new rank
 * **Level 1: The Supporter**
   
   > _"You have just become a Supporter! You now have the power to 'Wink' and help others grow. **Choose a community...**"_
+  > 
+  > * Create and save your own portfolios
+  > 
+  > * Create and save your own certificates
+  > 
+  > * Create and save your own agreements
+  > 
+  > * Create and save your own threads
 
 * **Level 2: The Participator**
   
   > _"You have just become a Participator! Your consistency is showing. It's time to make your mark. **Choose a project...**"_
+  > 
+  > * Create and save your own portfolios
+  > 
+  > * Create and save your own certificates
+  > 
+  > * Create and save your own agreements
+  > 
+  > * Create and save your own threads
+  > 
+  > * Create and save your own polls
 
 * **Level 3: The Contributor**
   
   > _"You have just become a Contributor! You are a vital part of the creative pulse. Who inspires you? **Choose a creator...**"_
+  > 
+  > * Create and save your own portfolios
+  > 
+  > * Create and save your own certificates
+  > 
+  > * Create and save your own agreements
+  > 
+  > * Create and save your own threads
+  > 
+  > * Create and save your own polls
+  > 
+  > * Create and save your own roles
 
 * **Level 4: The Creator**
   
   > _"You have just become a Creator! You are now a 'Guide' on the AIF Line. To activate your Bucket, you must make your Pledge. **Choose a pledge...**"_
+  > 
+  > * Create and save your own portfolios
+  > 
+  > * Create and save your own certificates
+  > 
+  > * Create and save your own agreements
+  > 
+  > * Create and save your own threads
+  > 
+  > * Create and save your own polls
+  > 
+  > * Create and save your own roles
+  > 
+  > * Create and save your own projects
+  > 
+  > * Create and save your own fragments
 
 #### **D.2 The Creator’s Pledge**
 
@@ -543,6 +608,16 @@ To finalize their evolution to Creator status, the user must sign the following 
 
 > _"I hereby pledge to respect and follow all of ORRO's rules and principles, and I understand that if I am discovered not doing this I may be penalized with trust score (MTC/YTC) deductions."_
 
+#### **D.4 Official Protocol Roles**
 
+Once a user reaches Level 3, they may take on specific responsibilities to maintain the "Human Lead" across the network. These roles are essential for keeping the Gossip Box high-quality and low-noise.
 
+1. **Community Moderator:** Helps keep the peace in the global threads, ensuring the "Good Neighbor" rules are followed.
 
+2. **Feedback & Suggestions:** Acts as a bridge between the community and the developers, curating the best ideas from the community for future protocol upgrades.
+
+3. **Gossip Box Administrator:** Manages the technical health of the Live Ticker, flagging potential bot-swarms or Sybil attacks for the ML Layer to investigate.
+
+4. **Portfolio Verification:** Reviews the "Genesis Certificates" of new users to ensure their initial work history is consistent with the human-centric mission.
+
+5. **Reviews & Critique:** Provides high-level feedback on Fragments. Work reviewed by these users often carries a "Verified Critique" badge, boosting the author's YTC (Winks).
