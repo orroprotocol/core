@@ -1,4 +1,4 @@
-# ORRO Protocol: The Live Creation Lead
+# ORRO PROTOCOL
 
 <p align="center">
   <img src="https://github.com/orroprotocol/core/blob/main/docs/images/orro-logo-header-white.png" alt="ORRO Protocol Logo" width="180">
