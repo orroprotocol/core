@@ -415,8 +415,6 @@ By combining Mathematical Friction (Fees), Cryptographic Truth (ZK-Proofs), and 
 
 ### Appendix C: Developer Quick-Start (Alpha)
 
-### **Appendix C: Developer Quick-Start (Alpha)**
-
 This guide provides the CLI-level instructions to initialize your first **Bucket** and commit your first **Fragment**. To follow this, you should have the Solana CLI and the `orro-cli` (Alpha) installed.
 
 #### C.0: Technical Protocol Specs
