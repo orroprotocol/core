@@ -4,7 +4,7 @@
 
 ## A Decentralized Framework for Next Generation Creators
 
-If it's Art, Writing, or Design that's your spiced jam or cup of tea, then you might be the perfect fit for **ORRO**, a new decentralized framework for creators. To sum things up in short, it's a simple and effective way to prove that human effort created the artwork and not just some AI.
+If it's Art, Writing, or Design that's your jam or cup of tea, then you might be the perfect fit for **ORRO**, a new decentralized framework for creators. To sum things up in short, it's a simple and effective way to prove that human effort created the artwork and not just some AI.
 
 ### What is ORRO?
 
