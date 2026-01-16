@@ -189,7 +189,6 @@ Issues/PRs for OIPs (ORRO Improvement Proposals) especially encouraged.
 
 MIT License — see LICENSE for details.
 
-* * *
 
 <p align="center">Built with 💜 by @darkerdarkofficial and the ORRO Community.</p>
 
