@@ -535,6 +535,10 @@ When a user meets the technical requirements (MTC/YTC thresholds) for a new rank
   > * Create and save your own agreements
   > 
   > * Create and save your own threads
+  > 
+  > * Create and save your own projects
+  > 
+  > * Create and save your own fragments
 
 * **Level 2: The Participator**
   
@@ -549,6 +553,10 @@ When a user meets the technical requirements (MTC/YTC thresholds) for a new rank
   > * Create and save your own threads
   > 
   > * Create and save your own polls
+  > 
+  > * Create and save your own projects
+  > 
+  > * Create and save your own fragments
 
 * **Level 3: The Contributor**
   
@@ -565,6 +573,10 @@ When a user meets the technical requirements (MTC/YTC thresholds) for a new rank
   > * Create and save your own polls
   > 
   > * Create and save your own roles
+  > 
+  > * Create and save your own projects
+  > 
+  > * Create and save your own fragments
 
 * **Level 4: The Creator**
   
