@@ -643,4 +643,26 @@ Your level on the protocol is now automatically determined by your total Trust S
 | **Level 3** | **Contributor**  | 300 Points             | 9 Months                    |
 | **Level 4** | **Creator**      | 400 Points             | 12 Months                   |
 
+#### E.3 Alpha Phase 2: The Multi-Chain Pivot
+
+To support the diverse needs of the global creator economy, **Alpha Phase 2** introduces cross-chain functionality. Users may now anchor their "Grit" to the ledger of their choice, selecting between the high-performance efficiency of **Solana** or the legacy security of **Ethereum**.
+
+* **Market Preference & Choice:** Creators can choose their primary chain based on their specific market:
+  
+  * **Solana:** Optimized for high-frequency, daily fragments with near-zero transaction costs ($<0.01).
+  
+  * **Ethereum:** Ideal for high-value "Final Master" assets, long-term archival projects, and accessing deep institutional liquidity.
+
+* **The Global Trust Layer:** Reputation remains unified. The **Golden Ratio (1:1)** applies across all supported chains. A Trust Point earned through a fragment on Solana is identical in value and rank-impact to one earned on Ethereum, maintaining a single, immutable source of truth for a creator's integrity.
+
+* **Seamless Interoperability:** Using decentralized bridging technology, creators can "graduate" projects from Solana's high-velocity development environment to Ethereum's permanent certification layer once they achieve **Level 4 (Creator)** status.
+
+#### E.4 Unified Social & Governance
+
+Despite the dual-chain architecture, the community remains one:
+
+* **Cross-Chain Gossip:** The **Gossip Box** aggregates live signals from both Ethereum and Solana, ensuring the global "Human Lead" conversation is never fragmented by technical choice.
+
+* **Unified Governance:** **ORROT** utility tokens and **ORROC Fund** stability mechanisms function as a meta-layer, protecting all creators regardless of which blockchain they use to store their "Grit".
+
 
