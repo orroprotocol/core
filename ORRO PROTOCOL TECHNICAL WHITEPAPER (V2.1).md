@@ -2,25 +2,31 @@
 
 # ORRO PROTOCOL TECHNICAL WHITEPAPER (V2.0)
 
-## A Decentralized Framework for Creators
+## What is ORRO?
 
-If it's Art, Writing, or Design that's your jam or cup of tea, then you might be the perfect fit for **ORRO**, a new decentralized framework for creators. To sum things up in short, it's a simple and effective way to prove that human effort created the artwork and not just some AI.
+ORRO is a **decentralized framework** which acts as a **immutable leder** that tracks the "Grit" behind a creative project. It doesn't just show who owns a piece of art; it proves how it was made. It is a simple and effective way to prove that human effort created the work, and not just an AI.
 
-### What is ORRO?
+## Who is it for?
 
-ORRO is a new vision for the creator economy that aims to provide a high-quality, low-cost alternative to present mainstream decentralized platforms for creators like Sora, Manifold, and OpenSea. It acts as a digital ledger that tracks the "Grit" behind a project—proving not just who owns it, but how it was made.
+ORRO is for artists, hobbyists, and creators. Anyone who likes to paint, write, design, or develop anything from traditional art to futuristic digital work can be part of this new vision for the global creator economy. It is designed for the "Guides", the tech savvy individuals who keep a keen eye on the latest latest technological innovations in the scene and who provide the strategic and creative direction to society.
 
-### Who is it for?
+## What can it do?
 
-Savvy individuals who know what they want and have a keen eye for the latest innovations in the art and technology spaces globally. It is designed for the **Guides**—the humans who provide the strategic and creative direction.
+ORRO gives you a permanent digital receipt for all of your hard work. It tracks your progress in real-time—from the first sketch to the final product—so the world can see the concerted effort or "Grit" you put in. It also lets you build a reputation based on actual human trust "Winks" rather than just how many followers you have.
 
-### What can it do?
+If you’re working on something top-secret, it even has a "Trust Mode" that proves you’re working without exposing your unfinished work.
 
-ORRO gives you a permanent digital receipt for all of your hard work. It tracks your progress in real-time—from the first sketch to the final product—so the world can see the concerted effort or **"Grit"** you put in. It also lets you build a reputation based on actual human trust **"Winks"** rather than just how many followers you have. If you’re working on something top-secret, it even has a **"Trust Mode"** that proves you’re working without showing your unfinished work to AI scrapers and associated intellectual property thieves.
+> * **Real-Time Tracking:** It records your progress step-by-step—from the first sketch to the final product—so the world can see the concerted effort or "Grit" you put in.
+> * **Reputation & Winks:** It lets you build a reputation based on actual human trust "Winks" rather than just how many followers you have.
+> * **Trust Mode (IP Protection):** If you’re working on something top-secret, "Trust Mode" proves you’re working without showing your unfinished work to AI scrapers and intellectual property thieves. Unlike big-tech platforms that want to "feed" your art to their AI models, ORRO is built to keep the human in the lead.
 
-### What are the alternatives?
+## What is the Golden Ratio?
 
-Most social media platforms provide some way to connect creatively, but these large platforms are usually full of distractions that can get in the way of immersing oneself in work. ORRO intends to be in the middle somewhere—not too busy but also not too overloaded. Unlike big-tech platforms that want to "feed" your art to their AI models, ORRO is built to keep the human in the lead.
+The protocol operates on a simple rule: **1 Fragment of work = 1 point of Trust.** Your Trust Score is a mathematical reflection of your consistency. In the ORRO ecosystem, you cannot buy status; you must earn it through documented grit.
+
+## How flexible is it?
+
+ORRO is built to be flexible. As we move into Phase 2, users will have the freedom to choose the market that suits them best. Whether you prefer the high speed of **Solana** or the long-standing security of **Ethereum**, your "Grit" and your Trust Score move with you.
 
 ## Authors & Contributors
 
@@ -535,10 +541,6 @@ When a user meets the technical requirements (MTC/YTC thresholds) for a new rank
   > * Create and save your own agreements
   > 
   > * Create and save your own threads
-  > 
-  > * Create and save your own projects
-  > 
-  > * Create and save your own fragments
 
 * **Level 2: The Participator**
   
@@ -553,10 +555,6 @@ When a user meets the technical requirements (MTC/YTC thresholds) for a new rank
   > * Create and save your own threads
   > 
   > * Create and save your own polls
-  > 
-  > * Create and save your own projects
-  > 
-  > * Create and save your own fragments
 
 * **Level 3: The Contributor**
   
@@ -573,10 +571,6 @@ When a user meets the technical requirements (MTC/YTC thresholds) for a new rank
   > * Create and save your own polls
   > 
   > * Create and save your own roles
-  > 
-  > * Create and save your own projects
-  > 
-  > * Create and save your own fragments
 
 * **Level 4: The Creator**
   
@@ -676,5 +670,3 @@ Despite the dual-chain architecture, the community remains one:
 * **Cross-Chain Gossip:** The **Gossip Box** aggregates live signals from both Ethereum and Solana, ensuring the global "Human Lead" conversation is never fragmented by technical choice.
 
 * **Unified Governance:** **ORROT** utility tokens and **ORROC Fund** stability mechanisms function as a meta-layer, protecting all creators regardless of which blockchain they use to store their "Grit".
-
-
