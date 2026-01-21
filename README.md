@@ -149,7 +149,6 @@ graph TD
 ## Roadmap
 
 ```gantt
-gantt
     title ORRO Protocol Development Roadmap (2025-2026)
     dateFormat  YYYY-MM-DD
     axisFormat  %b %Y
