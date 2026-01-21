@@ -148,7 +148,8 @@ graph TD
 
 ## Roadmap
 
-```gantt
+```
+gantt
 title ORRO Protocol Roadmap
 dateFormat YYYY-MM-DD
 section Alpha 1
