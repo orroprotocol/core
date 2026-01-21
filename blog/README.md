@@ -33,9 +33,9 @@ graph TD
     ORROT -.->|Propped Value| ORROS
     
     %% Styling
-    style ORRO fill:#f9d71c,stroke:#333,stroke-width:2px
-    style ORROS fill:#ff9900,stroke:#333,stroke-width:4px,color:#000
-    style ORROT fill:#00ccff,stroke:#333,stroke-width:2px
+    style ORRO fill:#000000,stroke:#333,stroke-width:2px
+    style ORROS fill:#000000,stroke:#333,stroke-width:4px,color:#000
+    style ORROT fill:#000000,stroke:#333,stroke-width:2px
     style Public_Market fill:#1a1a1a,stroke:#444,stroke-dasharray: 5 5
     style Equity_Layer fill:#0d0d0d,stroke:#ff9900
     style Utility_Core fill:#080808,stroke:#00ccff
