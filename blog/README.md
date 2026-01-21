@@ -38,6 +38,3 @@ graph TD
     Yield ==>|Purchase Discount| ORROT
     ORROT -.->|Propped Value| ORROS
 ```
-    style ORRO fill:#f9d71c,stroke:#fff,stroke-width:2px,color:#000
-    style ORROS fill:#ff9900,stroke:#fff,stroke-width:4px,color:#000
-    style ORROT fill:#00ccff,stroke:#fff,stroke-width:2px,color:#000
