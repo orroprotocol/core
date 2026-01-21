@@ -1,3 +1,4 @@
+```
 graph TD
     %% Outer Speculative Layer
     subgraph Public_Market [Public Speculative Layer]
@@ -38,3 +39,4 @@ graph TD
     style Public_Market fill:#1a1a1a,stroke:#444,stroke-dasharray: 5 5
     style Equity_Layer fill:#0d0d0d,stroke:#ff9900
     style Utility_Core fill:#080808,stroke:#00ccff
+```
