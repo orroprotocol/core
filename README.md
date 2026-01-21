@@ -148,19 +148,33 @@ graph TD
 
 ## Roadmap
 
-```gantt
-title ORRO Protocol Roadmap
-dateFormat YYYY-MM-DD
-section Alpha 1
-Core Architecture :active, p1, 2025-01-01, 60d
-ICO Launch :p2, after p1, 45d
-Buy-Back Window :crit, p3, 2025-03-15, 90d
-section Alpha 2
-Grit Ledger Engine :p4, 2025-04-01, 120d
-Wallet Beta :p5, after p4, 60d
-section Pivot
-Equity Swap :p6, 2025-09-01, 30d
-Utility Injection :p7, after p6, 120d
+```mermaid
+graph LR
+    %% Phase 1
+    subgraph P1 [Phase 1: Alpha Genesis]
+        A[Core Architecture] --> B[ICO Token Launch]
+        B --> C{Buy-Back Shield}
+    end
+
+    %% Phase 2
+    subgraph P2 [Phase 2: Product Build]
+        C --> D[Grit Ledger 1-999]
+        D --> E[Wallet Beta]
+    end
+
+    %% Phase 3
+    subgraph P3 [Phase 3: The Pivot]
+        E --> F[Equity $ORROS Swap]
+        F --> G[Utility Injection]
+    end
+
+    %% Branding Colors
+    style A fill:#00ccff,stroke:#fff,color:#000
+    style B fill:#f9d71c,stroke:#fff,color:#000
+    style C fill:#ff3333,stroke:#fff,color:#fff
+    style D fill:#00ccff,stroke:#fff,color:#000
+    style F fill:#ff9900,stroke:#fff,color:#000
+    style G fill:#00ccff,stroke:#fff,color:#000
 ```
 
 Pre-beta: Security audit in progress. To join the beta test apply for an invite code in the Telegram community here: [@orroprotocol]([https://discord.gg](https://t.me/orroprotocol)).
