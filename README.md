@@ -148,26 +148,28 @@ graph TD
 
 ## Roadmap
 
-```
-Application Development Roadmap (2026-2027)
-―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
-        | 2026 Q1      | 2026 Q2      | 2026 Q3      | 2026 Q4      | 2027 Q1      | 2027 Q2      | 2027 Q3      | 2027 Q4      |
-        |              |              |              |              |              |              |              |              |
- BETA   | (Phase 1)    |              |              |              |              |              |              |              |
-        | [Core Launch: Solana Wallet & Bucket System with 10% Early Adopter Rewards]             |              |              |
-        |              |              |              |              |              |              |              |              |
- GROWTH |              | (Phase 2)    |              |              |              |              |              |              |
-        |              | [Verified Badge Integration, Age-Gating, and Global Legal Compliance Frameworks]        |              |
-        |              |              |              |              |              |              |              |              |
- HARDEN |              |              | (Phase 3)    |              |              |              |              |              |
-        |              |              | [ZK-SNARK Integration: Trust Mode Activation for Private Provenance]     |              |
-        |              |              |              |              |              |              |              |              |
- AUDIT  |              |              |              | (Phase 4)    |              |              |              |              |
-        |              |              |              | [Third-Party Security Audit & ORROC Fund Community Grants]|              |
-        |              |              |              |              |              |              |              |              |
- SCALE  |              |              |              |              | (Phase 5)    |              |              |              |
-        |              |              |              |              | [DAO Governance & Global API Partnerships (Adobe/Meta Integrations)]
-        |              |              |              |              |              |              |              |              |
+```gantt
+gantt
+    title ORRO Protocol Development Roadmap (2025-2026)
+    dateFormat  YYYY-MM-DD
+    axisFormat  %b %Y
+
+    section Alpha Phase 1
+    Core Architecture & Rust Setup :active, p1, 2025-01-01, 60d
+    $ORRO ICO Token Launch         :p2, after p1, 45d
+    3-Month Buy-Back Window        :crit, p3, 2025-03-15, 90d
+
+    section Alpha Phase 2
+    Grit Ledger (1-999) Engine     :p4, 2025-04-01, 120d
+    Internal Secure Wallet Beta    :p5, after p4, 60d
+    
+    section Transition & Pivot
+    $ORRO to $ORROS Equity Swap    :p6, 2025-09-01, 30d
+    $ORROT Utility Tether Injection :p7, after p6, 270d
+
+    section Ecosystem Growth
+    Creator Grant Program          :2026-01-01, 180d
+    DAO Governance Integration     :2026-06-01, 90d
 ```
 
 Pre-beta: Security audit in progress. To join the beta test apply for an invite code in the Telegram community here: [@orroprotocol]([https://discord.gg](https://t.me/orroprotocol)).
