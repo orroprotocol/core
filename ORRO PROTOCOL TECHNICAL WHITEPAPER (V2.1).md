@@ -326,6 +326,28 @@ Application Development Roadmap (2026-2027)
         |              |              |              |              |              |              |              |              |
 ```
 
+```mermaid
+graph LR
+    %% Phase 1
+    subgraph P1 [Phase 1: Alpha Genesis]
+        A[Core Architecture] --> B[ICO Token Launch]
+        B --> C{Buy-Back Shield}
+    end
+
+    %% Phase 2
+    subgraph P2 [Phase 2: Product Build]
+        C --> D[Grit Ledger 1-999]
+        D --> E[Wallet Beta]
+    end
+
+    %% Phase 3
+    subgraph P3 [Phase 3: The Pivot]
+        E --> F[Equity $ORROS Swap]
+        F --> G[Utility Injection]
+    end
+
+```
+
 The goal of ORRO is to move from a beta test to a global standard for human creative provenance.
 
 * **Phase 1 (Beta):** Launching the core Wallet and Bucket system on Solana with a 10% early-adopter reward.
