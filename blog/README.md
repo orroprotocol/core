@@ -1,4 +1,4 @@
-```
+```mermaid
 graph TD
     %% Outer Speculative Layer
     subgraph Public_Market [Public Speculative Layer]
