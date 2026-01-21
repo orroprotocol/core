@@ -200,7 +200,9 @@ We welcome PRs! See CONTRIBUTING.md for guidelines.
 3. Commit: `git commit -m "feat: add X".`
 4. Push & PR.
 
-Issues/PRs for OIPs (ORRO Improvement Proposals) especially encouraged.
+Issues/PRs for [OIPs](https://github.com/orroprotocol/core/tree/main/OIPs) (ORRO Improvement Proposals) especially encouraged.
+
+Current research 22/01/2026: [OIP-003: ZK+ Privacy for Agreements & Vaults](https://github.com/orroprotocol/core/blob/main/OIPs/oip-003-zk%2B-privacy-for-agreements-%26-vaults.md)
 
 ## Security
 
