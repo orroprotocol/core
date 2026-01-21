@@ -149,26 +149,18 @@ graph TD
 ## Roadmap
 
 ```gantt
-    title ORRO Protocol Development Roadmap
-    dateFormat  YYYY-MM-DD
-    axisFormat  %b %Y
-
-    section Alpha Phase 1
-    Core Architecture           :active, p1, 2025-01-01, 60d
-    ORRO ICO Token Launch       :p2, after p1, 45d
-    3-Month Buy-Back Window     :crit, p3, 2025-03-15, 90d
-
-    section Alpha Phase 2
-    Grit Ledger Engine          :p4, 2025-04-01, 120d
-    Internal Wallet Beta        :p5, after p4, 60d
-    
-    section Transition & Pivot
-    ORRO to ORROS Equity Swap   :p6, 2025-09-01, 30d
-    ORROT Utility Injection     :p7, after p6, 270d
-
-    section Ecosystem Growth
-    Creator Grant Program       :2026-01-01, 180d
-    DAO Governance Integration  :2026-06-01, 90d
+title ORRO Protocol Roadmap
+dateFormat YYYY-MM-DD
+section Alpha 1
+Core Architecture :active, p1, 2025-01-01, 60d
+ICO Launch :p2, after p1, 45d
+Buy-Back Window :crit, p3, 2025-03-15, 90d
+section Alpha 2
+Grit Ledger Engine :p4, 2025-04-01, 120d
+Wallet Beta :p5, after p4, 60d
+section Pivot
+Equity Swap :p6, 2025-09-01, 30d
+Utility Injection :p7, after p6, 120d
 ```
 
 Pre-beta: Security audit in progress. To join the beta test apply for an invite code in the Telegram community here: [@orroprotocol]([https://discord.gg](https://t.me/orroprotocol)).
