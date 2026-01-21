@@ -167,14 +167,6 @@ graph LR
         E --> F[Equity $ORROS Swap]
         F --> G[Utility Injection]
     end
-
-    %% Branding Colors
-    style A fill:#00ccff,stroke:#fff,color:#000
-    style B fill:#f9d71c,stroke:#fff,color:#000
-    style C fill:#ff3333,stroke:#fff,color:#fff
-    style D fill:#00ccff,stroke:#fff,color:#000
-    style F fill:#ff9900,stroke:#fff,color:#000
-    style G fill:#00ccff,stroke:#fff,color:#000
 ```
 
 Pre-beta: Security audit in progress. To join the beta test apply for an invite code in the Telegram community here: [@orroprotocol]([https://discord.gg](https://t.me/orroprotocol)).
