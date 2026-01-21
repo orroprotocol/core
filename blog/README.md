@@ -34,7 +34,7 @@ graph TD
     
     %% Styling
     style ORRO fill:#f9d71c,stroke:#333,stroke-width:2px
-    style ORROS fill:#ff9900,stroke:#333,stroke-width:4px,color:#fff
+    style ORROS fill:#ff9900,stroke:#333,stroke-width:4px,color:#000
     style ORROT fill:#00ccff,stroke:#333,stroke-width:2px
     style Public_Market fill:#1a1a1a,stroke:#444,stroke-dasharray: 5 5
     style Equity_Layer fill:#0d0d0d,stroke:#ff9900
