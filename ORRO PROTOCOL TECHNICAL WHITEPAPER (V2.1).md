@@ -8,7 +8,7 @@ ORRO is the worlds first decentralized trust platform for creators. It acts as a
 
 ## Who is it for?
 
-ORRO is for artists, hobbyists, and creators. Anyone who likes to paint, write, design, or develop anything from traditional art to futuristic digital work can be part of this new vision for the global creator economy. It is designed for the "Guides", the tech savvy individuals who keep a keen eye on the latest latest technological innovations in the scene and who provide the strategic and creative direction to society.
+ORRO is for artists, hobbyists, and creators. Anyone who likes to create digital art can be part of this new vision for the global creator economy. It is designed for the "Guides", the tech savvy individuals who keep a keen eye on the latest technological innovations from scene to scene and who provide the strategic and creative direction to society.
 
 ## What can it do?
 
