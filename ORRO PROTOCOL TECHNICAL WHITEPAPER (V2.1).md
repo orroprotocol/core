@@ -422,7 +422,7 @@ The AIF Line is not something to fear, but something to prepare for. By turning 
 | **Wink**                  | A peer-to-peer endorsement that increases a user's community-based YTC score.                                                |
 | **YTC (Your Trust Code)** | A reputation score built on verified endorsements from other high-grit members.                                              |
 | **Zero-Knowledge (ZK)**   | A cryptographic technology that allows you to prove you are working on a project without exposing any intellectual property. |
-| **ZK-SNARKs**             | Efficient ZK-proofs used to keep Solana transaction costs low (~$1.49/mo).                                                   |
+| **ZK-SNARKs**             | Efficient ZK-proofs used to keep Solana transaction costs low (~\$1.49/mo).                                                  |
 
 ### **Appendix B: Preserving the Human Lead (Security & Mitigations)**
 
@@ -434,7 +434,7 @@ A decentralized reputation protocol is only as strong as its resistance to manip
 
 * **The Human Defense (Symmetry Gating):** A user cannot "Wink" at another unless they have reached a minimum **MTC Floor**. This ensures that "Community Trust" is only granted by those who have already proven their own consistency over time.
 
-* **The Economic Firewall:** Every Fragment and Wink carries a micro-fee ($1.49/mo active use). This creates an "Identity Friction" that makes mass-botting mathematically and economically unfeasible for bad actors.
+* **The Economic Firewall:** Every Fragment and Certificate carries a micro-fee (\$1.49/mo active use). This creates an "Identity Friction" that makes mass-botting mathematically and economically unfeasible for bad actors.
 
 #### **B.2 The "Coordinated Mimic" (Collusion Attacks)**
 
