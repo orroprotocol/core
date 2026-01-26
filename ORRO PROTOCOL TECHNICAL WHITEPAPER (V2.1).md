@@ -288,7 +288,7 @@ In the code, the notification of leveling up pledge is more than just text. It i
 
 The **ORROT** token is the utility that powers the ORRO ecosystem. It is designed to reward human "Grit" while preventing market manipulation by AI-driven bots or wealthy "whales".
 
-* **7.1 Fair-Launch Distribution:** We have a fixed supply of **1 Billion tokens**. To ensure the community stays in control, individual ownership is capped at **10,000 ORROT** (approx. $100 USD).
+* **7.1 Fair-Launch Distribution:** We have a fixed supply of **1 Billion tokens**. To ensure the community stays in control, individual ownership is capped at **100,000 ORROT** (approx. \$1,000 USD).
 
 * **7.2 The Cost of Creation:** Using the protocol is designed to be affordable for everyone. Most "Creation Leads" (saving Fragments or Winking) cost very little, meaning a typical creator can stay active for less than **$1.49 per month**.
 
@@ -296,7 +296,7 @@ The **ORROT** token is the utility that powers the ORRO ecosystem. It is designe
 
 ### 8. Governance: The ORROC Fund
 
-To protect the system’s long-term survival, we established the **ORRO Community Contingency (ORROC)**.
+To protect the system’s long-term survival, we established the **ORRO Community Fund (ORROC)**.
 
 * **8.1 Stability Accrual:** A **5% fee** from all protocol actions is automatically sent to the ORROC fund. This treasury is used to keep the system stable and provide grants for new **Guides** and **Creative Avatars**.
 
