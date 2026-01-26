@@ -4,7 +4,7 @@
 
 ## What is ORRO?
 
-ORRO is a **decentralized framework** which acts as a **immutable leder** that tracks the "Grit" behind a creative project. It doesn't just show who owns a piece of art; it proves how it was made. It is a simple and effective way to prove that human effort created the work, and not just an AI.
+ORRO is the worlds first decentralized trust platform for creators. It acts as a as a immutable ledger that tracks the "Grit" behind a creative project. It is a simple and effective way to prove that human effort created the work, and not just an AI.
 
 ## Who is it for?
 
