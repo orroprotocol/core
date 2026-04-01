@@ -91,43 +91,44 @@ function GravityEngine(currentFeed):
 ### Visual Flowchart
 
 ```mermaid
-flowchart LR
-    A[Start<br/>All Eligible Posts] 
-    --> B[Stage 1: Posts Queue<br/>Trust-Based 1:1 Social Score]
+flowchart TD
+    A[All Eligible Posts] 
+    --> B[Stage 1: Posts Queue<br/><b>Trust-Based 1:1 Social Score</b>]
 
-    B --> C[Stage 2: User Ranking & Behaviour<br/>Reports, Flags, Misbehaviour]
+    B --> C[Stage 2: User Ranking & Behaviour<br/><b>Reports, Flags, Misbehaviour</b>]
 
-    C --> D[Stage 3: Post Performance<br/>Trend / Hot Items]
+    C --> D[Stage 3: Post Performance<br/><b>Trend / Hot Items</b>]
 
-    D --> E[Stage 4: Content Type<br/>Quality Control]
+    D --> E[Stage 4: Content Type<br/><b>Quality Control</b>]
 
-    E --> F[Stage 5: Gravity Engine<br/>Hybrid Gravity + Adaptive Decay]
+    E --> F[Stage 5: Gravity Engine<br/><b>Hybrid Gravity + Adaptive Decay</b>]
 
-    F --> G[Final Optimised Feed<br/>Delivered to User]
+    F --> G[Final Optimised Feed]
 
-    %% Gravity Engine Detail
-    subgraph GravityEngine ["Gravity Engine - Stage 5"]
+    %% Feedback loop
+    G -.->|New Activity & Engagement| A
+
+    %% Gravity Engine internal detail
+    subgraph GravityEngine [Gravity Engine - Stage 5]
         direction TB
         H[Measure Total Gravity]
         I[Detect Dominant Source]
-        J[Apply Hybrid Gravity]
+        J[Apply Hybrid Gravity<br/>Stable / Hot / Deep / Negative]
         K[Apply Adaptive Decay]
         L[Final Re-ranking]
-
+        
         H --> I
         I --> J
         J --> K
         K --> L
     end
 
-    %% Feedback loop
-    G -->|New Activity| A
+    E --> GravityEngine
 
-    %% Style
-    classDef stage fill:#1e1e1e,stroke:#58a6ff,stroke-width:2px,color:#fff,rx:10,ry:10;
-    classDef gravity fill:#2a2a2a,stroke:#6fff64,stroke-width:3px,color:#fff,rx:15,ry:15;
+    classDef default fill:#1e1e1e,stroke:#58a6ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
+    classDef gravity fill:#1f2a1f,stroke:#6fff64,stroke-width:3px,color:#ffffff,rx:15,ry:15;
 
-    class A,B,C,D,E,G stage
+    class A,B,C,D,E,G default
     class F gravity
 
 ```
