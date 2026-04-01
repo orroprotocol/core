@@ -35,13 +35,13 @@
 
 ORRO is a Solana-based protocol for verifiable creative reputation. Creators build a "Live Lead" through time-stamped fragments—proving merit without faking portfolios or buying likes. Key features:
 
-* **MTC/YTC Endorsements**: Signed messages for private/public trust shares.
+* **Endorsements**: Signed messages for private/public trust shares.
 
 * **Fragments**: Customizable, compressed provenance trails (IPFS/Arweave storage).
 
-* **Reputation Scores**: TrustScore (user), ResonanceScore (project), PopularityScore (asset).
+* **Reputation Scores**: Trust score 1:1 Fragment mint (golden ratio).
 
-* **Gossip Box**: Moderated community chat with AI assistance.
+* **Gossip Box**: Lightening fast "moderated" community chat with AI assistance.
 
 ## Installation
 
@@ -152,8 +152,8 @@ graph TD
 graph LR
     %% Phase 1
     subgraph P1 [Phase 1: Alpha Genesis]
-        A[Core Architecture] --> B[ICO Token Launch]
-        B --> C{Buy-Back Shield}
+        A[Core Architecture] --> B[Token Launch]
+        B --> C{Guaranteed Buy-Back Shield}
     end
 
     %% Phase 2
@@ -173,15 +173,15 @@ Pre-beta: Security audit in progress. To join the beta test apply for an invite 
 
 ## Tokenomics
 
-To keep ORRO fair, stable, and truly creator-owned, we use a simple utility token called ORROT — never designed for speculation, but as a tool for reputation and system stability.
+To keep ORRO fair, stable, and truly creator-owned, we use a simple utility token $ORRO — never designed for speculation, but as a tool for reputation and system stability.
 
-- **Fair Start for Everyone** Total supply: 1 billion tokens. To prevent whales accumulation, every account is capped at ~\$100 worth (10,000 ORROT). This means the platform can only ever be fully owned by up to 100,000 real users — not a handful of investors.
+- **Fair Start for Everyone** Total supply: 1 billion tokens. To prevent whales accumulation, every account is capped at ~\$100 worth (10,000 ORRO). This means the platform can only ever be fully owned by up to 100,000 real users — not a handful of investors (which we think is a healthy total user cap for the application).
 
-- **The ORROC Community Fund** No "developer slush fund." Instead, a small 5% fee from system activity flows into the ORRO Community Contingency (ORROC) fund. This grows quietly and is used only for emergencies (e.g., network congestion compensation) or community initiatives — fully transparent and governed by reputation-weighted votes.
+- **The ORRO Community Fund** No "developer slush fund." Instead, a small 5% fee from system activity flows into the ORRO Community fund. This grows quietly and is used only for emergencies (e.g., network congestion compensation) or community initiatives — fully transparent and governed by reputation-weighted votes.
 
-- **Pay-As-You-Go (No Subscriptions)** Using ORRO is extremely affordable. Most users preload ~\$10 in ORROT to cover everyday actions (saving fragments, voting, etc.). For typical creators, this lasts months — costing less than \$1.49 per month to keep your Live Creation Lead active.
+- **Pay-As-You-Go (No Subscriptions)** Using ORRO is extremely affordable. Most users preload ~\$10 in ORROT to cover everyday actions (using the newly developed My Studio toolset, saving fragments, voting, etc.). For typical creators, this lasts months — costing less than \$1.49 per month to keep your Live Creation Lead active.
 
-- **Safety & Compliance** To meet global age-verification laws (e.g., under-16 restrictions in Australia and the UK) and enhance credibility, users can earn a Verified Badge by securely confirming age (email + optional phone). This keeps the community safe and makes your reputation even more valuable to partners.
+- **Safety & Compliance** To meet global age-verification laws (e.g., under-16 restrictions in Australia and the UK) and enhance credibility, users can earn a Verified Badge by meeting all elgible criteria e.g. a Solana wallet with 1.0 balance, a verified Email Address and a fully setup Profile). This keeps the community safe and makes your reputation even more valuable to partners.
 
 ## Community
 
