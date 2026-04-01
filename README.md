@@ -1,7 +1,7 @@
 # ORRO PROTOCOL
 
 <p align="center">
-  <img src="https://github.com/orroprotocol/core/blob/main/docs/images/orro-logo-header-white.png" alt="ORRO Protocol Logo" width="180">
+  <img src="https://github.com/orroprotocol/core/blob/main/blog/images/orro-logo-header-white.png" alt="ORRO Protocol Logo" width="180">
 </p>
 
 <p align="center"><strong>The world's first decentralized reputation and trust engine for the creative economy.</strong></p>
