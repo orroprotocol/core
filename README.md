@@ -181,7 +181,7 @@ To keep ORRO fair, stable, and truly creator-owned, we use a simple utility toke
 
 - **Pay-As-You-Go (No Subscriptions)** Using ORRO is extremely affordable. Most users preload ~\$10 in ORROT to cover everyday actions (using the newly developed My Studio toolset, saving fragments, voting, etc.). For typical creators, this lasts months — costing less than \$1.49 per month to keep your Live Creation Lead active.
 
-- **Safety & Compliance** To meet global age-verification laws (e.g., under-16 restrictions in Australia and the UK) and enhance credibility, users can earn a Verified Badge by meeting all elgible criteria e.g. a Solana wallet with 1.0 balance, a verified Email Address and a fully setup Profile). This keeps the community safe and makes your reputation even more valuable to partners.
+- **Safety & Compliance** To meet global age-verification laws (e.g., under-16 restrictions in Australia and the UK) and enhance credibility, users can earn a Verified Badge by meeting all eligible criteria e.g. a Solana wallet with 1.0 balance, a verified Email Address and a fully setup Profile). This keeps the community safe and makes your reputation even more valuable to partners.
 
 ## Community
 
@@ -199,10 +199,6 @@ We welcome PRs! See CONTRIBUTING.md for guidelines.
 2. Create branch: `git checkout -b feature/your-feature.`
 3. Commit: `git commit -m "feat: add X".`
 4. Push & PR.
-
-Issues/PRs for [OIPs](https://github.com/orroprotocol/core/tree/main/OIPs) (ORRO Improvement Proposals) especially encouraged.
-
-Current research 22/01/2026: [OIP-003: ZK+ Privacy for Agreements & Vaults](https://github.com/orroprotocol/core/blob/main/OIPs/oip-003-zk%2B-privacy-for-agreements-%26-vaults.md)
 
 ## Security
 
