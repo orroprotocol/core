@@ -162,11 +162,6 @@ graph LR
         D --> E[Wallet Beta]
     end
 
-    %% Phase 3
-    subgraph P3 [Phase 3: The Pivot]
-        E --> F[Equity $ORROS Swap]
-        F --> G[Utility Injection]
-    end
 ```
 
 Pre-beta: Security audit in progress. To join the beta test apply for an invite code in the Telegram community here: [@orroprotocol]([https://discord.gg](https://t.me/orroprotocol)).
@@ -175,11 +170,11 @@ Pre-beta: Security audit in progress. To join the beta test apply for an invite 
 
 To keep ORRO fair, stable, and truly creator-owned, we use a simple utility token $ORRO — never designed for speculation, but as a tool for reputation and system stability.
 
-- **Fair Start for Everyone** Total supply: 1 billion tokens. To prevent whales accumulation, every account is capped at ~\$100 worth (10,000 ORRO). This means the platform can only ever be fully owned by up to 100,000 real users — not a handful of investors (which we think is a healthy total user cap for the application).
+- **Fair Start for Everyone** Total supply: 1 billion tokens. To prevent whales accumulation, every account is capped at ~\$100 worth (10,000 ORRO). This means the platform can only ever be fully owned by up to 100,000 real users — not a handful of investors (which we think is a healthy maximum user cap for the application).
 
-- **The ORRO Community Fund** No "developer slush fund." Instead, a small 5% fee from system activity flows into the ORRO Community fund. This grows quietly and is used only for emergencies (e.g., network congestion compensation) or community initiatives — fully transparent and governed by reputation-weighted votes.
+- **The ORRO Community Fund** No "developer slush fund." Instead, a small 5% fee from system activity flows into the ORRO community fund. This grows quietly and is used only for emergencies (e.g., network congestion compensation) or community initiatives — fully transparent and governed by reputation-weighted votes.
 
-- **Pay-As-You-Go (No Subscriptions)** Using ORRO is extremely affordable. Most users preload ~\$10 in ORROT to cover everyday actions (using the newly developed My Studio toolset, saving fragments, voting, etc.). For typical creators, this lasts months — costing less than \$1.49 per month to keep your Live Creation Lead active.
+- **Pay-As-You-Go (No Subscriptions)** Using ORRO is extremely affordable. Most users preload ~\$10 in ORRO to cover everyday actions (using the newly developed My Studio toolset, saving fragments, voting, etc.). For typical creators, this lasts months — costing less than \$1.49 per month to keep your Live Creation Lead active.
 
 - **Safety & Compliance** To meet global age-verification laws (e.g., under-16 restrictions in Australia and the UK) and enhance credibility, users can earn a Verified Badge by meeting all eligible criteria e.g. a Solana wallet with 1.0 balance, a verified Email Address and a fully setup Profile). This keeps the community safe and makes your reputation even more valuable to partners.
 
@@ -203,7 +198,7 @@ We welcome PRs! See CONTRIBUTING.md for guidelines.
 ## Security
 
 * **Audits**: Pre-beta security audit in progress (OtterSec/Kudelski).
-* **Breaches**: Report to [orroprotocol@proton.me](mailto:orroprotocol@proton.me?referrer=grok.com) — bounties up to 1000 ORROT for critical finds.
+* **Breaches**: Report to [orroprotocol@proton.me](mailto:orroprotocol@proton.me?referrer=grok.com) — bounties up to 1000 ORRO for critical finds.
 
 ## License
 
