@@ -1,0 +1,463 @@
+/* ============================================================
+   ORRO — Markup Stylesheet  (mu.css)
+   ============================================================
+   Shared media editing UI used across:
+     · My Profile    — post & avatar canvas
+     · My Storage    — media card canvas
+     · My Projects   — project cover art canvas
+     · My Fragments  — fragment cover art canvas
+     · My Community  — post & cover art canvas
+
+   Load order:
+     <link rel="stylesheet" href="../nav.css">
+     <link rel="stylesheet" href="../mu.css">
+     <script src="../mu.js" defer></script>
+
+   ── REQUIRED HTML STRUCTURE ────────────────────────────────
+
+   <div class="mu-canvas-area" id="muArea">
+     <div class="mu-empty-msg" id="muEmptyMsg">
+       No file uploaded yet
+     </div>
+     <img class="mu-image" id="muImage" style="display:none" alt="">
+     <canvas class="mu-canvas" id="muCanvas"></canvas>
+   </div>
+
+   Background colour rows (above canvas):
+   <div class="mu-section">
+     <span class="mu-label">Background</span>
+     <div class="mu-swatches mu-bg-swatches">
+       <!-- mu.js populates these via mu.renderBgSwatches() -->
+     </div>
+   </div>
+
+   Markup tool row (below canvas):
+   <div class="mu-section">
+     <span class="mu-label">Markup</span>
+     <div class="mu-swatches mu-tool-row">
+       <!-- mu.js populates these via mu.renderToolRow() -->
+     </div>
+   </div>
+
+   Resize / reposition bar (below markup row):
+   <div class="mu-resize-bar" id="muResizeBar">
+     <button class="mu-resize-btn" id="muRotateCCW" title="Rotate left">↺</button>
+     <button class="mu-resize-btn" id="muRotateCW"  title="Rotate right">↻</button>
+     <input  class="mu-resize-slider" id="muScaleSlider"
+             type="range" min="50" max="200" value="100" step="1">
+     <button class="mu-resize-btn" id="muResetTransform" title="Reset">⊡</button>
+   </div>
+
+   ── CSS CUSTOM PROPERTIES CONSUMED (from nav.css) ──────────
+   --bg-primary  --surface  --surface-elevated
+   --border-subtle  --medium-grey
+   --text-light  --text-main  --text-dim
+   --accent-glow  --white
+   --red  --orange  --yellow  --gold  --brown
+   --green  --mint  --teal  --light-teal  --sky-blue
+   --blue  --deep-blue  --purple  --light-purple
+   --pink  --plum  --periwinkle
+   --dark-grey  --black
+   ============================================================ */
+
+
+/* ════════════════════════════════════════
+   1. CANVAS AREA
+   ════════════════════════════════════════ */
+
+.mu-canvas-area {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px dashed var(--border-subtle);
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+    /* Transition background when a colour swatch is picked */
+    transition: background 0.15s;
+}
+
+/* Inner absolute layer — centres the empty state message */
+.mu-canvas-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The uploaded image — sits behind the canvas layer */
+.mu-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    /* Transform is applied by mu.js for resize / reposition */
+    transform-origin: center center;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* The drawing canvas — sits above the image */
+.mu-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    display: none;              /* shown by mu.js when a tool is selected */
+    touch-action: none;
+    cursor: crosshair;
+}
+
+/* Placeholder shown before any media is loaded */
+.mu-empty-msg {
+    color: var(--text-dim);
+    font-size: 0.875rem;
+    text-align: center;
+    padding: 1rem;
+    line-height: 1.6;
+    pointer-events: none;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mu-empty-msg svg {
+    opacity: 0.3;
+}
+
+
+/* ════════════════════════════════════════
+   2. SECTION ROWS  (label + swatches)
+   ════════════════════════════════════════ */
+
+/* Outer wrapper for a label + swatch row */
+.mu-section {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+/* Left-hand label ("Background" / "Markup") */
+.mu-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    width: 52px;
+    flex-shrink: 0;
+    white-space: normal;
+    line-height: 1.3;
+}
+
+/* Inner swatch / tool container */
+.mu-swatches {
+    display: flex;
+    gap: 5px;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+/* Background swatch rows get extra breathing room */
+.mu-bg-swatches {
+    padding-left: 1rem;
+}
+
+/* Markup tool row gets a larger left indent */
+.mu-tool-row {
+    gap: 2px;
+    align-items: center;
+    padding-left: 2rem;
+}
+
+/* Group wrapper when background uses two rows */
+.mu-section-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+
+/* ════════════════════════════════════════
+   3. BACKGROUND COLOUR SWATCHES
+   ════════════════════════════════════════ */
+
+.mu-swatch {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    flex-shrink: 0;
+    transition: transform 0.12s, border-color 0.12s;
+}
+
+.mu-swatch:hover {
+    transform: scale(1.25);
+    border-color: var(--white);
+}
+
+.mu-swatch.mu-selected {
+    border-color: var(--white);
+    transform: scale(1.15);
+}
+
+/* "Remove colour" swatch — dashed circle with diagonal strikethrough */
+.mu-swatch.mu-none {
+    background: transparent !important;
+    border: 2px dashed var(--medium-grey);
+    position: relative;
+}
+
+.mu-swatch.mu-none::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: linear-gradient(
+        135deg,
+        transparent 45%,
+        var(--medium-grey) 45%,
+        var(--medium-grey) 55%,
+        transparent 55%
+    );
+    border-radius: 50%;
+}
+
+
+/* ════════════════════════════════════════
+   4. MARKUP TOOL BUTTONS
+   ════════════════════════════════════════ */
+
+.mu-tool-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--border-subtle);
+    background: var(--bg-primary);
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: border-color 0.12s, transform 0.12s;
+}
+
+.mu-tool-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+}
+
+.mu-tool-btn:hover {
+    border-color: var(--medium-grey);
+    transform: scale(1.1);
+}
+
+.mu-tool-btn.mu-selected {
+    border-color: var(--accent-glow);
+    transform: scale(1.08);
+}
+
+/* "Clear all markup" button — same dashed style as mu-none swatch */
+.mu-tool-btn.mu-clear {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px dashed var(--medium-grey);
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: border-color 0.12s, transform 0.12s;
+}
+
+.mu-tool-btn.mu-clear::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background: linear-gradient(
+        135deg,
+        transparent 45%,
+        var(--medium-grey) 45%,
+        var(--medium-grey) 55%,
+        transparent 55%
+    );
+    border-radius: 50%;
+}
+
+.mu-tool-btn.mu-clear:hover {
+    border-color: var(--text-dim);
+    transform: scale(1.1);
+}
+
+
+/* ════════════════════════════════════════
+   5. RESIZE & REPOSITION BAR
+   ════════════════════════════════════════ */
+
+.mu-resize-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.25rem 0.25rem;
+}
+
+/* Rotate / reset icon buttons */
+.mu-resize-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    border: 1px solid var(--border-subtle);
+    background: var(--surface);
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    padding: 0;
+}
+
+.mu-resize-btn:hover {
+    border-color: var(--medium-grey);
+    color: var(--text-light);
+    background: var(--surface-elevated);
+}
+
+.mu-resize-btn:active {
+    transform: scale(0.93);
+}
+
+/* Scale slider */
+.mu-resize-slider {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    appearance: none;
+    -webkit-appearance: none;
+    background: var(--border-subtle);
+    outline: none;
+    cursor: pointer;
+    min-width: 0;
+    accent-color: var(--accent-glow);
+}
+
+.mu-resize-slider::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent-glow);
+    cursor: grab;
+    border: 2px solid var(--bg-primary);
+    box-shadow: 0 0 0 1px var(--accent-glow);
+    transition: transform 0.12s;
+}
+
+.mu-resize-slider::-webkit-slider-thumb:active {
+    cursor: grabbing;
+    transform: scale(1.2);
+}
+
+.mu-resize-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent-glow);
+    border: 2px solid var(--bg-primary);
+    cursor: grab;
+}
+
+/* Scale percentage label */
+.mu-resize-label {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    min-width: 36px;
+    text-align: right;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* ════════════════════════════════════════
+   6. DRAG-TO-REPOSITION OVERLAY
+      Applied by mu.js to .mu-canvas-area
+      when the reposition mode is active
+   ════════════════════════════════════════ */
+
+.mu-canvas-area.mu-drag-mode {
+    cursor: grab;
+    border-style: solid;
+    border-color: var(--accent-glow);
+}
+
+.mu-canvas-area.mu-drag-mode:active {
+    cursor: grabbing;
+}
+
+/* Subtle highlight ring during active drag */
+.mu-canvas-area.mu-dragging {
+    box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+
+/* ════════════════════════════════════════
+   7. SCROLLABLE MODAL WRAPPER
+      When mu is used inside a modal the
+      modal should set max-height + overflow
+   ════════════════════════════════════════ */
+
+.mu-modal {
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 18px;
+    padding: 1.75rem;
+    width: 90vw;
+    max-width: 640px;
+    max-height: 92vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.mu-modal::-webkit-scrollbar          { width: 4px; }
+.mu-modal::-webkit-scrollbar-track    { background: transparent; }
+.mu-modal::-webkit-scrollbar-thumb    { background: var(--border-subtle); border-radius: 4px; }
+
+
+/* ════════════════════════════════════════
+   8. SIZE VARIANTS
+   ════════════════════════════════════════ */
+
+/* Compact — for profile avatar or small card thumbnails */
+.mu-canvas-area.mu-sm .mu-tool-btn   { width: 28px; height: 28px; }
+.mu-canvas-area.mu-sm .mu-swatch     { width: 16px; height: 16px; }
+.mu-tool-row.mu-sm                   { gap: 1px; padding-left: 1rem; }
+
+/* Large — for project / fragment cover art (full 800×800) */
+.mu-canvas-area.mu-lg {
+    border-radius: 14px;
+}
+.mu-canvas-area.mu-lg .mu-canvas {
+    border-radius: 14px;
+}
+.mu-canvas-area.mu-lg .mu-image {
+    border-radius: 14px;
+}
