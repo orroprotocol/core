@@ -1,5 +1,7 @@
 <img src="https://github.com/orroprotocol/core/blob/main/docs/images/orro-creative-explosion.png" title="" alt="Creative Explosion: The Bucket Moment" style="zoom:125%;">
 
+**⚠️ IMPORTANT NOTICE — This document is OUT OF DATE**
+
 # ORRO PROTOCOL TECHNICAL WHITEPAPER (V2.1)
 
 ## What is ORRO?
