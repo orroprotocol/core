@@ -12,9 +12,6 @@ ORRO is a Solana-based protocol for verifiable creative reputation. Creators bui
 
 ## Table of Compartments
 
-### Table of Compartments
-
-
 * [Introduction](https://www.google.com/search?q=%23-introduction)
 
 * [Installation](https://www.google.com/search?q=%23-installation)
