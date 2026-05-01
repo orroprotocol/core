@@ -1,4 +1,4 @@
-# ORRO PROTOCOL
+# ORRO protocol
 ORRO is a Solana-based protocol for verifiable creative reputation. Creators build a "Live Lead" through time-stamped fragments—proving merit without faking portfolios or buying likes.
 
 <p align="center">
