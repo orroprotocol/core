@@ -1,6 +1,8 @@
-<p align="center">
-  <img src="https://github.com/orroprotocol/core/blob/main/blog/images/orro-logo-header-white.png" alt="ORRO Protocol Logo" width="180">
-</p>
+<p align="center"><svg version="1.2" xmlns="http://www.w3.org/2000/svg" width="235" viewBox="1 2 386 322" fill="#FFFFFF">
+<path d="m0.77 125.78l110.9-110.9 62.29 183.55z"/>
+<path d="m130 3l65 188 191-62z"/>
+<path d="m182.2 215.4l192.6-60.3-123.3 80.1-130.1 88.5z"/>
+</svg></p>
 
 # ORRO Protocol May 2026 Project Update
 
