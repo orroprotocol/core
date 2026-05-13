@@ -1,8 +1,8 @@
-# ORRO PROTOCOL MAY 2026 PROJECT UPDATE
-
 <p align="center">
   <img src="https://github.com/orroprotocol/core/blob/main/blog/images/orro-logo-header-white.png" alt="ORRO Protocol Logo" width="180">
 </p>
+
+# ORRO Protocol May 2026 Project Update
 
 The past six months have been a defining period for ORRO. We’ve plowed through consecutive challenges, and while the project is primarily driven by a two-person team—meaning progress can be measured and deliberate—we have successfully reached the critical milestones required for this Q2 update.
 
