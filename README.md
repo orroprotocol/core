@@ -1,209 +1,48 @@
-# ORRO PROTOCOL
+# ORRO PROTOCOL PROJECT UPDATE MAY 2026
 
 <p align="center">
   <img src="https://github.com/orroprotocol/core/blob/main/blog/images/orro-logo-header-white.png" alt="ORRO Protocol Logo" width="180">
 </p>
 
-<p align="center"><strong>The world's first decentralized reputation and trust engine for the creative economy.</strong></p>
+# ORRO May 2026 Project Update V2
 
-<p align="center"><a href="[GitHub - orroprotocol/core](https://github.com/orroprotocol/core)"><img src="https://img.shields.io/badge/ORRO%20Protocol-v2.0-8B5CF6?style=for-the-badge&logoColor=white" alt="ORRO Protocol v2.0"></a><a href="https://github.com/orroprotocol/core/releases"><img src="https://img.shields.io/github/v/release/orroprotocol/core?style=for-the-badge&include_prereleases" alt="Version"></a><a href="[The MIT License &#8211; Open Source Initiative](https://opensource.org/licenses/MIT)"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License: MIT"></a><a href="[https://solana.com](https://solana.com)"><img src="https://img.shields.io/badge/Built%20on-Solana-00d1b2?style=for-the-badge&logo=solana&logoColor=white" alt="Built on Solana"></a><a href="[https://www.rust-lang.org](https://www.rust-lang.org)"><img src="https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white" alt="Rust"></a><a href="[https://www.anchor-lang.com](https://www.anchor-lang.com)"><img src="https://img.shields.io/badge/Anchor-Framework-8B5CF6?style=for-the-badge&logoColor=white" alt="Anchor Framework"></a></p>
-<p align="center"><a href="https://twitter.com/orroprotocol"><img src="https://img.shields.io/twitter/follow/orroprotocol?style=social" alt="Twitter"></a></p>
+The past six months have been a defining period for ORRO. We’ve plowed through consecutive challenges, and while the project is primarily driven by a two-person team—meaning progress can be measured and deliberate—we have successfully reached the critical milestones required for this Q2 update.
 
-## Table of Contents
+We’ve reached a point of high confidence in the protocol's stability. So, what’s changed, and what remains the foundation of the mission?
 
-* [Introduction](https://www.google.com/search?q=%23-introduction)
+## Philosophy
 
-* [Installation](https://www.google.com/search?q=%23-installation)
+In the interest of maintaining neutrality and avoiding the inflammatory, fast-paced friction common in legacy systems, we have postponed the **Gossip Box** until after the beta phase.
 
-* [Usage](https://www.google.com/search?q=%23-usage)
+Our narrative has evolved: ORRO is a **"Cultural Media"** utility—a space for shared, inclusive appeal—rather than another "social media" platform designed to exploit attention spans and algorithms.
 
-* [Architecture](https://www.google.com/search?q=%23-architecture)
+We are committed to a higher tier of service. While ORRO remains fully decentralized and accessible via browser-based wallets for complete anonymity, becoming a **Verified Member** will represent a significant milestone. This verified status will require 2FA (email/password), a consistent minimum balance of **1.0 SOL**, and the connection of an ample storage device—supplementing the 1GB of Google Cloud Storage provided to all new users.
 
-* [Roadmap](https://www.google.com/search?q=%23-roadmap)
+## Economy
 
-* [Tokenomics](https://www.google.com/search?q=%23-tokenomics)
+ORRO has moved away from the tethered \$ORROT model; the ecosystem now operates exclusively on its own internal utility token, **\$ORRO**. This utility token is strictly for platform-internal use and cannot be traded or withdrawn from the site. Furthermore, we have unanimously decided that there will be no ICO or public token sale. While we understand this may disappoint those seeking a pre-release investment opportunity, we were simply not convinced of the traditional token-sale model's relevance in 2026. Hosting a public ICO in the current decentralized landscape felt too much like hosting a NASDAQ investor meeting at an antiquated country fair.
 
-* [Community](https://www.google.com/search?q=%23-community)
+Our model focuses on a **pay-as-you-go** structure for ORRO tools and services. We are targeting traditional artists, digital creators, and post-digital innovators who want to leverage cost-effective, streamlined capabilities to reimagine their workflows and explore a new way of working.
 
-* [Contributing](https://www.google.com/search?q=%23-contributing)
+User sovereignty remains a priority: you can withdraw unused funds from your account at any time should you choose to archive it. In the event of archiving—whether for redundancy or preference—all user data, project records, and processing logs will be retained for a minimum of three months to ensure you have ample time to secure your documentation.
 
-* [Security](https://www.google.com/search?q=%23-security)
+## Capability
 
-* [Licence](https://www.google.com/search?q=%23-licence)
+ORRO is prioritizing its most formidable technical strengths: **Fragmentation** and **Watermarking**. We are engineering these into state-of-the-art, "weaponized" protection and prevention capabilities. Anchored by the Solana blockchain, these tools serve as a definitive defense against unauthorized AI scraping and illicit model training—an effort we expect to bolster with extensive architectural R&D later this year.
 
-## Introduction
+The most significant front-end evolution is a complete overhaul of the navigation architecture. Moving away from traditional top-bar placement, the navigation now occupies a high-density, collapsible left-hand sidebar. This shift reflects our new **"Cultural Media"** focus: we have expanded the menu options to prioritize user experience and utility. Our goal is to add measurable value to the creator’s workflow, rather than simply capitalizing on user data.
 
-ORRO is a Solana-based protocol for verifiable creative reputation. Creators build a "Live Lead" through time-stamped fragments—proving merit without faking portfolios or buying likes. Key features:
+## Accountability
 
-* **Endorsements**: Signed messages for private/public trust shares.
+While the ORRO public beta launch was originally targeted for mid-2026, we have adjusted the timeline to ensure our core features and foundational architecture are hardened and finalized correctly the first time. It is with sustained momentum and excitement that we announce the new launch window to be: **Q1 2027**.
 
-* **Fragments**: Customizable, compressed provenance trails (IPFS/Arweave storage).
+Regarding our planned beta feature set, the **Communities** section is the only other component postponed. We realized that users will have a significantly better experience if this functionality is introduced after the initial beta phase.
 
-* **Reputation Scores**: Trust score 1:1 Fragment mint (golden ratio).
-
-* **Gossip Box**: Lightening fast "moderated" community chat with AI assistance.
-
-## Installation
-
-- Prerequisitest: Rust 1.75+, Anchor CLI v0.29+, Solana CLI v1.18+
-
-```bash
-Bash
-# Clone repo (Rust + Anchor for Solana programs)
-
-git clone https://github.com/orroprotocol/core.git
-cd core
-
-# Install dependencies
-
-cargo install --locked anchor-cli
-
-# Build programs
-
-anchor build
-
-# Test locally
-
-anchor test
-```
-
-## Usage
-
-Example: Create a fragment in Rust (Anchor program):
-
-```rust
-Rust
-use anchor_lang::prelude::*;
-
-#[program]
-pub mod orro {
-    use super::*;
-
-    pub fn create_fragment(ctx: Context<CreateFragment>, hash: [u8; 32]) -> Result<()> {
-        let fragment = &mut ctx.accounts.fragment;
-        fragment.creator = *ctx.accounts.signer.key;
-        fragment.timestamp = Clock::get()?.unix_timestamp;
-        fragment.hash = hash;
-        Ok(())
-    }
-}
-
-#[derive(Accounts)]
-pub struct CreateFragment<'info> {
-    #[account(init, payer = signer, space = 8 + 32 + 8 + 32)]
-    pub fragment: Account<'info, Fragment>,
-    #[account(mut)]
-    pub signer: Signer<'info>,
-    pub system_program: Program<'info, System>,
-}
-
-#[account]
-pub struct Fragment {
-    pub creator: Pubkey,
-    pub timestamp: i64,
-    pub hash: [u8; 32],
-}
-```
-
-For full API, see [https://github.com/orroprotocol/core/blob/main/docs/api-reference/index.md](https://github.com/orroprotocol/core/blob/main/docs/api-reference/index.md)
-
-## Architecture
-
-```mermaid
-graph TD
-    %% Layers
-    subgraph Frontend [Frontend Layer]
-        UI[ORRO.art Web App]
-        Wallet[Solana Wallet Adapter]
-    end
-
-    subgraph Logic [Application Logic]
-        SDK[Solana Web3.js]
-        Irys[Irys SDK Gateway]
-    end
-
-    subgraph Blockchain [Solana On-Chain]
-        Program[ORRO Rust Program]
-        Ledger[(Grit Ledger Account)]
-        Tokens[(Token State Vault)]
-    end
-
-    subgraph Storage [Permanent Storage]
-        Arweave[(Arweave / Irys)]
-        Metadata[JSON Proofs]
-    end
-
-    %% Connections
-    UI --> Wallet
-    Wallet --> SDK
-    SDK --> Program
-    Program --> Ledger
-    Program --> Tokens
-    
-    UI --> Irys
-    Irys --> Storage
-    Storage --> Metadata
-    Metadata -.->|Immutable Link| Ledger
-```
-
-## Roadmap
-
-```mermaid
-graph LR
-    %% Phase 1
-    subgraph P1 [Phase 1: Alpha Genesis]
-        A[Core Architecture] --> B[Token Launch]
-        B --> C{Guaranteed Buy-Back Shield}
-    end
-
-    %% Phase 2
-    subgraph P2 [Phase 2: Product Build]
-        C --> D[Grit Ledger 1-999]
-        D --> E[Wallet Beta]
-    end
-
-```
-
-Pre-beta: Security audit in progress. To join the beta test apply for an invite code in the Telegram community here: [@orroprotocol]([https://discord.gg](https://t.me/orroprotocol)).
-
-## Tokenomics
-
-To keep ORRO fair, stable, and truly creator-owned, we use a simple utility token $ORRO — never designed for speculation, but as a tool for reputation and system stability.
-
-- **Fair Start for Everyone** Total supply: 1 billion tokens. To prevent whales accumulation, every account is capped at ~\$100 worth (10,000 $ORRO). This means the platform can only ever be fully owned by up to 100,000 real users — not a handful of investors (which we think is a healthy maximum user cap for the application).
-
-- **The ORRO Community Fund** No "developer slush fund." Instead, a small 5% fee from system activity flows into the ORRO community fund. This grows quietly and is used only for emergencies (e.g., network congestion compensation) or community initiatives — fully transparent and governed by reputation-weighted votes.
-
-- **Pay-As-You-Go (No Subscriptions)** Using ORRO is extremely affordable. Most users preload ~\$10 in $ORRO to cover everyday actions (using the newly developed My Studio toolset, saving fragments, voting, etc.). For typical creators, this lasts months — costing less than \$1.49 per month to keep your Live Creation Lead active.
-
-- **Safety & Compliance** To meet global age-verification laws (e.g., under-16 restrictions in Australia and the UK) and enhance credibility, users can earn a Verified Badge by meeting all eligible criteria e.g. a Solana wallet with 1.0 balance, a verified Email Address and a fully setup Profile). This keeps the community safe and makes your reputation even more valuable to partners.
-
-## Community
-
-Join our community today!
-
-X: [https://twitter.com/orroprotocol](https://twitter.com/orroprotocol)
-
-Telegram: [https://t.me/orroprotocol](https://t.me/orroprotocol)
-
-## Contributing
-
-We welcome PRs! See CONTRIBUTING.md for guidelines.
-
-1. Fork the repo.
-2. Create branch: `git checkout -b feature/your-feature.`
-3. Commit: `git commit -m "feat: add X".`
-4. Push & PR.
-
-## Security
-
-* **Audits**: Pre-beta security audit in progress (OtterSec/Kudelski).
-* **Breaches**: Report to [orroprotocol@proton.me](mailto:orroprotocol@proton.me?referrer=grok.com) — bounties up to 1,000 $ORRO for critical finds.
+By delaying the Communities launch until our user base reaches a critical mass, we ensure that the platform remains high-density and active for first-time users. This strategic move allows us to focus entirely on the quality of individual creator tools during the beta test period before scaling into full-scale community functionality. 
 
 ## License
 
 MIT License — see LICENSE for details.
-
 
 <p align="center">Built with 💜 by @darkerdarkofficial and the ORRO Community.</p>
 
