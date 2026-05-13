@@ -34,11 +34,11 @@ The most significant front-end evolution is a complete overhaul of the navigatio
 
 ## Accountability
 
-While the ORRO public beta launch was originally targeted for mid-2026, we have adjusted the timeline to ensure our core features and foundational architecture are hardened and finalized correctly the first time. It is with sustained momentum and excitement that we announce the new launch window to be: **Q1 2027**.
+While the ORRO public beta launch was originally targeted for mid-2026, we have adjusted the timeline to ensure our core features and foundational architecture are hardened and finalized correctly the first time. It is with sustained momentum and excitement that we announce the new launch window: Q1 2027.
 
-Regarding our planned beta feature set, the **Communities** section is the only other component postponed. We realized that users will have a significantly better experience if this functionality is introduced after the initial beta phase.
+Regarding our planned beta feature set, the Communities section is the only other component postponed. We realized that users will have a significantly better experience if this functionality is introduced after the initial beta phase.
 
-By delaying the Communities launch until our user base reaches a critical mass, we ensure that the platform remains high-density and active for first-time users. This strategic move allows us to focus entirely on the quality of individual creator tools during the beta test period before scaling into full-scale community functionality. 
+By delaying the Communities launch until our user base reaches a critical mass, we ensure that the platform remains high-density and active for first-time users. This strategic move allows us to focus entirely on the quality of individual creator tools during the beta test period before scaling into full-scale community functionality.
 
 ## License
 
