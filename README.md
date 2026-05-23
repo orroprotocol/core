@@ -40,6 +40,52 @@ Regarding our planned beta feature set, the Communities section is the only othe
 
 By delaying the Communities launch until our user base reaches a critical mass, we ensure that the platform remains high-density and active for first-time users. This strategic move allows us to focus entirely on the quality of individual creator tools during the beta test period before scaling into full-scale community functionality.
 
+## Updated Roadmap
+
+Beta Stage: Q1 & Q2 2027
+
+Platform features:
+
+- Projects
+
+- Fragments
+
+- Certificates
+
+- Agreements
+
+- Profiles
+
+- Portfolios
+
+- Workspaces
+
+- Basic Tools
+
+- Group Messaging
+
+```mermaid
+flowchart TD
+    A[ORRO Beta Stage\nQ1/Q2 2027] --> B[Core Creative System]
+    A --> C[User & Identity]
+    A --> D[Collaboration & Communication]
+    A --> E[Supporting Tools]
+
+    B --> B1[Projects]
+    B --> B2[Fragments]
+    B --> B3[Certificates]
+    B --> B4[Agreements]
+
+    C --> C1[Profiles]
+    C --> C2[Portfolios]
+    C --> C3[Workspaces]
+
+    D --> D1[Group Messaging]
+
+    E --> E1[Basic Tools]
+```
+
+
 ## License
 
 MIT License — see LICENSE for details.
