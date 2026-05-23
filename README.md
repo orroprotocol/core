@@ -40,9 +40,9 @@ Regarding our planned beta feature set, the Communities section is the only othe
 
 By delaying the Communities launch until our user base reaches a critical mass, we ensure that the platform remains high-density and active for first-time users. This strategic move allows us to focus entirely on the quality of individual creator tools during the beta test period before scaling into full-scale community functionality.
 
-## Updated Roadmap
+## Updated roadmap
 
-Beta Stage: Q1 & Q2 2027
+Beta stage: Q1/Q2 2027
 
 ```mermaid
 flowchart TD
