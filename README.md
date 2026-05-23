@@ -44,26 +44,6 @@ By delaying the Communities launch until our user base reaches a critical mass, 
 
 Beta Stage: Q1 & Q2 2027
 
-Platform features:
-
-- Projects
-
-- Fragments
-
-- Certificates
-
-- Agreements
-
-- Profiles
-
-- Portfolios
-
-- Workspaces
-
-- Basic Tools
-
-- Group Messaging
-
 ```mermaid
 flowchart TD
     A[ORRO Beta Stage\nQ1/Q2 2027] --> B[Core Creative System]
@@ -85,6 +65,25 @@ flowchart TD
     E --> E1[Basic Tools]
 ```
 
+Platform features:
+
+- Projects
+
+- Fragments
+
+- Certificates
+
+- Agreements
+
+- Profiles
+
+- Portfolios
+
+- Workspaces
+
+- Basic Tools
+
+- Group Messaging
 
 ## License
 
