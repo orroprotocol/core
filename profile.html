@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ORRO — Profile</title>
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --bg-primary:       #0A0A0C;
+    --surface:          #16161A;
+    --surface-elevated: #1D1D21;
+    --border-subtle:    #27272A;
+    --text-dim:         #A1A1A5;
+    --text-main:        #E4E4E8;
+    --text-light:       #FFFFFF;
+    --accent-glow:      #00F2FF;
+    --blue:             #0978FA;
+    --indigo:           #5214F0;
+    --purple:           #8701EE;
+    --pink:             #EC4EF0;
+    --green:            #30BF3F;
+    --yellow:           #FADE24;
+    --orange:           #FF7F27;
+    --red:              #FF2F2A;
+    --plum:             #CC1960;
+}
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-main);
+    font-family: Inter, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    min-height: 100dvh;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* ════════════════ TOP NAV ════════════════ */
+.top-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 65px;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex; align-items: center;
+    justify-content: space-between;
+    padding: 0 16px; z-index: 300;
+}
+.hamburger {
+    width: 36px; height: 36px;
+    display: flex; flex-direction: column;
+    justify-content: center; gap: 5px;
+    background: none; border: none;
+    cursor: pointer; padding: 4px; flex-shrink: 0;
+}
+.nav-logo { position: absolute; left: 50%; transform: translateX(-50%); }
+.nav-logo svg { display: block; }
+.nav-right { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+.nav-icon {
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    background: none; border: none; cursor: pointer;
+    color: var(--text-main); border-radius: 50%; position: relative;
+}
+.nav-badge {
+    position: absolute; top: 3px; right: 4px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent-glow); border: 2px solid var(--bg-primary);
+}
+
+/* ════════════════ DRAWER ════════════════ */
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 190; }
+.overlay.open { display: block; }
+.drawer {
+    position: fixed; top: 65px; left: 0;
+    width: 65%; max-width: 260px;
+    background: var(--surface);
+    border-right: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    border-radius: 0 0 16px 0; z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 0.22s cubic-bezier(0.4,0,0.2,1);
+    overflow: hidden;
+}
+.drawer.open { transform: translateX(0); }
+.drawer-item {
+    display: block; padding: 9px 16px;
+    color: var(--text-dim); font-size: 15px;
+    font-weight: 500; font-family: inherit;
+    cursor: pointer; border-bottom: 1px solid var(--border-subtle);
+    text-decoration: none; transition: color 0.1s, background 0.1s;
+}
+.drawer-item:last-child { border-bottom: none; }
+.drawer-item:hover, .drawer-item:active { background: var(--surface-elevated); color: var(--text-light); }
+
+/* ════════════════ CONTENT ════════════════ */
+.content { padding-top: 65px; padding-bottom: 65px; }
+
+/* 150px BANNER */
+.profile-banner {
+    height: 180px;
+    background: var(--surface);
+    overflow: hidden; position: relative;
+    /* full bleed — no border, no radius */
+}
+.profile-banner-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #0a0a14 0%, #12082a 50%, #0a0a14 100%);
+}
+
+/* IDENTITY ROW */
+.profile-identity {
+    padding: 0 16px 12px;
+    margin-top: -44px; position: relative;
+}
+.avatar {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: var(--surface-elevated);
+    border: 3px solid var(--bg-primary);
+    flex-shrink: 0; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-dim); position: relative; z-index: 1;
+    margin-bottom: 12px;
+}
+.avatar svg { width: 42px; height: 42px; }
+.profile-name { font-size: 20px; font-weight: 700; color: var(--text-light); line-height: 1.2; margin-bottom: 2px; }
+.profile-handle { font-size: 13px; color: var(--text-dim); margin-bottom: 6px; }
+.profile-follow-counts {
+    font-size: 13px; color: var(--text-dim);
+    margin-bottom: 8px;
+}
+.profile-follow-counts a { color: var(--accent-glow); text-decoration: none; font-weight: 600; }
+.profile-follow-counts a:hover { text-decoration: underline; }
+.profile-follow-counts .dot { margin: 0 6px; opacity: 0.4; }
+
+/* inline Trust / Status / Rank row */
+.profile-inline-stats {
+    display: flex; align-items: center;
+    gap: 14px; flex-wrap: wrap;
+}
+.profile-inline-stat { font-size: 13px; color: var(--text-dim); }
+.profile-inline-stat strong { color: var(--text-main); font-weight: 600; }
+.accent { color: var(--accent-glow); font-weight: 600; }
+
+/* meta + buttons: meta left, buttons right aligned to bottom */
+.profile-identity-body {
+    display: flex; align-items: flex-end; gap: 12px;
+}
+.profile-meta { flex: 1; min-width: 0; }
+
+/* Follow + Message buttons — side by side on the right */
+.profile-actions {
+    display: flex; flex-direction: row;
+    gap: 8px; flex-shrink: 0; align-items: flex-end;
+}
+.btn-follow {
+    padding: 9px 18px;
+    background: var(--text-light); color: var(--bg-primary);
+    border: none; border-radius: 8px;
+    font-size: 14px; font-weight: 700;
+    font-family: inherit; cursor: pointer;
+    white-space: nowrap; transition: opacity 0.15s;
+}
+.btn-follow:active { opacity: 0.85; }
+.btn-message {
+    padding: 9px 18px;
+    background: none; color: var(--text-main);
+    border: 1px solid var(--border-subtle); border-radius: 8px;
+    font-size: 14px; font-weight: 600;
+    font-family: inherit; cursor: pointer;
+    white-space: nowrap; transition: background 0.15s;
+}
+.btn-message:active { background: var(--surface-elevated); }
+
+/* separator line before tabs */
+.profile-divider {
+    height: 1px;
+    background: var(--border-subtle);
+    margin: 0;
+}
+
+/* PROFILE TABS */
+.profile-tabs {
+    display: flex;
+  /*    margin: 4px 4px 0;
+    border-radius: 4px; */
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-subtle);
+}
+.profile-tab {
+    flex: 1; padding: 8px 4px 7px 4px;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--text-dim); text-align: center;
+    cursor: pointer; border-right: 1px solid var(--border-subtle);
+    transition: color 0.1s, background 0.1s; user-select: none;
+    background: var(--surface);
+}
+.profile-tab:last-child { border-right: none; }
+.profile-tab.active { color: var(--text-light); background: var(--surface-elevated); }
+.profile-tab:active { background: var(--surface-elevated); }
+
+/* WALL — single column */
+.wall-card {
+    display: flex; background: var(--surface);
+    border-radius: 4px;
+    margin: 4px 4px 4px;
+    cursor: pointer; overflow: hidden;
+    transition: background 0.1s;
+}
+.wall-card:hover { background: var(--surface-elevated); }
+.wall-card:active { background: var(--surface-elevated); }
+
+/* Left thumb — 110px wide */
+.wall-thumb {
+    width: 110px; flex-shrink: 0;
+    position: relative; overflow: hidden;
+    background: var(--surface-elevated);
+    height: 160px;
+    border-radius: 4px 0 0 4px;
+}
+.wall-card.tall .wall-thumb { height: 180px; }
+.wall-thumb-bg { position: absolute; inset: 0; }
+
+/* Right body */
+.wall-body {
+    flex: 1; padding: 14px 14px 14px 16px;
+    display: flex; flex-direction: column;
+    justify-content: space-between; min-width: 0;
+    height: 160px;
+}
+.wall-card.tall .wall-body { height: 180px; }
+
+.wall-badge {
+    display: inline-flex; align-items: center;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 20px;
+    width: fit-content; margin-bottom: 5px;
+}
+.badge-genesis     { background: rgba(255,255,255,0.07); color: #FFFFFF; border: 1px solid var(--border-subtle); }
+.badge-minted      { background: rgba(9,120,250,0.15);   color: var(--blue); }
+.badge-completed   { background: rgba(48,191,63,0.15);   color: var(--green); }
+.badge-draft       { background: rgba(250,222,36,0.15);  color: var(--yellow); }
+.badge-paused      { background: rgba(135,1,238,0.15);   color: var(--purple); }
+.badge-uncompleted { background: rgba(255,127,39,0.15);  color: var(--orange); }
+
+.wall-title {
+    font-size: 14px; font-weight: 700;
+    color: var(--text-light); line-height: 1.3;
+    margin-bottom: 4px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.wall-desc {
+    font-size: 12px; color: var(--text-dim); line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; overflow: hidden; flex: 1;
+}
+.wall-foot {
+    display: flex; align-items: center;
+    justify-content: space-between; margin-top: 8px;
+}
+.wall-id {
+    font-size: 10px; color: var(--text-dim);
+    font-family: 'Courier New', monospace; opacity: 0.5;
+    overflow: hidden; text-overflow: ellipsis;
+    white-space: nowrap; max-width: 120px;
+}
+.wall-stat {
+    font-size: 11px; color: var(--text-dim);
+    display: flex; align-items: center; gap: 3px;
+}
+.wall-stat svg { width: 11px; height: 11px; }
+
+/* ════════════════ PANELS ════════════════ */
+.panel-placeholder {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 10px; padding: 60px 24px;
+    color: var(--text-dim); text-align: center;
+    margin: 4px; border-radius: 4px;
+    background: var(--surface);
+}
+.panel-placeholder svg { opacity: 0.3; }
+.panel-placeholder span {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-dim);
+}
+.panel-placeholder-sub {
+    font-size: 12px !important; font-weight: 400 !important;
+    letter-spacing: 0 !important; text-transform: none !important;
+    color: var(--text-dim); opacity: 0.5;
+}
+
+/* ════════════════ BOTTOM TAB BAR ════════════════ */
+.tab-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    height: 54px; background: var(--bg-primary);
+    border-top: 1px solid var(--border-subtle);
+    display: flex; align-items: flex-start;
+    padding-top: 12px; z-index: 300;
+}
+.tab {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; gap: 3px; cursor: pointer;
+    color: var(--text-dim); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    -webkit-tap-highlight-color: transparent; transition: color 0.15s;
+}
+.tab.active { color: var(--accent-glow); }
+.tab svg { width: 28px; height: 28px; }
+
+/* ════════════════ TABLET ════════════════ */
+@media (min-width: 768px) {
+    body { max-width: 640px; margin: 0 auto; }
+    .top-nav, .tab-bar { max-width: 640px; left: 50%; transform: translateX(-50%); }
+    .drawer { border-radius: 0 0 16px 0; }
+    .wall-card { border-radius: 8px; margin: 0 8px 10px; }
+    .wall-thumb { border-radius: 8px 0 0 8px; }
+    .profile-banner { border-radius: 0 0 8px 8px; }
+}
+
+</style>
+</head>
+<body>
+
+<header class="top-nav">
+    <button class="hamburger" onclick="toggleDrawer()" aria-label="Menu">
+        <svg width="45px" height="36px" viewBox="0 0 1150 960" fill="none" stroke="#FFFFFF" stroke-linecap="round">
+            <line x1="0" y1="240" x2="1150" y2="240" stroke-width="80"/>
+            <line x1="0" y1="480" x2="1150" y2="480" stroke-width="80"/>
+            <line x1="0" y1="720" x2="1150" y2="720" stroke-width="80"/>
+        </svg>
+    </button>
+    <div class="nav-logo">
+        <svg width="66" height="54" viewBox="80 80 360 360" fill="currentColor">
+            <path d="M54.77,220.78 L165.67,109.88 L227.96,293.43 L54.77,220.78 Z"/>
+            <path d="M184.0,98.0 L249.0,286.0 L440.0,224.0 L184.0,98.0 Z"/>
+            <path d="M236.2,310.4 L428.8,250.1 L305.5,330.2 L175.4,418.7 Z"/>
+        </svg>
+    </div>
+    <div class="nav-right">
+        <button class="nav-icon" aria-label="Notifications">
+            <div class="nav-badge"></div>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </button>
+        <button class="nav-icon" aria-label="Messages">
+            <div class="nav-badge"></div>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </button>
+    </div>
+</header>
+
+<div class="overlay" id="overlay" onclick="toggleDrawer()"></div>
+<nav class="drawer" id="drawer">
+    <a class="drawer-item" href="#">Projects</a>
+    <a class="drawer-item" href="#">Fragments</a>
+    <a class="drawer-item" href="#">Certificates</a>
+    <a class="drawer-item" href="#">Agreements</a>
+    <a class="drawer-item" href="#">Watermarks</a>
+    <a class="drawer-item" href="#">Notifications</a>
+    <a class="drawer-item" href="#">Messages</a>
+    <a class="drawer-item" href="#">Profile</a>
+    <a class="drawer-item" href="#">Settings</a>
+    <a class="drawer-item" href="#">Help</a>
+</nav>
+
+<main class="content">
+
+    <!-- 150px banner -->
+    <div class="profile-banner"><div class="profile-banner-bg"></div></div>
+
+    <!-- IDENTITY + STATS — open layout -->
+    <div class="profile-identity">
+        <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="profile-identity-body">
+            <div class="profile-meta">
+                <div class="profile-name">Joseph Livingstone</div>
+                <div class="profile-handle">@josephlivingstoneartist</div>
+                <div class="profile-follow-counts">
+                    <a href="#">Followers: 129</a>
+                    <span class="dot">•</span>
+                    <a href="#">Following: 537</a>
+                </div>
+                <div class="profile-inline-stats">
+                    <span class="profile-inline-stat">Trust: <span class="accent">35</span>/92</span>
+                    <span class="profile-inline-stat">Status: <span class="accent">Supporter</span></span>
+                    <span class="profile-inline-stat">Rank: 1,067</span>
+                </div>
+            </div>
+            <div class="profile-actions">
+                <button class="btn-follow">Follow</button>
+                <button class="btn-message">Message</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-divider"></div>
+
+    <!-- Gallery / Posts / Likes / Comments tabs -->
+    <div class="profile-tabs">
+        <div class="profile-tab active" onclick="setProfileTab(this, 'displays')">Displays</div>
+        <div class="profile-tab" onclick="setProfileTab(this, 'posts')">Posts</div>
+        <div class="profile-tab" onclick="setProfileTab(this, 'comments')">Comments</div>
+        <div class="profile-tab" onclick="setProfileTab(this, 'likes')">Likes</div>
+    </div>
+
+    <!-- ════ PANEL: DISPLAYS (default visible) ════ -->
+    <div class="panel" id="panel-displays" style="padding-top:10px;">
+
+        <div class="wall-card tall">
+            <div class="wall-thumb">
+                <div class="wall-thumb-bg" style="background:linear-gradient(160deg,#060610,#0d1228);"></div>
+            </div>
+            <div class="wall-body">
+                <div>
+                    <span class="wall-badge badge-genesis">Genesis</span>
+                    <div class="wall-title">SIGNAL DECAY</div>
+                    <div class="wall-desc">A 180-day exploration of entropy, noise and degradation through generative systems.</div>
+                </div>
+                <div class="wall-foot">
+                    <div class="wall-id">17447c42d6dfa967</div>
+                    <div class="wall-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>20</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wall-card">
+            <div class="wall-thumb">
+                <div class="wall-thumb-bg" style="background:linear-gradient(160deg,#040e04,#0a1c0c);"></div>
+            </div>
+            <div class="wall-body">
+                <div>
+                    <span class="wall-badge badge-genesis">Genesis</span>
+                    <div class="wall-title">ORGANIC PROTOCOL</div>
+                    <div class="wall-desc">Hybrid works combining biological photography with algorithmic composition.</div>
+                </div>
+                <div class="wall-foot">
+                    <div class="wall-id">3aac1289e9d8ab9f</div>
+                    <div class="wall-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>20</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wall-card">
+            <div class="wall-thumb">
+                <div class="wall-thumb-bg" style="background:linear-gradient(160deg,#08040e,#160a28);"></div>
+            </div>
+            <div class="wall-body">
+                <div>
+                    <span class="wall-badge badge-draft">Draft</span>
+                    <div class="wall-title">NULL SPACE</div>
+                    <div class="wall-desc">Minimal conceptual works exploring absence, void and the space between signals.</div>
+                </div>
+                <div class="wall-foot">
+                    <div class="wall-id">8f06289b8395cf66</div>
+                    <div class="wall-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>12</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wall-card">
+            <div class="wall-thumb">
+                <div class="wall-thumb-bg" style="background:linear-gradient(160deg,#0a0806,#201408);"></div>
+            </div>
+            <div class="wall-body">
+                <div>
+                    <span class="wall-badge badge-genesis">Genesis</span>
+                    <div class="wall-title">CHROME RITUAL</div>
+                    <div class="wall-desc">Ceremonial digital objects forged from industrial process and synthetic material.</div>
+                </div>
+                <div class="wall-foot">
+                    <div class="wall-id">4e94e07bd601dc7d</div>
+                    <div class="wall-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>20</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wall-card">
+            <div class="wall-thumb">
+                <div class="wall-thumb-bg" style="background:linear-gradient(160deg,#040a10,#081e28);"></div>
+            </div>
+            <div class="wall-body">
+                <div>
+                    <span class="wall-badge badge-genesis">Genesis</span>
+                    <div class="wall-title">DEEP FIELD</div>
+                    <div class="wall-desc">Long-exposure generative astronomy — mapping invisible structures in data space.</div>
+                </div>
+                <div class="wall-foot">
+                    <div class="wall-id">383354bc2a3276ab</div>
+                    <div class="wall-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>20</div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /panel-displays -->
+
+    <!-- ════ PANEL: POSTS (hidden until selected) ════ -->
+    <div class="panel" id="panel-posts" style="display:none;">
+        <!-- Post composer and post feed will be added here -->
+        <div class="panel-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <span>Posts</span>
+            <span class="panel-placeholder-sub">Post composer module goes here</span>
+        </div>
+    </div>
+
+    <!-- ════ PANEL: LIKES (hidden until selected) ════ -->
+    <div class="panel" id="panel-likes" style="display:none;">
+        <div class="panel-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span>Likes</span>
+            <span class="panel-placeholder-sub">Liked items feed goes here</span>
+        </div>
+    </div>
+
+    <!-- ════ PANEL: COMMENTS (hidden until selected) ════ -->
+    <div class="panel" id="panel-comments" style="display:none;">
+        <div class="panel-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span>Comments</span>
+            <span class="panel-placeholder-sub">Comment history goes here</span>
+        </div>
+    </div>
+</main>
+
+<nav class="tab-bar">
+    <div class="tab" onclick="setTab(this)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+<!--        <span>Home</span> -->
+    </div>
+    <div class="tab" onclick="setTab(this)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+<!--        <span>Create</span> -->
+    </div>
+    <div class="tab active" onclick="setTab(this)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+<!--        <span>Profile</span> -->
+    </div>
+    <div class="tab" onclick="setTab(this)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+<!--        <span>Rank</span> -->
+    </div>
+</nav>
+
+<script>
+function toggleDrawer() {
+    document.getElementById('drawer').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('open');
+}
+function setTab(el) {
+    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+    el.classList.add('active');
+}
+function setProfileTab(el, panelId) {
+    /* Update tab active state */
+    document.querySelectorAll('.profile-tab').forEach(function(t) { t.classList.remove('active'); });
+    el.classList.add('active');
+    /* Hide all panels then show the selected one */
+    document.querySelectorAll('.panel').forEach(function(p) { p.style.display = 'none'; });
+    var target = document.getElementById('panel-' + panelId);
+    if (target) target.style.display = 'block';
+}
+</script>
+
+</body>
+</html>
