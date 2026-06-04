@@ -4,19 +4,13 @@
 
 **Pubished: 2026-04-06**
 
-* * *
-
 ## What is ORRO?
 
 ORRO is a time-based creative protocol on the Solana blockchain that treats time as the primary material for artists to structure, protect, and release work over time. Unlike static, traditional platforms, it organizes creative fragments into interconnected, enduring frameworks, rewarding consistency and building value for creators and collectors. 
 
-* * *
-
 ## What is our vision?
 
 We envision a world where serious artists skip short-term hype cycles to focus entirely on their craft. ORRO builds the foundational infrastructure for a sustainable creative economy that values depth over virality and long-term legacy over social media likes. Ultimately, ORRO aims to become a mainstream cultural media hub powered by real creative interest.
-
-* * *
 
 ## What do we offer?
 
@@ -24,13 +18,9 @@ ORRO provides professional-grade creative tools with near-zero user costs by com
 
 At the center of ORRO is the Golden Ratio: a fair, transparent reward system where creators earn trust points at a 1:1 ratio for every successful fragment minted. These trust points prove an artist’s consistency, highlight their productivity, and attract high-quality marketplace and verification services. Through active participation, top-ranked creators unlock fee discounts, creating a virtuous cycle that rewards long-term dedication over speculation.
 
-* * *
-
 ## What is our strategy?
 
 ORRO builds deep creative trust by prioritizing strong, foundational artist protections. Our strategy combines strict confidentiality via Master Art Verification (MAV) agreements with on-chain proof of authorship and genesis creation time. Backed by vetted, ethical validators, artist-controlled privacy protocols, and human-first dispute resolution, we ensure great art flourishes in an environment of total clarity and respect.
-
-* * *
 
 ## Where do we come from?
 
