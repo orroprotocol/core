@@ -11,7 +11,7 @@
 
 /* ── ORRO COLOURS — hardcoded, no external dependency ── */
 :root {
-    --bg:        #0A0A0C;
+    --bg-primary:#0A0A0C;
     --surface:   #16161A;
     --elevated:  #1D1D21;
     --border:    #27272A;
@@ -325,46 +325,40 @@ body {
     color: #A1A1A5;
 }
 
-/* ════════════════════════════════
-   BOTTOM TAB BAR — 65px fixed
-════════════════════════════════ */
+/* ════════════════ BOTTOM TAB BAR ════════════════ */
 .tab-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 65px;
-    background: #0A0A0C;
-    border-top: 1px solid #27272A;
-    display: flex;
-    align-items: flex-start;
-    padding-top: 10px;
+    position: fixed; bottom: 0; left: 0; right: 0;
+    /* 65px visible area + safe area inset for home indicator on iPhone */
+    height: calc(54px + env(safe-area-inset-bottom));
+    background-color: var(--bg-primary);
+    border-top: 1px solid var(--border-subtle);
+    display: flex; align-items: flex-start;
+    padding-top: 12px;
+    padding-bottom: env(safe-area-inset-bottom);
     z-index: 300;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
 }
 .tab {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    cursor: pointer;
-    color: #A1A1A5;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    -webkit-tap-highlight-color: transparent;
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; gap: 3px; cursor: pointer;
+    color: var(--text-dim); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    -webkit-tap-highlight-color: transparent; transition: color 0.15s;
 }
-.tab.active { color: #00F2FF; }
-.tab svg { width: 22px; height: 22px; }
-.tab-dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: #00F2FF;
-    opacity: 0;
-}
-.tab.active .tab-dot { opacity: 1; }
+.tab.active { color: var(--accent-glow); }
+.tab svg { width: 28px; height: 28px; }
+
+/* ════════════════ TABLET ════════════════
+@media (min-width: 768px) {
+    body { max-width: 640px; margin: 0 auto; }
+    .top-nav, .tab-bar { max-width: 640px; left: 50%; transform: translateX(-50%); }
+    .drawer { border-radius: 0 0 16px 0; }
+    .wall-card { border-radius: 8px; margin: 0 8px 10px; }
+    .wall-thumb { border-radius: 8px 0 0 8px; }
+    .profile-banner { border-radius: 0 0 8px 8px; }
+} */
 
 /* ════════════════════════════════
    TABLET — 768px+
@@ -397,10 +391,10 @@ body {
 
     <!-- ORRO logo placeholder — replace SVG content when ready -->
     <div class="nav-logo">
-        <svg width="66" height="54" viewBox="60 60 400 400" fill="currentColor">
-            <path d="M54.77,220.78 L165.67,109.88 L227.96,293.43 L54.77,220.78 Z" />
-            <path d="M184.0,98.0 L249.0,286.0 L440.0,224.0 L184.0,98.0 Z" />
-            <path d="M236.2,310.4 L428.8,250.1 L305.5,330.2 L175.4,418.7 Z" />
+        <svg width="66" height="54" viewBox="80 80 360 360" fill="currentColor">
+            <path d="M54.77,220.78 L165.67,109.88 L227.96,293.43 L54.77,220.78 Z"/>
+            <path d="M184.0,98.0 L249.0,286.0 L440.0,224.0 L184.0,98.0 Z"/>
+            <path d="M236.2,310.4 L428.8,250.1 L305.5,330.2 L175.4,418.7 Z"/>
         </svg>
     </div>
 
@@ -663,25 +657,20 @@ body {
 
 <!-- BOTTOM TAB BAR -->
 <nav class="tab-bar">
+    <div class="tab" onclick="setTab(this)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    <div class="tab" onclick="setTab(this)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    <div class="tab" onclick="setTab(this)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+    </div>
     <div class="tab active" onclick="setTab(this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        <span>Home</span>
-        <div class="tab-dot"></div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     </div>
     <div class="tab" onclick="setTab(this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-        <span>Create</span>
-        <div class="tab-dot"></div>
-    </div>
-    <div class="tab" onclick="setTab(this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <span>Profile</span>
-        <div class="tab-dot"></div>
-    </div>
-    <div class="tab" onclick="setTab(this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-        <span>Rank</span>
-        <div class="tab-dot"></div>
+        <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
     </div>
 </nav>
 
