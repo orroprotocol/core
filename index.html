@@ -6,26 +6,53 @@
 <title>ORRO — Coming Soon</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body {
+
+html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
     background: #000;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
-h1 {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 4rem;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: -0.03em;
-    text-align: center;
-    line-height: 1;
-    user-select: none;
-}
+
 .wallpaper {
+    position: fixed;
+    inset: 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+
+    /* Default — desktop and tablet */
+    object-position: center center;
+}
+
+/* ── iPhone SE / small Android — 340–390px portrait ── */
+@media (max-width: 390px) and (orientation: portrait) {
+    .wallpaper {
+        object-position: center 20%;
+        /* Anchors 20% from the top — keeps the upper portion
+           of the image in frame where logos/focal points usually sit.
+           Shift toward 50% to show more centre, 0% for very top. */
+    }
+}
+
+/* ── iPhone 14/15 standard — 390–430px portrait ── */
+@media (min-width: 391px) and (max-width: 430px) and (orientation: portrait) {
+    .wallpaper {
+        object-position: center 25%;
+    }
+}
+
+/* ── iPhone Pro Max / Plus — 430px+ portrait ── */
+@media (min-width: 431px) and (max-width: 600px) and (orientation: portrait) {
+    .wallpaper {
+        object-position: center 30%;
+    }
+}
+
+/* ── Any iPhone landscape ── */
+@media (max-width: 900px) and (orientation: landscape) {
+    .wallpaper {
+        object-position: center 35%;
+    }
 }
 </style>
 </head>
