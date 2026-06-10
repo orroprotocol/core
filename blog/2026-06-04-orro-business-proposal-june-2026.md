@@ -26,6 +26,8 @@ ORRO builds deep creative trust by prioritizing strong, foundational artist prot
 
 ORRO was born from a simple frustration: talented artists were spending more time fighting for visibility than actually creating. While traditional platforms reward noise, we wanted to build a lean, grassroots protocol that honors time, craft, and consistency. What began as a time-based creation experiment in Australia has evolved into a complete infrastructure designed to support the next generation of serious digital and post-digital artists.
 
+Originating from Australia, ORRO proudly acknowledges the Traditional Custodians of the land on which we live and work. We pay our respects to First Nations Elders past, present, and emerging. As a creators hub, we hold a profound respect for Indigenous artists, celebrating the enduring strength, innovation, and global impact of the world's oldest continuous living culture.
+
 * * *
 
 For more information, visit the official [ORRO project documentation](https://orro.art/docs/).
