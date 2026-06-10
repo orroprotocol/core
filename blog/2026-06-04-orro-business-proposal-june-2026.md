@@ -6,7 +6,7 @@
 
 ## What is ORRO?
 
-ORRO is a time-based creative protocol on the Solana blockchain that treats time as the primary material for artists to structure, protect, and release work over time. Unlike static, traditional platforms, it organizes creative fragments into interconnected, enduring frameworks, rewarding consistency and building value for creators and collectors. 
+ORRO is a time-based protocol on the Solana blockchain that treats time as the primary material for artists to structure, protect, and release work over time. Unlike static, traditional platforms, it organizes creative fragments into interconnected, enduring frameworks, rewarding consistency and building value for creators and collectors. 
 
 ## What is our vision?
 
@@ -14,7 +14,7 @@ We envision a world where serious artists skip short-term hype cycles to focus e
 
 ## What do we offer?
 
-ORRO provides professional-grade creative tools with near-zero user costs by combining cloud storage with the Solana blockchain. Our platform features advanced workspaces for long-form creation, on-chain Certificates of Authenticity, a validator marketplace, and robust watermarking systems.
+ORRO provides professional-grade creative tools with near-zero user costs by combining cloud storage with the Solana blockchain. Our decentralized platform features advanced workspaces for long-form creation, on-chain Certificates of Authenticity, a validator marketplace, and robust watermarking systems.
 
 At the center of ORRO is the Golden Ratio: a fair, transparent reward system where creators earn trust points at a 1:1 ratio for every successful fragment minted. These trust points prove an artist’s consistency, highlight their productivity, and attract high-quality marketplace and verification services. Through active participation, top-ranked creators unlock fee discounts, creating a virtuous cycle that rewards long-term dedication over speculation.
 
