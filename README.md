@@ -89,6 +89,6 @@ Platform features:
 
 MIT License — see LICENSE for details.
 
-<p align="center">Built with 💜 by @darkerdarkofficial and the ORRO Community.</p>
+<p align="center">Built with 💜 by the ORRO Community.</p>
 
 
