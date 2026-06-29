@@ -1,0 +1,235 @@
+/* ── ORRO COLOR PALETTE ── */
+:root {
+
+  /* ── ACCENTS ── */
+  --red:              #EE1923;
+  --orange:           #F1761B;
+  --yellow:           #FADE24;
+  --gold:             #BABE16;
+  --lime:             #96DB3B;
+  --green:            #0BA136;
+  --teal:             #008666;
+  --cyan:             #06A6BB;
+  --blue:             #1360DD;
+  --indigo:           #491ACE;
+  --purple:           #601DAD;
+  --pink:             #CC22EE;
+  --plum:             #CC1970;
+  --brown:            #8B4220;
+  
+  /* ── NEUTRALS ── */
+  --white:            #FFFFFF;
+  --periwinkle:       #C5C6C7;
+  --light-grey:       #A4A5A6;
+  --grey:             #737578;
+  --dark-grey:        #28292C;
+  --black:            #000000;
+
+  /* ── DARK THEME ── */
+  --bg-primary:       #070808;
+  --surface-inner:    #0F0F11;
+  --surface:          #16171A;
+  --surface-elevated: #1F2024;
+  --border-subtle:    #2A2A2C;
+  --text-dark:        #696969;
+  --text-dim:         #A1A5B0;
+  --text-main:        #E1E3F7;
+  --text-light:       #FFFFFF;
+  --fg-menu:          #FFFFFF;
+  --bg-menu:          #070808;
+  --accent-glow:      #0ABBA0;
+  --accent-hover:     #02FACE;
+  --accent-surface:   #C0FFEE;
+  --form-heading-fg:  #070808;
+  --form-heading-bg:  #FFFFFF;
+  --form-cancel-btn:  #1F2024;
+  --form-field:       #1F2024;
+  --form-heading-bord:#2A2A2C;
+
+  /* ── TRANSITION ── */
+  --transition-speed:   0.25s;
+
+}
+
+/* ── LIGHT THEME ── */
+[data-theme="light"] {
+  --bg-primary:       #FFFFFF;
+  --surface:          #FAF8FD;
+  --surface-elevated: #F0F4F9;
+  --surface-outer:    #D5DADF;
+  --border-subtle:    #BEBEBE;
+  --text-dark:        #696969;
+  --text-dim:         #28292C;
+  --text-main:        #16161A;
+  --text-light:       #000000;
+  --fg-menu:          #000000;
+  --bg-menu:          #FFFFFF;
+  --accent-glow:      #0160CC;
+  --accent-hover:     #1241DD;
+  --accent-surface:   #1ABBE1;
+  --btn-text:         #FFFFFF;
+  --form-heading-fg:  #FFFFFF;
+  --form-heading-bg:  #070808;
+  --form-cancel-btn:  #DBDBDB;
+  --form-field:       #F0F4F9;
+  --form-heading-bord:#070808;
+
+  /* ── TRANSITION ── */
+  --transition-speed:   0.25s;
+
+}
+
+html, body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; 
+}
+
+/* ── DATE INPUT FIX ── */
+[data-theme="light"] .form-input[type="date"] { color-scheme: light; }
+[data-theme="dark"]  .form-input[type="date"] { color-scheme: dark; }
+
+/* ── FONTS ── */
+
+@import url('https://fonts.googleapis.com/css2?family=family=JetBrains+Mono:ital,wght@0,100..800;1,100..800');
+
+/* ── CODES AND TIMESTAMPS ── */
+.hex-key, .timestamp {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400; /* Regular weight for data is often more readable */
+}
+
+/* ── COLOR PRESETS ── */
+.red        { color:var(--red);    }
+.orange     { color:var(--orange); } 
+.yellow     { color:var(--yellow); } 
+.gold       { color:var(--gold);   } 
+.lime       { color:var(--yellow); } 
+.green      { color:var(--green);  }
+.teal       { color:var(--teal);   }
+.cyan       { color:var(--cyan);   }
+.blue       { color:var(--blue);   }
+.indigo     { color:var(--indigo); }
+.purple     { color:var(--purple); }
+.pink       { color:var(--pink);   }
+.plum       { color:var(--plum);   }
+.brown      { color:var(--brown);  }
+.grey       { color:var(--grey);   }
+.periwinkle { color:var(--periwinkle); }
+.white      { color:var(--white);  }
+.black      { color:var(--black);  }
+
+/* ── HYPERLINKS ── */
+a { color: var(--accent-glow); text-decoration: none; }
+a:hover { color: var(--accent-glow); text-decoration: underline; }
+.hyperlink { color: var(--text-light);  text-decoration: none; }
+.hyperlink:hover { color: var(--text-light); text-decoration: underline; }
+.filelink { color: var(--text-glow);  text-decoration: underline; }
+.filelink:hover { color: var(--text-glow); text-decoration: underline; }
+.dangerlink { color: var(--red);  text-decoration: underline; }
+.dangerlink:hover { color: var(--red); text-decoration: underline; }
+.indexlink { color: var(--text-light); text-decoration: none; }
+.indexlink:hover { color: var(--accent-glow); text-decoration: none; }
+
+/* ── POSTS ── */
+
+
+/* ── COMMENTS ── */
+
+
+/* ── FORMS ── */
+
+/* INPUTS
+.form-input { background: var(--surface-elevated); border: 1px solid var(--border-subtle); border-radius: 10px; color: var(--text-main); font-size: 0.875rem; font-family: inherit; padding: 1rem; outline: none; transition: border-color 0.15s; width: 100%; } 
+.form-textarea { background: var(--surface-elevated); border: 1px solid var(--border-subtle); border-radius: 10px; color: var(--text-main); font-size: 0.875rem; font-family: inherit; padding: 0.5rem 1rem; outline: none; transition: border-color 0.15s; width: 100%; }
+.form-input::placeholder, .form-textarea::placeholder { color: var(--text-dim); opacity: 0.5; }
+.form-input:focus, .form-textarea:focus { border-color: var(--medium-grey); }
+.form-input:disabled { opacity: 0.35; cursor: not-allowed; }
+.form-input[type="date"] { color-scheme: dark; max-width: 220px; }
+.form-textarea { resize: vertical; line-height: 1.65; } */
+
+/* SELECT
+.form-select { appearance: none; -webkit-appearance: none; background: var(--surface); border: 1px solid var(--border-subtle); border-radius: 7px; color: var(--text-main); font-size: 0.875rem; font-family: inherit; font-weight: 500; padding: 0.5rem 2rem 0.5rem 0.75rem; outline: none; cursor: pointer; transition: border-color 0.15s; width: 100%; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.6rem center; }
+.form-select:hover, .form-select:focus { border-color: var(--medium-grey); }
+.form-select option { background: var(--surface-elevated); color: var(--text-main); } */
+
+/* TOGGLE
+.toggle-wrap { display: flex; align-items: center; gap: 0.75rem; }
+.toggle-track { width: 40px; height: 22px; border-radius: 11px; background: var(--surface); border: 1px solid var(--border-subtle); cursor: pointer; position: relative; transition: background 0.2s, border-color 0.2s; flex-shrink: 0; }
+.toggle-track.on { background: var(--accent-glow); border-color: var(--accent-glow); }
+.toggle-thumb { position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--text-dim); transition: left 0.2s, background 0.2s; }
+.toggle-track.on .toggle-thumb { left: 20px; background: var(--bg-primary); }
+.toggle-label { font-size: 0.875rem; color: var(--text-dim); } */
+
+/* CHECKBOXES
+.checkbox-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.checkbox-row { display: flex; align-items: center; gap: 0.55rem; cursor: pointer; user-select: none; }
+.checkbox-row input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 17px; height: 17px; border-radius: 4px; border: 1.5px solid var(--border-subtle); background: transparent; cursor: pointer; flex-shrink: 0; position: relative; transition: border-color 0.15s, background 0.15s; padding: 3px;}
+.checkbox-row input[type="checkbox"]:checked { border-color: var(--text-light); background: var(--text-light); }
+.checkbox-row input[type="checkbox"]:checked::after { content: ''; position: absolute; left: 3px; top: 0; width: 5px; height: 9px; border: 1.5px solid var(--bg-primary); border-top: none; border-left: none; transform: rotate(45deg); margin-top: 1px; margin-left: 2px; }
+.checkbox-row span { font-size: 0.875rem; color: var(--text-dim); transition: color 0.15s; }
+.checkbox-row:has(input:checked) span { color: var(--text-light); } */
+
+/* DIVIDERS
+.form-divider { height: 1px; background: var(--border-subtle); margin: 1.75rem 0; }
+.form-divider-thin { height: 1px; background: var(--border-subtle); margin: 0.375rem 0; }
+.form-divider-bottom { height: 1px; background: var(--border-subtle); margin: 0.375rem 0 1.5rem 0; }
+.form-divider-clear { border: none; border-top: 1px solid transparent; margin: 0.5rem 0; }
+.form-actions { display: flex; gap: 0.75rem; align-items: center; padding-top: 0.5rem; } */
+
+/* BUTTONS
+.btn { padding: 0.5rem 1.25rem 0.6rem; border-radius: 10px; font-size: 0.9375rem; font-weight: 600; font-family: inherit; cursor: pointer; border: 1px solid var(--medium-grey); background: var(--bg-primary); color: var(--text-dim); transition: border-color 0.15s, color 0.15s; }
+.btn:hover { border-color: var(--medium-grey); background: var(--surface-elevated); color: var(--text-dim); }
+.btn-primary { background: var(--fg-menu); color: var(--btn-text); border: none; padding: 0.5rem 1.5rem 0.6rem; }
+.btn-primary:hover { background: var(--accent-glow); color: var(--bg-menu); opacity: 0.85; } */
+
+/* ── STATS ── */
+
+
+/* ══════════════════════════════════════════════════════
+   POST COMPOSER REFINEMENTS
+══════════════════════════════════════════════════════ */
+
+/* 1. Preview Mode — glass slab on content, no bg change on outer card */
+.post-composer.composer-mode-preview {
+    border: 1px solid rgba(255,255,255,0.12);
+    transition: border-color 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.post-composer.composer-mode-preview #composerPreviewContent {
+    background: rgba(255,255,255,0.04) !important;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-color: rgba(255,255,255,0.1);
+    transition: background 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* 2. Glass scrollbar — invisible until hovered */
+.post-composer-body::-webkit-scrollbar,
+#composerPreviewContent::-webkit-scrollbar { width: 5px; }
+.post-composer-body::-webkit-scrollbar-track,
+#composerPreviewContent::-webkit-scrollbar-track { background: transparent; }
+.post-composer-body::-webkit-scrollbar-thumb,
+#composerPreviewContent::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.07);
+    border-radius: 10px;
+    transition: background 0.2s;
+}
+.post-composer-body:hover::-webkit-scrollbar-thumb,
+#composerPreviewContent:hover::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); }
+
+/* 3. Toolbar safety tint — legible over any post background */
+.post-composer-toolbar {
+    background: rgba(10,10,12,0.55) !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-top: 1px solid var(--border-subtle);
+}
+
+/* 4. Header authority tracking — Satoshi + wide letter-spacing */
+.post-composer-header > span:first-child {
+    font-family: 'Satoshi', -apple-system, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+}
