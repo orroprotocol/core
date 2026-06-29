@@ -1,0 +1,3034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORRO — Fragments</title>
+<script>
+const PAGE = 'fragments';
+const CURRENT_PAGE = 'fragments';
+const CURRENT_USER = 'e96f3a830f73e908';
+(function(){
+  var saved = localStorage.getItem('orro-theme');
+  var sys   = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', saved || sys);
+})();
+</script>
+<link rel="stylesheet" href="main.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    
+* { box-sizing: border-box; }
+
+:root {
+    --col-gap:          6px;
+    --card-rad:         8px;
+    --button-top:       46px;
+    --button-right:     10px;
+}
+
+:root[data-theme="loggedin"] {
+    --button-top:       45px;
+    --button-right:     10px;
+}
+
+:root[data-theme="loggedout"] {
+    --button-top:       10px;
+    --button-right:     10px;
+}
+
+/* ── Post composer colour presets ── */
+:root {
+    --pc-red:    #EE1923;
+    --pc-orange: #F1761B;
+    --pc-yellow: #FADE24;
+    --pc-gold:   #BABE16;
+    --pc-lime:   #96DB3B;
+    --pc-green:  #0BA136;
+    --pc-teal:   #008666;
+    --pc-cyan:   #06A6BB;
+    --pc-blue:   #1360DD;
+    --pc-indigo: #491ACE;
+    --pc-purple: #601DAD;
+    --pc-pink:   #CC22EE;
+    --pc-plum:   #CC1970;
+    --pc-brown:  #8B4220;
+    --pc-black:  #000000;
+    --pc-white:  #FFFFFF;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    font-size: 15px;
+    font-weight: 400;
+    font-family: 'Quicksand SemiBold', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    margin: 0;
+}
+
+.page-content {
+    display: flex;
+    align-items: stretch;
+    height: 100vh;
+    overflow: hidden;
+    margin-top: 60px;  /* clear top nav */
+    margin-left: 70px; /* clear sidebar */
+}
+
+.centre-container {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--surface);
+    padding: 1rem;
+    margin: 0.8rem;
+}
+
+.centre-scroll {
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 0.8rem;
+}
+
+.centre-scroll::-webkit-scrollbar { width: 4px; }
+.centre-scroll::-webkit-scrollbar-track { background: transparent; }
+.centre-scroll::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 2px; }
+.centre-scroll::-webkit-scrollbar-thumb:hover { background: var(--medium-grey); }
+
+/* ── File browser ── */
+.file-browser { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+.file-tree { flex: 1; overflow-y: auto; padding: 0.125rem 0 0.5rem; min-height: 0; }
+.file-search { display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.625rem; background: var(--surface-elevated); border: 1px solid var(--border-subtle); border-radius: 10px; margin: 0.75rem 0.625rem 0.375rem; flex-shrink: 0; transition: border-color 0.15s; box-sizing: border-box; }
+.file-search:focus-within { border-color: var(--accent-glow); }
+.file-search svg { color: var(--text-dim); flex-shrink: 0; }
+.file-search input { background: transparent; border: none; outline: none; color: var(--text-main); font-size: 0.8125rem; font-family: inherit; width: 100%; }
+.file-search input::placeholder { color: var(--text-dim); opacity: 0.55; }
+.file-tree::-webkit-scrollbar { width: 3px; }
+.file-tree::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 2px; }
+.file-tree-root { display: flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.625rem; font-size: 0.75rem; font-weight: 600; color: var(--text-dim); letter-spacing: 0.04em; text-transform: uppercase; user-select: none; }
+.ft-row { display: flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.625rem; font-size: 0.8125rem; color: var(--text-main); cursor: pointer; user-select: none; transition: background 0.12s; white-space: nowrap; overflow: hidden; }
+.ft-row:hover { background: #26262A; }
+.ft-row.active { background: rgba(255,255,255,0.06); border-left: 2px solid var(--accent-glow); color: var(--text-light); }
+.ft-row.depth-1 { padding-left: 1.25rem; }
+.ft-row.depth-2 { padding-left: 2rem; }
+.ft-chevron { width: 10px; height: 10px; flex-shrink: 0; color: var(--text-dim); transition: transform 0.15s; }
+.ft-row.open .ft-chevron { transform: rotate(90deg); }
+.ft-icon { width: 15px; height: 15px; flex-shrink: 0; color: var(--text-dim); }
+.ft-row:hover .ft-icon, .ft-row.active .ft-icon { color: var(--text-light); }
+.ft-name { flex: 1; overflow: hidden; text-overflow: ellipsis; font-size: 0.8125rem; }
+.ft-children { display: none; }
+.ft-children.open { display: block; }
+
+/* ── Image browser ── */
+.img-browser { width: 100%; height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+.img-browser-header { height: 46px; min-height: 46px; flex-shrink: 0; display: flex; align-items: center; padding: 0 1rem; gap: 0.5rem; border-bottom: 1px solid var(--border-subtle); background: var(--surface-elevated);}
+.img-browser-title { font-size: 12px; font-weight: 600; font-family: inherit; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+.img-browser-stage { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; position: relative; padding: 1.5rem 0; overflow: hidden; }
+.img-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-light); z-index: 10; opacity: 0.6; transition: opacity 0.15s; padding: 0; flex-shrink: 0; }
+.img-nav-btn:hover { opacity: 1; }
+.img-nav-btn.prev { left: 0.5rem; }
+.img-nav-btn.next { right: 0.5rem; }
+.img-nav-btn svg { pointer-events: none; }
+.img-slot-wrap { display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.img-slot-wrap.side { opacity: 0.55; transition: opacity 0.2s; }
+.img-slot-wrap.side:hover { opacity: 0.75; }
+.img-slot { background: var(--medium-grey); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.9375rem; font-weight: 500; min-width: 20px; min-height: 20px; color: #111; overflow: hidden; flex-shrink: 0; }
+.img-browser-toolbar {
+    flex-shrink: 0;
+    min-height: 48px;
+    height: auto;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    background: var(--surface-elevated);
+    padding: 0.375rem 1.5rem;
+    gap: 0;
+}
+.tool-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    min-height: 36px;
+    padding: 0.25rem 0;
+}
+
+/* Crop ratio pill buttons */
+.crop-btn {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-dim, #A1A1A5);
+    background: transparent;
+    border: 1px solid var(--border-subtle, #27272A);
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0.4rem 0.6rem;
+    line-height: 1;
+    font-family: inherit;
+    transition: border-color 0.12s, color 0.12s, background 0.12s;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.crop-btn:hover {
+    border-color: var(--accent-glow, #00F2FF);
+    color: var(--accent-glow, #00F2FF);
+}
+.crop-btn.active {
+    border-color: var(--accent-glow, #00F2FF);
+    color: var(--accent-glow, #00F2FF);
+    background: rgba(0,242,255,0.08);
+}
+.crop-wrap {
+    font-size: 0.825rem;
+    display: inline-flex; 
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* ══════════════════════════════════════════════════════
+   FRAGMENT EDIT MODAL
+══════════════════════════════════════════════════════ */
+
+/* ── Backdrop ── */
+
+/* ══════════════════════════════════════════════════════
+   NEW FRAGMENT MODAL
+══════════════════════════════════════════════════════ */
+.cf-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    align-items: flex-start;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 2rem 1rem 4rem;
+}
+.cf-backdrop.open { display: flex; }
+
+.cf-modal {
+    width: 100%;
+    max-width: 580px;
+    animation: cfIn 0.22s cubic-bezier(0.34,1.2,0.64,1) both;
+    position: relative;
+}
+@keyframes cfIn {
+    from { opacity:0; transform: scale(0.97) translateY(10px); }
+    to   { opacity:1; transform: none; }
+}
+
+/* Header bar */
+.cf-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.cf-header-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    font-family: inherit;
+/*    font-family: 'Satoshi', -apple-system, sans-serif; */
+}
+.cf-close-btn {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--white);
+    background: transparent;
+    color: var(--white);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    padding: 0; flex-shrink: 0;
+}
+.cf-close-btn:hover { color: var(--black); background: var(--white); }
+
+/* ── Form containers ── */
+.cf-card {
+    background: transparent;
+/*    border-radius: 10px;
+    padding: 2rem 2rem 2.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); */
+}
+.cf-actions {
+    background: transparent;
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Typography inside modal ── */
+.cf-card strong { font-size: 16px; color: var(--text-main); font-weight: 600; }
+.cf-card p { font-size: 15px; color: var(--text-dim); line-height: 1.65; margin: 0 0 0.25rem; }
+
+/* ── Input wrapper spacing ── */
+.cf-iw       { padding-top: 1rem; }
+.cf-iw-top   { padding-top: 0; }
+.cf-label-top{ font-size: 15px; display:flex; align-items:center; justify-content:space-between; margin-bottom:0.375rem; }
+.cf-label    { font-size: 15px; display:flex; align-items:center; justify-content:space-between; margin-top:1rem; margin-bottom:0.375rem; }
+.cf-counter  { font-size: 0.6875rem; color: var(--text-dim); flex-shrink:0; font-variant-numeric:tabular-nums; }
+
+/* ── Inputs ── */
+.cf-input {
+    width: 100%; background: var(--form-field, #1D1D21);
+    border: 1px solid var(--border-subtle); color: var(--text-main);
+    padding: 1rem; border-radius: 10px; font-size: 0.9375rem;
+    font-family: inherit; transition: border-color 0.2s; box-sizing: border-box;
+}
+.cf-input::placeholder { color: var(--text-dim); opacity: 0.5; }
+.cf-input:hover:not(:focus) { border-color: var(--medium-grey); }
+.cf-input:focus { outline: none; border-color: var(--accent-glow); }
+.cf-input-search {
+    width: 100%; background: var(--text-main);
+    border: 1px dashed var(--border-subtle); color: var(--text-main);
+    padding: 1rem; border-radius: 10px; font-size: 0.9375rem;
+    font-family: inherit; transition: border-color 0.2s; box-sizing: border-box;
+}
+.cf-input-search::placeholder { color: var(--text-dim); opacity: 0.5; }
+.cf-input-search:hover:not(:focus) { border-color: var(--medium-grey); }
+.cf-input-search:focus { outline: none; border-color: var(--accent-glow); }
+
+.cf-select {
+    appearance: none; -webkit-appearance: none;
+    width: 100%; background: var(--form-field, #1D1D21);
+    border: 1px solid var(--border-subtle); border-radius: 10px;
+    color: var(--text-main); font-size: 0.9375rem; font-family: inherit;
+    font-weight: 500; height: 54px; padding: 0 2.5rem 0 1rem;
+    outline: none; cursor: pointer; transition: border-color 0.2s; box-sizing: border-box;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='4 2 18 18' fill='none' stroke='%23A1A1A5' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background-position: right 0.75rem center;
+}
+
+[data-theme="light"] .cf-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='4 2 18 18' fill='none' stroke='%2328282C' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+.cf-select:hover:not(:focus) { border-color: var(--medium-grey); }
+.cf-select:focus { border-color: var(--accent-glow); }
+.cf-select option { background: var(--surface-elevated); color: var(--text-main); }
+
+.cf-textarea {
+    width: 100%; background: var(--form-field, #1D1D21);
+    border: 1px solid var(--border-subtle); color: var(--text-main);
+    padding: 0.75rem 1rem; border-radius: 10px; font-size: 0.9375rem;
+    font-family: inherit; transition: border-color 0.2s; resize: vertical;
+    line-height: 1.65; outline: none; box-sizing: border-box;
+    min-height: calc(1.65em * 4 + 1.5rem);
+}
+.cf-textarea::placeholder { color: var(--text-dim); opacity: 0.5; }
+.cf-textarea:hover:not(:focus) { border-color: var(--medium-grey); }
+.cf-textarea:focus { border-color: var(--accent-glow); }
+
+/* ── Red asterisk ── */
+.cf-modal .red { color: var(--red, #FF2F2A); }
+
+/* Radio options */
+.cf-radio-options { display:flex; flex-direction:column; gap:0.5rem; }
+.cf-radio-option {
+    display:flex; align-items:flex-start; gap:0.75rem; cursor:pointer;
+    padding:0.5rem; border-radius:8px;
+    border:1px solid var(--border-subtle); background:var(--form-field);
+    transition: border-color 0.15s, background 0.15s;
+}
+.cf-radio-option:hover { border-color: var(--medium-grey); }
+.cf-radio-option:has(input:checked) { border-color:var(--accent-glow); background:rgba(0,242,255,0.04); }
+.cf-radio-option input[type="radio"] {
+    appearance:none; -webkit-appearance:none;
+    width:36px; height:36px; min-width:24px;
+    border-radius:50%; border:1px solid var(--border-subtle);
+    background:transparent; flex-shrink:0; margin-top:1px; cursor:pointer;
+    transition:border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    position: relative;
+}
+.cf-radio-option input[type="radio"]:checked {
+    border-color:var(--accent-glow); border-width:2px;
+    background:var(--accent-glow);
+    box-shadow:inset 0 0 0 4px var(--form-field);
+}
+.cf-radio-text { display:flex; flex-direction:column; gap:0.1rem; width:100%; }
+.cf-radio-title { font-size:0.9375rem; font-weight:500; color:var(--text-light); line-height:1.3; }
+.cf-radio-desc  { font-size:0.8125rem; color:var(--text-dim); line-height:1.4; }
+
+/* Date / time fields */
+.cf-date-row   { display:block; gap:0.75rem; }
+.cf-date-wrap  { position:relative; display:flex; align-items:center; flex:1; }
+.cf-date-wrap.narrow { flex:0 0 160px; }
+.cf-date-input, .cf-time-input {
+    width:100%; background:var(--form-field); border:1px solid var(--border-subtle);
+    color:var(--text-main); padding:1rem 2.5rem 1rem 1rem; border-radius:10px;
+    font-size:0.9375rem; font-family:inherit; transition:border-color 0.2s;
+    cursor:pointer; appearance:none; -webkit-appearance:none; box-sizing:border-box;
+}
+.cf-date-input { color-scheme:dark; }
+.cf-time-input { color-scheme:dark; }
+
+/* Dim the dd/mm/yyyy placeholder until a real date is picked */
+.cf-date-input::-webkit-datetime-edit { color: var(--text-dim); }
+.cf-date-input:valid::-webkit-datetime-edit { color: var(--text-main); }
+
+[data-theme="light"] .cf-date-input { color-scheme:light; }
+[data-theme="light"] .cf-time-input { color-scheme:light; }
+.cf-date-input::-webkit-calendar-picker-indicator,
+.cf-time-input::-webkit-calendar-picker-indicator { opacity:0; position:absolute; right:0; width:2.5rem; height:100%; cursor:pointer; }
+.cf-date-input:hover:not(:focus), .cf-time-input:hover:not(:focus) { border-color:var(--medium-grey); }
+.cf-date-input:focus, .cf-time-input:focus { outline:none; border-color:var(--accent-glow); }
+.cf-date-icon {
+    position:absolute; right:0.75rem; pointer-events:none;
+    display:flex; align-items:center; color:var(--text-dim); transition:color 0.2s;
+}
+.cf-date-wrap:focus-within .cf-date-icon { color:var(--accent-glow); }
+
+/* Tags */
+.cf-tags-header { display:flex; align-items:center; gap:0.5rem; position:relative; margin-bottom:0.25rem; }
+.cf-tags-counter { font-size:0.75rem; color:var(--text-dim); margin-left:auto; }
+.cf-tag-tooltip {
+    display:none; position:absolute; left:0; top:calc(100% + 8px);
+    background:var(--accent-glow); color:#000; font-size:0.8rem; font-weight:600;
+    padding:0.75rem 1rem; border-radius:10px; white-space:nowrap; z-index:100;
+    box-shadow:0 4px 16px rgba(0,242,255,0.3); pointer-events:none;
+    animation: cfTipIn 0.18s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes cfTipIn { from{opacity:0;transform:translateY(-4px) scale(0.95)} to{opacity:1;transform:none} }
+.cf-tag-tooltip::before {
+    content:''; position:absolute; top:-5px; left:14px;
+    border:5px solid transparent; border-top:0; border-bottom-color:var(--accent-glow);
+}
+.cf-tag-tooltip.show { display:block; }
+.cf-tag-wrap { display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; margin-top:0.75rem; }
+.cf-tag-pill {
+    display:inline-flex; align-items:center; gap:0.35rem;
+    background:var(--form-field); border:1px solid var(--border-subtle);
+    border-radius:32px; padding:0.6rem 0.75rem 0.6rem 1rem;
+    font-size:1rem; font-family:inherit; color:var(--text-main); white-space:nowrap;
+    transition:border-color 0.15s;
+}
+.cf-tag-pill:hover { border-color:var(--medium-grey); }
+.cf-tag-text { color:var(--accent-glow); font-weight:500; }
+.cf-tag-remove {
+    background:transparent; border:none; cursor:pointer; color:var(--text-dim);
+    font-size:0.9rem; line-height:1; padding:0; display:flex; align-items:center;
+    justify-content:center; width:16px; height:16px; border-radius:50%;
+    transition:color 0.12s, background 0.12s; flex-shrink:0;
+}
+.cf-tag-remove:hover { color:var(--red); background:rgba(255,47,42,0.1); }
+input.cf-hashtag {
+    background:var(--form-field); border:1px solid var(--border-subtle);
+    color:var(--text-main); padding:0.6rem 1rem; border-radius:32px;
+    font-size:0.9rem; font-family:inherit; transition:border-color 0.15s;
+}
+input.cf-hashtag::placeholder { color:var(--text-dim); opacity:0.5; }
+input.cf-hashtag:hover:not(:focus) { border-color:var(--medium-grey); }
+input.cf-hashtag:focus { outline:none; border-color:var(--accent-glow); }
+
+/* ── File browser ── */
+.cf-browser {
+    width:100%; height:259px; background:var(--form-field);
+    border-radius:10px; border:1px solid var(--border-subtle); margin-bottom:0.8rem;
+    display:flex; flex-direction:column; overflow:hidden;
+}
+.cf-fb-search {
+    display:flex; align-items:center; gap:0.5rem; padding:0.5rem 0.75rem;
+    border-bottom:1px solid var(--border-subtle); background:var(--surface-elevated); flex-shrink:0;
+}
+.cf-fb-search svg { color:var(--text-dim); flex-shrink:0; }
+.cf-fb-search input {
+    background:transparent; border:none; outline:none; color:var(--text-main);
+    font-size:0.8125rem; font-family:inherit; width:100%; padding:0;
+}
+.cf-fb-search input::placeholder { color:var(--text-dim); opacity:0.55; }
+.cf-fb-tree { flex:1; overflow-y:auto; padding:0.25rem 0; background:var(--surface-elevated); min-height:0; }
+.cf-fb-tree::-webkit-scrollbar { width:3px; }
+.cf-fb-tree::-webkit-scrollbar-thumb { background:var(--border-subtle); border-radius:2px; }
+
+/* ── Mount drive button ── */
+.cf-mount-bar {
+    flex-shrink: 0;
+    padding: 0.375rem 0.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--surface-elevated);
+}
+.cf-mount-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    width: 100%;
+    padding: 0.3rem 0.5rem;
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cf-mount-btn:hover {
+    border-color: var(--accent-glow);
+    color: var(--accent-glow);
+    background: rgba(0,242,255,0.05);
+}
+.cf-mount-btn svg { flex-shrink: 0; }
+.cf-fb-row {
+    display:flex; align-items:center; gap:0.375rem; padding:0.3rem 0.75rem;
+    font-size:0.8125rem; color:var(--text-dim); cursor:pointer; user-select:none;
+    white-space:nowrap; overflow:hidden; transition:background 0.12s, color 0.12s;
+}
+.cf-fb-row:hover { background:rgba(255,255,255,0.05); color:var(--text-main); }
+.cf-fb-row.depth-1 { padding-left:1.25rem; }
+.cf-fb-row.cf-selected { background:rgba(0,242,255,0.07); color:var(--text-light); border-left:2px solid var(--accent-glow); }
+.cf-fb-chevron { flex-shrink:0; color:var(--text-dim); display:flex; align-items:center; }
+.cf-fb-row.cf-open .cf-fb-chevron { display:none; }
+.cf-fb-chevron-down { flex-shrink:0; color:var(--text-dim); display:none; align-items:center; }
+.cf-fb-row.cf-open .cf-fb-chevron-down { display:flex; }
+.cf-fb-icon { flex-shrink:0; color:var(--text-dim); display:flex; align-items:center; transition:color 0.12s; }
+.cf-fb-row:hover .cf-fb-icon { color:var(--text-main); }
+.cf-fb-name { flex:1; overflow:hidden; text-overflow:ellipsis; }
+.cf-fb-children { display:none; }
+.cf-fb-children.cf-open { display:block; }
+
+/* ── Image preview zone ── */
+.cf-image-wrap {
+    width:100%; height:420px; background:var(--form-field);
+    border:1px dashed var(--border-subtle); border-radius:10px;
+    position:relative; overflow:hidden; display:flex;
+    flex-direction:column; align-items:center; justify-content:center;
+    gap:0.5rem; cursor:pointer; transition:border-color 0.2s;
+}
+.cf-image-wrap.has-image { border-style:solid; border-color: var(--border-subtle); cursor:grab; }
+.cf-image-wrap.has-image:active { cursor:grabbing; }
+.cf-image-wrap.has-image .cf-zone-icon,
+.cf-image-wrap.has-image .cf-zone-label { opacity:0; pointer-events:none; }
+.cf-zone-icon { color:var(--text-dim); opacity:0.4; pointer-events:none; transition:opacity 0.2s; }
+.cf-zone-label { font-size:0.875rem; color:var(--text-dim); opacity:0.5; pointer-events:none; transition:opacity 0.2s; }
+.cf-img-preview { display:none; position:absolute; object-fit:cover; user-select:none; pointer-events:none; border-radius:0; z-index:1; }
+.cf-image-wrap.has-image .cf-img-preview { display:block; }
+
+/* ── Crop boundary — white outline box that shows what gets saved ── */
+.cf-crop-boundary {
+    display: none;
+    position: absolute;
+    box-sizing: border-box;
+    border: none;
+    outline: 2px solid rgba(255,255,255,0.9);
+    outline-offset: -2px;
+    border-radius: 1px;
+    pointer-events: none;
+    z-index: 3;
+    box-shadow: 0 0 0 9999px rgba(0,0,0,0.4);
+}
+.cf-image-wrap.has-image .cf-crop-boundary { display: block; }
+
+.cf-img-remove {
+    display:none; position:absolute; top:0.5rem; right:0.5rem; z-index:10;
+    width:28px; height:28px; border-radius:50%; background:rgba(0,0,0,0.65);
+    border:1.5px solid rgba(255,255,255,0.2); color:#fff; cursor:pointer;
+    align-items:center; justify-content:center; transition:background 0.15s; padding:0;
+}
+.cf-image-wrap.has-image .cf-img-remove { display:flex; }
+.cf-img-remove:hover { background:var(--red); border-color:var(--red); }
+.cf-img-file-input { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; z-index:2; }
+.cf-image-wrap.has-image .cf-img-file-input { pointer-events:none; }
+
+/* ── Crop row ── */
+.cf-crop-row { display:flex; align-items:center; gap:0.4rem; margin:0.8rem 0; flex-wrap:wrap; }
+.cf-crop-label { font-size:0.75rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-dim); margin-right:0.25rem; flex-shrink:0; }
+.cf-crop-btn {
+    font-size:12px; font-weight:600; color:var(--text-dim);
+    background:transparent; border:1.5px solid var(--border-subtle);
+    border-radius:5px; cursor:pointer; padding:0.5rem 0.7rem 0.4rem 0.7rem;
+    line-height:1; font-family:inherit; transition:border-color 0.12s, color 0.12s, background 0.12s;
+    white-space:nowrap; flex-shrink:0;
+}
+.cf-crop-btn:hover { border-color:var(--medium-grey); color:var(--text-main); }
+.cf-crop-btn.cf-active { border-color:var(--accent-glow); color:var(--accent-glow); background:rgba(0,242,255,0.08); }
+
+/* ── Action buttons ── */
+.cf-btn-cancel {
+    padding:0.8rem 1.5rem; border:1px solid var(--border-subtle);
+    background:var(--surface); color:var(--text-dim); border-radius:10px;
+    font-size:16px; font-weight:600; font-family:inherit; cursor:pointer;
+    transition: transform 0.1s ease;
+}
+.cf-btn-cancel:hover { border-color:var(--border-subtle); background:var(--border-subtle); }
+.cf-btn-cancel:active { transform: scale(0.93); }
+.cf-btn-save {
+    padding:0.8rem 1.5rem; /* border:1px solid var(--border-subtle); */
+    background:var(--accent-glow); color:var(--bg-primary); border:none; border-radius:10px;
+    font-size:16px; font-weight:600; font-family:inherit; cursor:pointer;
+    transition: transform 0.1s ease;
+}
+.cf-btn-save:hover { color:var(--bg-primary); background:var(--accent-hover); }
+.cf-btn-save:active { transform: scale(0.93); }
+.cf-btn-create {
+    padding:0.8rem 2.5rem; background:var(--accent-glow); color:var(--bg-primary);
+    border:none; border-radius:10px; font-size:16px; font-weight:600;
+    font-family:inherit; cursor:pointer; transition: transform 0.1s ease;
+}
+.cf-btn-create:hover { color:var(--bg-primary); background:var(--accent-hover); }
+.cf-btn-create:active { transform: scale(0.93); }
+
+/* ══════════════════════════════════════════════════════
+   POST COMPOSER MODAL
+══════════════════════════════════════════════════════ */
+.pc-post-modal { max-width: 640px; }
+
+#postComposerBackdrop {
+    align-items: center;
+    padding: 2rem 1rem;
+}
+
+.pc-header-title-center {
+    flex: 1;
+    text-align: center;
+}
+
+/* ── Top control bar: Font Style / Color / Size / Background ── */
+.pc-toolbar {
+    position: relative;
+    display: flex;
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    background: var(--surface-elevated);
+}
+.pc-tool-btn {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 0.75rem 0.4rem;
+    background: transparent;
+    border: none;
+    border-right: 1px solid var(--border-subtle);
+    color: var(--text-main);
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background 0.15s, color 0.15s;
+}
+.pc-tool-btn:first-child { border-radius: 10px 0 0 10px; }
+.pc-tool-btn:last-child { border-radius: 0 10px 10px 0; }
+.pc-tool-btn:last-child { border-right: none; }
+.pc-tool-btn:hover { background: var(--border-subtle); }
+.pc-tool-btn.pc-active { color: var(--accent-glow); background: rgba(0,242,255,0.08); }
+.pc-tool-btn svg { flex-shrink: 0; opacity: 0.7; }
+.pc-tool-btn .pc-short { display: none; }
+@media (max-width: 480px) {
+    .pc-tool-btn .pc-full { display: none; }
+    .pc-tool-btn .pc-short { display: inline; }
+    .pc-tool-btn { font-size: 0.7rem; padding: 0.65rem 0.2rem; }
+}
+
+/* ── Dropdown panels anchored under the toolbar ── */
+.pc-dropdown-panel {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 0.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    z-index: 60;
+}
+.pc-dropdown-panel.pc-open { display: block; }
+
+#pcPanel-font { width: 210px; }
+#pcPanel-size { width: 220px; }
+#pcPanel-color, #pcPanel-bg { width: 200px; }
+
+.pc-font-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    padding: 0.55rem 0.6rem;
+    font-size: 0.9375rem;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: background 0.12s;
+}
+.pc-font-option:hover { background: var(--border-subtle); }
+.pc-font-option.pc-selected { background: rgba(0,242,255,0.1); color: var(--accent-glow); font-weight: 600; }
+
+.pc-size-row { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0.25rem; }
+.pc-size-option {
+    padding: 0.5rem 0.7rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-main);
+    font-size: 0.875rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.12s, color 0.12s, background 0.12s;
+}
+.pc-size-option:hover { border-color: var(--medium-grey); }
+.pc-size-option.pc-selected { border-color: var(--accent-glow); color: var(--accent-glow); background: rgba(0,242,255,0.08); }
+
+.pc-color-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.55rem;
+    padding: 0.25rem;
+}
+.pc-swatch {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--border-subtle);
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.12s, box-shadow 0.12s;
+}
+.pc-swatch:hover { transform: scale(1.1); }
+.pc-swatch.pc-selected {
+    box-shadow: 0 0 0 2px var(--surface-elevated), 0 0 0 4px var(--accent-glow);
+}
+.pc-swatch.pc-none {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dim);
+}
+
+/* ── Canvas (the actual post body) ── */
+.pc-canvas-wrap {
+    position: relative;
+    flex: 1;
+    display: flex;
+    margin: 1rem 0;
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: background 0.2s;
+}
+.pc-canvas {
+    flex: 1;
+    width: 100%;
+    min-height: 220px;
+    max-height: 46vh;
+    overflow-y: auto;
+    padding: 1rem;
+    outline: none;
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 1.65;
+}
+.pc-canvas img { max-width: 100%; border-radius: 8px; display: block; margin: 0.5rem 0; }
+.pc-canvas * { background-color: transparent !important; }
+.pc-canvas a { color: var(--accent-glow); text-decoration: underline; }
+.pc-canvas ul, .pc-canvas ol { padding-left: 1.4rem; margin: 0.5rem 0; }
+.pc-placeholder {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    color: var(--text-dim);
+    opacity: 0.55;
+    font-size: 16px;
+    line-height: 1.65;
+    font-family: inherit;
+    pointer-events: none;
+}
+.pc-placeholder.pc-hidden { display: none; }
+
+/* ── Bottom dark control strip ── */
+.pc-bottom-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #18181B;
+    border-radius: 999px;
+    padding: 0.5rem 0.6rem;
+}
+.pc-bottom-icons { display: flex; align-items: center; gap: 0.5rem; }
+.pc-emoji-wrap { position: relative; display: flex; }
+.pc-icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #fff;
+    color: #18181B;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+    transition: transform 0.12s, background 0.12s;
+}
+.pc-icon-btn:hover { background: #E4E4E7; }
+.pc-icon-btn:active { transform: scale(0.9); }
+.pc-bottom-right { margin-left: auto; display: flex; align-items: center; gap: 0.75rem; }
+.pc-counter { font-size: 0.75rem; color: #A1A1A5; font-variant-numeric: tabular-nums; }
+.pc-counter.pc-over { color: var(--pc-red); font-weight: 700; }
+.pc-trash-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: #A1A1A5;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: color 0.15s, background 0.15s;
+}
+.pc-trash-btn:hover { color: #fff; background: var(--pc-red); }
+
+/* ── Emoji popover ── */
+.pc-emoji-panel {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 0;
+    width: 244px;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.2rem;
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 0.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    z-index: 60;
+}
+.pc-emoji-panel.pc-open { display: grid; }
+.pc-emoji-btn {
+    background: transparent;
+    border: none;
+    font-size: 19px;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 0.32rem 0;
+}
+.pc-emoji-btn:hover { background: var(--border-subtle); }
+
+/* ── Real user post card (rendered on the Posts/single-column feed) ── */
+#feedSingleCol .pc-user-card {
+    min-height: 0 !important;
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+}
+.pc-user-card-meta {
+    padding: 0.9rem 1rem 0;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+.pc-user-card-body {
+    margin: 0.75rem 1rem 1rem;
+    border-radius: 10px;
+    padding: 1.25rem;
+    min-height: 100px;
+    display: flex;
+    align-items: flex-start;
+    transition: background 0.15s;
+}
+.pc-user-card-content {
+    width: 100%;
+    line-height: 1.65;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+.pc-user-card-content > div + div,
+.pc-user-card-content > p + p { margin-top: 0.7em; }
+.pc-user-card-content img { max-width: 100%; border-radius: 8px; display: block; margin: 0.5rem 0; }
+.pc-user-card-content * { background-color: transparent !important; }
+.pc-user-card-content a { color: var(--accent-glow); text-decoration: underline; }
+.pc-user-card-content ul, .pc-user-card-content ol { padding-left: 1.4rem; margin: 0.5rem 0; }
+.pc-user-card-empty {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.875rem;
+}
+
+.create-btn {
+    margin-left: auto;
+    margin-right: 0.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 1.5rem;
+    background: var(--accent-glow);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+.create-btn:hover { background: var(--accent-hover); }
+.create-btn:active { transform: scale(0.93); }
+
+.header-single-view {
+    color: var(--text-main);
+    cursor: pointer;
+    transition: color 0.15s;
+}
+.header-single-view:hover {
+    color: var(--accent-glow);
+}
+.header-single-view.view-active {
+    color: var(--accent-glow);
+}
+
+.header-multi-view {
+    color: var(--text-main);
+    cursor: pointer;
+    transition: color 0.15s;
+}
+.header-multi-view:hover {
+    color: var(--accent-glow);
+}
+.header-multi-view.view-active {
+    color: var(--accent-glow);
+}
+
+/* ── Visibility toggle ── */
+.cert-toggle-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    cursor: pointer;
+    user-select: none;
+    margin: 0.8rem 0;
+}
+.cert-toggle-track {
+    margin-top: 10px;
+    width: 44px;
+    height: 26px;
+    border-radius: 13px;
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-subtle);
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s;
+}
+.cert-toggle-track.on {
+    background: var(--accent-glow);
+    border-color: var(--accent-glow);
+}
+.cert-toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--text-dim);
+    transition: left 0.2s, background 0.2s;
+}
+.cert-toggle-track.on .cert-toggle-thumb {
+    left: 20px;
+    background: var(--bg-primary);
+}
+.cert-toggle-label {
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--text-dim);
+    transition: color 0.2s;
+}
+.cert-toggle-track.on + .cert-toggle-label {
+    color: var(--text-main);
+}
+
+/* ── Certificate list ── */
+.cert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    max-width: 1040px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.cert-card {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    background: var(--surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+.cert-card:hover {
+    border-color: var(--medium-grey);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* Left thumbnail strip */
+.cert-thumb-wrap {
+    flex-shrink: 0;
+    width: 160px;
+    background: var(--surface-elevated);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+/*    border-right: 1px solid var(--border-subtle); */
+}
+.cert-thumb {
+    width: 120px;
+    height: 80px;
+    border-radius: 4px;
+    background: var(--bg-primary);
+/*    border: 1px solid var(--border-subtle); */
+}
+
+/* ── Right body ── */
+.cert-body {
+    flex: 1;
+    min-width: 0;
+    padding: 0.875rem 1.125rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.cert-title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-light);
+    line-height: 1.35;
+}
+
+.cert-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+.cert-meta-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+}
+.cert-meta-label {
+    color: var(--text-dim);
+    flex-shrink: 0;
+    min-width: 95px;
+}
+.cert-meta-value {
+    color: var(--text-main);
+}
+.cert-meta-value.hex-key {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+}
+
+.cert-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.25rem;
+    color: var(--accent-glow);
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    text-decoration: none;
+    transition: opacity 0.15s;
+    align-self: flex-start;
+}
+.cert-download:hover { opacity: 0.75; }
+.cert-download svg { flex-shrink: 0; }
+
+/* ── Loading spinner ── */
+.cert-loading {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.75rem; padding: 3rem 1rem; width: 100%;
+}
+@keyframes certSpin { to { transform: rotate(360deg); } }
+
+/* ── Status badge on cert cards ── */
+.cert-status-badge {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 0.2rem 0.5rem;
+    border-radius: 4px; margin-bottom: 0.375rem;
+}
+.cert-status-badge.draft       { background: rgba(250,222,36,0.12);  color: var(--yellow,#FADE24); }
+.cert-status-badge.minted      { background: rgba(48,191,63,0.12);   color: var(--green,#30BF3F); }
+.cert-status-badge.transferred { background: rgba(0,120,219,0.12);   color: var(--blue,#0978FA); }
+.cert-status-badge.disputed    { background: rgba(139,92,246,0.12);  color: var(--purple, #8701EE); }
+.cert-status-badge.revoked     { background: rgba(255,47,42,0.12);   color: var(--red,#FF2F2A); }
+.cert-status-badge.burned      { background: rgba(30,30,30,0.6);     color: #888; border: 1px solid #333; }
+
+/* ── Char-counters ── */
+.char-counter {
+    font-size: 0.6875rem;
+    color: var(--text-dim);
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── Tag pills ──  */
+.tag-field-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 0.75rem;
+}
+.tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--form-field);
+    border: 1px solid var(--border-subtle);
+    border-radius: 32px;
+    padding: 0.6rem 0.75rem 0.6rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--text-main);
+    white-space: nowrap;
+    transition: border-color 0.15s;
+}
+.tag-pill:hover {
+    border-color: var(--medium-grey);
+}
+.tag-pill-text {
+    color: var(--accent-glow);
+    font-weight: 500;
+}
+.tag-pill-remove {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    transition: color 0.12s, background 0.12s;
+    flex-shrink: 0;
+}
+.tag-pill-remove:hover {
+    color: var(--red);
+    background: rgba(255,47,42,0.1);
+}
+
+/* ── Tags section header row with tooltip anchor ── */
+.tags-header-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    margin-bottom: 0.25rem;
+}
+.tags-counter {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-left: auto;
+}
+
+/* ── Tag tooltip ── */
+.tag-tooltip {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: calc(100% + 8px);
+    background: var(--accent-glow);
+    color: var(text-light);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    white-space: nowrap;
+    z-index: 100;
+    box-shadow: 0 4px 16px rgba(0,242,255,0.3);
+    pointer-events: none;
+    animation: tagTipIn 0.18s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes tagTipIn {
+    from { opacity: 0; transform: translateY(-4px) scale(0.95); }
+    to   { opacity: 1; transform: none; }
+}
+.tag-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -5px; left: 14px;
+    border: 5px solid transparent;
+    border-top: 0;
+    border-bottom-color: var(--accent-glow);
+}
+.tag-tooltip.show { display: block; }
+
+.disputed-banner::before {
+    content: "\26A0  ";
+    font-size: 1.2rem;
+    vertical-align: middle;
+}
+
+/* ── Checkbox ── */
+.cf-checkbox-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    cursor: pointer;
+    user-select: none;
+}
+.cf-checkbox-wrap input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1.5px solid var(--border-subtle);
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    transition: border-color 0.15s, background 0.15s;
+}
+.cf-checkbox-wrap input[type="checkbox"]:hover {
+    border-color: var(--medium-grey);
+}
+.cf-checkbox-wrap input[type="checkbox"]:checked {
+    border-color: var(--accent-glow);
+    background: var(--accent-glow);
+}
+.cf-checkbox-wrap input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 1px;
+    width: 8px;
+    height: 13px;
+    color: var(--bg-primary);
+    border: 2.5px solid var(--bg-primary);
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+.cf-checkbox-label {
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    transition: color 0.15s;
+}
+.cf-checkbox-wrap:has(input:checked) .cf-checkbox-label {
+    color: var(--text-light); 
+}
+
+/* ── Signature ── */
+.cf-sig-wrap {
+    position: relative;
+    margin: 0.75rem 0 1rem;
+}
+.cf-sig-canvas {
+    display: block;
+    width: 100%;
+    height: 140px;
+    border-radius: 10px;
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-subtle);
+    cursor: crosshair;
+    touch-action: none;
+    transition: border-color 0.15s;
+}
+.cf-sig-canvas:hover,
+.cf-sig-canvas.active {
+    border-color: var(--medium-grey);
+}
+.cf-sig-clear {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-dim);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.15s, color 0.15s;
+}
+.cf-sig-clear:hover {
+    border-color: var(--red);
+    color: var(--red);
+}
+
+</style>
+<style>
+
+/* ── TOP NAV — full 100% width × 56px ── */
+.top-nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 60px;
+    background: var(--surface-elevated);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex; align-items: center;
+    z-index: 200; /* above sidebar */
+}
+/* Left 70px — logo zone, aligns with sidebar width */
+.nav-logo-zone {
+    width:70px; flex-shrink: 0; flex-direction: column;
+    display: flex; align-items: center; justify-content: center;
+/*    border-right: 1px solid var(--border-subtle); */
+    height: 100%;
+/*    padding: 0 8px 0 4px; */
+}
+.nav-logo-zone svg { display: block; }
+/* Right section — fills retext-maining width */
+.nav-right-zone {
+    flex: 1;
+    display: flex; align-items: center;
+    justify-content: flex-end;
+    margin: 0 1rem 0 0.8rem;
+    max-width: 100px;
+    gap: 0px;
+}
+.nav-spacer {
+    flex: 1;
+    min-width: 0;
+}
+.nav-icon {
+    width: 42px; height: 42px;
+    border-radius: 50%; background: none; border: none;
+    cursor: pointer; color: var(--text-main);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.1s;
+    position: relative;
+}
+.nav-icon:hover { background: var(--surface-elevated); }
+
+/* ── LEFT SIDEBAR — starts below top nav ── */
+.side-nav {
+    position: fixed; top: 60px; left: 0; bottom: 0;
+    width: 70px;
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border-subtle);
+    display: flex; flex-direction: column;
+    align-items: center;
+    padding: 14px 0 8px 0px; /* +2px top, +2px left */
+    z-index: 100;
+    gap: 4px;
+}
+.side-logo { display: none; } /* logo now lives in nav-logo-zone */
+.side-logo svg { display: block; }
+/* Nav icons in sidebar */
+.side-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: none; border: none;
+    cursor: pointer; color: var(--text-dim);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.1s, color 0.1s;
+    position: relative;
+}
+.side-icon:hover { background: var(--surface-elevated); color: var(--text-main); }
+.side-icon.active { color: var(--accent-glow); }
+/* Badge dot */
+.side-badge {
+    position: absolute; top: 8px; right: 8px;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent-glow);
+    border: 1.5px solid var(--bg-primary);
+}
+/* Bottom-pinned icons */
+.side-spacer { flex: 1; }
+
+/* ── LOADING SENTINEL ── */
+.sentinel {
+    height: 1px; width: 100%;
+    margin-top: 400px; /* trigger well before page end */
+}
+.load-indicator {
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; padding: 32px;
+    font-size: 12px; color: var(--text-dim);
+    letter-spacing: 0.08em; text-transform: uppercase;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.load-spin {
+    width: 16px; height: 16px;
+    border: 2px solid var(--border-subtle);
+    border-top-color: var(--accent-glow);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* ── NAV SEARCH BAR ── */
+.nav-search {
+    flex: 1;
+    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 10px;
+    margin: 0 6px 0 4px;
+    max-width: 100%;
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 0 0 0 14px;
+    height: 36px;
+    transition: border-color 0.15s;
+}
+.nav-search:focus-within {
+    border-color: var(--surface-elevated);
+}
+.nav-search svg {
+    color: var(--text-dim);
+    flex-shrink: 0;
+}
+.nav-search input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-main);
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+    min-width: 70px;
+}
+.nav-search input::placeholder { text-overflow: ellipsis; overflow-wrap: break-word; color: var(--text-dim); opacity: 0.7; }
+
+.cf-page-heading-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.cf-page-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    margin: 1rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.cf-page-heading-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-light);
+    letter-spacing: -0.03em;
+    margin-top: -0.8rem;
+}
+
+</style>
+<style>
+
+/* ── FEED CONTAINER — offset for both nav and sidebar ── */
+.feed-wrap {
+    height: 100vh;
+    overflow-y: auto;
+    padding-top: 60px;  /* clear top nav */
+    padding-left: 70px; /* clear sidebar */
+    padding-bottom: 80px;
+    box-sizing: border-box;
+}
+
+.feed-wrap::-webkit-scrollbar { width: 4px; }
+.feed-wrap::-webkit-scrollbar-track { background: var(--surface); }
+.feed-wrap::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 2px; }
+.feed-wrap::-webkit-scrollbar-thumb:hover { background: var(--medium-grey); }
+
+.feed-header {
+    font-size: 20px;
+    padding: 1.2rem 0.8rem 0 0.8rem;
+}
+
+/* ── MASONRY GRID —
+   4 columns desktop, 2 tablet, 1 mobile
+   Uses JS column-filling rather than CSS columns
+   so we can control the balancing order ── */
+.masonry {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--col-gap);
+    padding: 0.8rem;
+    align-items: start;
+}
+@media (max-width: 900px) {
+    .masonry { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Single-column feed layout (toggled via nav icon) ── */
+.feed-single-col {
+    width: 820px;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--col-gap);
+    padding: 0.8rem;
+    box-sizing: border-box;
+}
+.feed-single-col .card {
+    min-height: 600px !important;
+    width: 100%;
+}
+@media (max-width: 600px) {
+    .side-nav {
+        top: auto; left: 0; right: 0; bottom: 0;
+        width: 100%; height: 60px;
+        flex-direction: row;
+        padding: 0 8px 0 8px;
+        border-right: none;
+        border-top: 1px solid var(--border-subtle);
+        gap: 0px;
+    }
+    .side-spacer { display: none; }
+    .side-icon { flex: 1; border-radius: 0; width: auto; height: 100%; }
+    .top-nav { left: 0; margin: 0 -3rem 0 0;}
+    .nav-logo-zone { border-right: none; }
+    .feed-wrap { padding-left: 0; padding-bottom: 60px; }
+}
+@media (max-width: 480px) {
+    .masonry { grid-template-columns: 1fr; }
+    :root { --col-gap: 4px; }
+}
+
+/* Each column is a flex container stacking cards */
+.masonry-col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* matches --col-gap */
+}
+
+/* ── CARD ── */
+.card {
+    position: relative;
+    border-radius: var(--card-rad);
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border-subtle);
+    cursor: pointer;
+    break-inside: avoid;
+    transition: transform 0.18s, box-shadow 0.18s, background 0.15s;
+    opacity: 0;
+    animation: fadeCard 0.35s ease forwards;
+}
+@keyframes fadeCard {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.card:hover {
+    transform: scale(1.015);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    background: var(--surface-elevated);
+}
+
+.card img {
+    width: 100%; display: block;
+    object-fit: cover;
+    /* Height set inline per card — preserves aspect ratio */
+}
+
+/* Gradient overlay at bottom */
+.card-overlay {
+    padding: 16px 14px 14px;
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: inherit;
+}
+
+.card-title {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--white); line-height: 1.3; margin-bottom: 2px;
+}
+.card-sub {
+    font-size: 11px; color: rgba(255,255,255,0.6);
+}
+.card-menu {
+    position: absolute; top: 10px; right: 10px;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(4px);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white); opacity: 0;
+    transition: opacity 0.2s, background 0.15s;
+}
+.card-like {
+    top: var(--button-top);
+    right: var(--button-right);
+    position: absolute;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(4px);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white); opacity: 0;
+    transition: opacity 0.2s, background 0.15s;
+}
+.card:hover .card-like { opacity: 1; }
+.card-like:hover { background: rgba(0,0,0,0.7); }
+.card-like.liked svg { fill: var(--red); stroke: var(--red); }
+
+/* Three-dot menu button — top-right, logged-in only */
+.card-menu {
+    position: absolute; top: 10px; right: 10px;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(4px);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white); opacity: 0;
+    transition: opacity 0.2s, background 0.15s;
+    z-index: 2;
+}
+.card:hover .card-menu { opacity: 1; }
+.card-menu:hover { background: rgba(0,0,0,0.7); }
+
+/* Third action button — wand or bolt, below like */
+.card-action {
+    position: absolute; top: calc(var(--button-top) + 36px); right: var(--button-right);
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(4px);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white); opacity: 0;
+    transition: opacity 0.2s, background 0.15s;
+}
+.card:hover .card-action { opacity: 1; }
+.card-action:hover { background: rgba(0,0,0,0.7); }
+.card-action.active svg { stroke: var(--yellow); }
+
+/* ── NAV ACTIVE STATES ──
+   All icons use --accent-glow except Create which uses --accent-feel */
+.side-icon.active { color: var(--accent-glow); }
+.side-icon.active-create { color: var(--accent-feel); }
+
+/* ── CARD DROPDOWN MENU ── */
+.card-dropdown {
+    position: absolute; top: 10px; right: 44px;
+    background: var(--black);
+    border-radius: 8px;
+    min-width: 130px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+    z-index: 10;
+    display: none;
+    flex-direction: column;
+}
+.card-dropdown.open { display: flex; }
+.card-dropdown-item {
+    padding: 9px 14px;
+    font-size: 12px; font-weight: 500;
+    font-family: inherit;
+    color: var(--white);
+    background: none; border: none;
+    text-align: left; cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.1s;
+}
+.card-dropdown-item:last-child { border-bottom: none; }
+.card-dropdown-item:hover { background: rgba(255,255,255,0.08); }
+
+/* ── LOADING SENTINEL ── */
+.sentinel {
+    height: 1px; width: 100%;
+    margin-top: 400px; /* trigger well before page end */
+}
+.load-indicator {
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; padding: 32px;
+    font-size: 12px; color: var(--text-dim);
+    letter-spacing: 0.08em; text-transform: uppercase;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.load-spin {
+    width: 16px; height: 16px;
+    border: 2px solid var(--border-subtle);
+    border-top-color: var(--accent-glow);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.nav-notifications-dot {
+    position: absolute;
+    top: 6px;
+    right: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-glow);
+    border: 1.5px solid var(--bg-primary);
+}
+
+.nav-messages-dot {
+    position: absolute;
+    top: 6px;
+    right: 4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-glow);
+    border: 1.5px solid var(--bg-primary);
+}
+
+.nav-toggle-dot {
+    position: absolute;
+    top: 6px;
+    right: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-glow);
+    border: 1.5px solid var(--bg-primary);
+}
+
+</style>
+<body>
+
+<!-- LEFT SIDEBAR -->
+<nav class="side-nav">
+    <!-- Home -->
+    <button class="side-icon" title="Home">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </button>
+    <!-- Create -->
+    <!-- ################################################ -->
+    <!--                                                  -->
+    <!-- THE CREATE BUTTON THAT TOGGLES THE POST COMPOSER -->
+    <!--                                                  -->
+    <!-- ################################################ -->
+    <button class="side-icon" title="Create" onclick="openPostComposer()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+    </button>
+    <!-- Projects — paintbrush icon -->
+    <button class="side-icon" title="Projects">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3z"/><path d="M9 8c-2 3-4 3.5-7 4l8 10c2-1 6-5 6-7"/><path d="M14.5 17.5 4.5 15"/></svg>
+    </button>
+    <!-- Fragments -->
+    <button class="side-icon" title="Fragments">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    </button>
+    <!-- Imprints — stamp -->
+    <button class="side-icon" title="Imprints">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14"/><path d="M5 18a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v0H5z"/><path d="M8.5 15l-1-4.5a4.5 4.5 0 1 1 9 0l-1 4.5"/><path d="M12 5V2"/></svg>
+    </button>
+    <!-- Certificates -->
+    <button class="side-icon" title="Certificates">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+    </button>
+    <!-- Agreements — signed document -->
+    <button class="side-icon" title="Agreements">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15l2 2 4-4"/></svg>
+    </button>
+    <!-- Validations — shield check
+    <button class="side-icon" title="Validations">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+    </button> -->
+    <!-- Assets — vault/wallet -->
+    <button class="side-icon" title="Assets">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2"/><circle cx="16" cy="14" r="1.5"/></svg>
+    </button>
+
+    <div class="side-spacer"></div>
+
+    <!-- Profile -->
+    <button class="side-icon" title="Profile">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </button>
+    <!-- Settings -->
+    <button class="side-icon" title="Settings">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+    <!-- Help -->
+    <button class="side-icon" title="Help">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </button>
+
+</nav>
+
+<!-- TOP NAV — full width, logo zone left 70px, nav icons right -->
+<header class="top-nav">
+    <div class="nav-logo-zone">
+        <svg width="52" height="44" viewBox="70 85 350 350" fill="currentColor">
+            <path d="M54.77,220.78 L165.67,109.88 L227.96,293.43 L54.77,220.78 Z"/>
+            <path d="M184.0,98.0 L249.0,286.0 L440.0,224.0 L184.0,98.0 Z"/>
+            <path d="M236.2,310.4 L428.8,250.1 L305.5,330.2 L175.4,418.7 Z"/>
+        </svg>
+    </div>
+    <!-- Search bar — grows up to its max-width, never wider -->
+    <div class="nav-search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" placeholder="Search..." autocomplete="off">
+    </div>
+    <!-- Absorbs any leftover width so the icon zone stays pinned to the right edge
+    <div class="nav-spacer"></div> -->
+    <div class="nav-right-zone">
+        <!-- Notifications -->
+        <button class="nav-icon" title="Notifications">
+            <div  class="nav-notifications-dot"></div>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </button>
+        <!-- Messages -->
+        <button class="nav-icon" title="Messages">
+            <div class="nav-messages-dot"></div>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </button>
+        <!-- Layout toggle: single 820px column vs full-width multi-column feed -->
+        <button class="nav-icon layout-toggle-btn" id="layoutToggleBtn" title="Switch to gallery" onclick="toggleFeedLayout()">
+            <div class="nav-toggle-dot"></div>
+            <svg id="layoutToggleIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="3" width="12" height="18" rx="1"/>
+            </svg>
+        </button>
+    </div>
+</header>
+
+<!-- FEED -->
+<div class="feed-wrap">
+    <div class="feed-header" id="feed-header">Posts</div>
+    <div class="masonry" id="masonry" style="display:none;">
+        <div class="masonry-col" id="col-0"><div class="card" style="animation-delay: 0ms; min-height: 560px;"><div class="card-dropdown" id="dd-11"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;11&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></button></div><div class="card" style="animation-delay: 480ms; min-height: 560px;"><div class="card-dropdown" id="dd-9"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;9&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></button></div><div class="card" style="animation-delay: 540ms; min-height: 299px;"><div class="card-dropdown" id="dd-6"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;6&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></button></div><div class="card" style="animation-delay: 660ms; min-height: 560px;"><div class="card-dropdown" id="dd-10"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;10&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></button></div></div>
+        <div class="masonry-col" id="col-1"><div class="card" style="animation-delay: 240ms; min-height: 560px;"><div class="card-dropdown" id="dd-7"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;7&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></button></div><div class="card" style="animation-delay: 300ms; min-height: 301px;"><div class="card-dropdown" id="dd-8"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;8&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></button></div><div class="card" style="animation-delay: 0ms; min-height: 299px;"><div class="card-dropdown" id="dd-15"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;15&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></button></div><div class="card" style="animation-delay: 60ms; min-height: 299px;"><div class="card-dropdown" id="dd-22"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;22&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></button></div></div>
+        <div class="masonry-col" id="col-2"><div class="card" style="animation-delay: 60ms; min-height: 299px;"><div class="card-dropdown" id="dd-12"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;12&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></button></div><div class="card" style="animation-delay: 120ms; min-height: 299px;"><div class="card-dropdown" id="dd-1"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;1&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></button></div><div class="card" style="animation-delay: 600ms; min-height: 301px;"><div class="card-dropdown" id="dd-2"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;2&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></button></div><div class="card" style="animation-delay: 120ms; min-height: 560px;"><div class="card-dropdown" id="dd-20"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;20&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></button></div><div class="card" style="animation-delay: 180ms; min-height: 337px;"><div class="card-dropdown" id="dd-16"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;16&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></button></div><div class="card" style="animation-delay: 240ms; min-height: 560px;"><div class="card-dropdown" id="dd-17"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;17&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></button></div><div class="card" style="animation-delay: 300ms; min-height: 299px;"><div class="card-dropdown" id="dd-18"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;18&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></button></div><div class="card" style="animation-delay: 360ms; min-height: 560px;"><div class="card-dropdown" id="dd-23"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;23&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></button></div><div class="card" style="animation-delay: 660ms; min-height: 335px;"><div class="card-dropdown" id="dd-13"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;13&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></button></div></div>
+        <div class="masonry-col" id="col-3"><div class="card" style="animation-delay: 180ms; min-height: 299px;"><div class="card-dropdown" id="dd-5"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;5&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></button></div><div class="card" style="animation-delay: 360ms; min-height: 560px;"><div class="card-dropdown" id="dd-4"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;4&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></button></div><div class="card" style="animation-delay: 420ms; min-height: 560px;"><div class="card-dropdown" id="dd-3"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;3&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></button></div><div class="card" style="animation-delay: 420ms; min-height: 337px;"><div class="card-dropdown" id="dd-21"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;21&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></button></div><div class="card" style="animation-delay: 480ms; min-height: 299px;"><div class="card-dropdown" id="dd-14"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;14&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></button></div><div class="card" style="animation-delay: 540ms; min-height: 299px;"><div class="card-dropdown" id="dd-24"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;24&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></button></div><div class="card" style="animation-delay: 600ms; min-height: 560px;"><div class="card-dropdown" id="dd-19"><button class="card-dropdown-item">Post</button><button class="card-dropdown-item">Share</button><button class="card-dropdown-item">Download</button><button class="card-dropdown-item">Edit</button><button class="card-dropdown-item">Archive</button></div><button class="card-menu" onclick="toggleCardMenu(&#39;19&#39;,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg></button><button class="card-like" onclick="toggleLike(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button><button class="card-action" onclick="cardAction(this,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></button></div></div>
+    </div>
+    <div class="feed-single-col" id="feedSingleCol"><div id="userPostsContainer"></div></div>
+
+    <div class="load-indicator" id="loadIndicator" style="display: none;">
+        <div class="load-spin"></div>
+        <span>Loading more</span>
+    </div>
+</div>
+
+<!-- Intersection sentinel — sits below the fold -->
+<div class="sentinel" id="sentinel"></div>
+
+<script>
+/* ── CURRENT PAGE — drives left nav highlight ── */
+
+/* Map page names to their sidebar icon title attribute */
+const PAGE_ICON_MAP = {
+    'feed':         'Home',
+    'home':         'Home',
+    'create':       'Create',
+    'projects':     'Projects',
+    'fragments':    'Fragments',
+    'certificates': 'Certificates',
+    'profile':      'Profile',
+    'settings':     'Settings',
+    'help':         'Help',
+};
+
+function highlightNav() {
+    var targetTitle = PAGE_ICON_MAP[PAGE] || '';
+    document.querySelectorAll('.side-icon').forEach(function(btn) {
+        btn.classList.remove('active', 'active-create');
+        if (btn.getAttribute('title') === targetTitle) {
+            btn.classList.add(targetTitle === 'Create' ? 'active-create' : 'active');
+        }
+    });
+}
+
+/* Run once DOM is ready */
+document.addEventListener('DOMContentLoaded', highlightNav);
+
+/* ════════════════════════════════════════════════════
+   COLOUR-BALANCING MASONRY FEED ENGINE
+   
+   Each card has a dominant hue (0-360).
+   The column-picker algorithm minimises hue clash
+   by choosing the column whose most recent card's
+   hue is furthest from the incoming card's hue.
+   Within each batch, cards are also pre-sorted to
+   maximise hue spread across sequential positions.
+════════════════════════════════════════════════════ */
+
+/* ── Picsum image catalogue with metadata ──
+   In production these come from GET /api/feed?page=N
+   Each item has: id, aspectRatio, hue (dominant colour 0-360),
+   title, handle, category                                    */
+
+var CARD_POOL = (function() {
+    /* 64 items — varied aspect ratios and hues for full 4-col coverage */
+    var items = [
+        { id:'1',  w:2500,h:1667, hue:200, title:'DEEP FIELD 01',    handle:'@deepfield',      cat:'Digital'     },
+        { id:'2',  w:3670,h:2462, hue:30,  title:'CHROME RITUAL 04', handle:'@chromeritual',   cat:'Generative'  },
+        { id:'3',  w:1280,h:1900, hue:120, title:'ORGANIC 003',      handle:'@bloom.wire',     cat:'Hybrid'      },
+        { id:'4',  w:2500,h:3754, hue:280, title:'NULL SPACE 07',    handle:'@void.signal',    cat:'Digital'     },
+        { id:'5',  w:4272,h:2848, hue:15,  title:'CHROME 011',       handle:'@chromeritual',   cat:'Traditional' },
+        { id:'6',  w:5184,h:3456, hue:160, title:'DEEP FIELD 02',    handle:'@deepfield',      cat:'Generative'  },
+        { id:'7',  w:3456,h:5184, hue:220, title:'DECAY 019',        handle:'@static.ghost',   cat:'Digital'     },
+        { id:'8',  w:3872,h:2592, hue:45,  title:'ORGANIC 012',      handle:'@bloom.wire',     cat:'Hybrid'      },
+        { id:'9',  w:2760,h:3840, hue:330, title:'NULL SPACE 12',    handle:'@void.signal',    cat:'Digital'     },
+        { id:'10', w:2592,h:3888, hue:60,  title:'CHROME 003',       handle:'@chromeritual',   cat:'Generative'  },
+        { id:'11', w:3024,h:4032, hue:190, title:'DEEP FIELD 08',    handle:'@deepfield',      cat:'Digital'     },
+        { id:'12', w:4928,h:3280, hue:10,  title:'DECAY 005',        handle:'@static.ghost',   cat:'Digital'     },
+        { id:'13', w:2592,h:1936, hue:300, title:'ORGANIC 021',      handle:'@bloom.wire',     cat:'Hybrid'      },
+        { id:'14', w:4752,h:3168, hue:90,  title:'NULL SPACE 04',    handle:'@void.signal',    cat:'Traditional' },
+        { id:'15', w:5184,h:3456, hue:240, title:'CHROME 017',       handle:'@chromeritual',   cat:'Generative'  },
+        { id:'16', w:2560,h:1920, hue:25,  title:'DEEP FIELD 14',    handle:'@deepfield',      cat:'Digital'     },
+        { id:'17', w:1280,h:1852, hue:170, title:'DECAY 031',        handle:'@static.ghost',   cat:'Hybrid'      },
+        { id:'18', w:5472,h:3648, hue:355, title:'ORGANIC 006',      handle:'@bloom.wire',     cat:'Digital'     },
+        { id:'19', w:2400,h:3600, hue:75,  title:'NULL SPACE 18',    handle:'@void.signal',    cat:'Generative'  },
+        { id:'20', w:3456,h:5184, hue:210, title:'CHROME 009',       handle:'@chromeritual',   cat:'Digital'     },
+        { id:'21', w:5184,h:3888, hue:320, title:'DEEP FIELD 22',    handle:'@deepfield',      cat:'Traditional' },
+        { id:'22', w:3024,h:2016, hue:50,  title:'DECAY 044',        handle:'@static.ghost',   cat:'Generative'  },
+        { id:'23', w:4000,h:6000, hue:145, title:'ORGANIC 018',      handle:'@bloom.wire',     cat:'Hybrid'      },
+        { id:'24', w:5616,h:3744, hue:265, title:'NULL SPACE 23',    handle:'@void.signal',    cat:'Digital'     },
+        { id:'25', w:2400,h:1600, hue:35,  title:'CHROME 021',       handle:'@chromeritual',   cat:'Generative'  },
+        { id:'26', w:3456,h:4608, hue:180, title:'DEEP FIELD 31',    handle:'@deepfield',      cat:'Digital'     },
+        { id:'27', w:4032,h:3024, hue:5,   title:'DECAY 057',        handle:'@static.ghost',   cat:'Traditional' },
+        { id:'28', w:2500,h:1667, hue:135, title:'ORGANIC 027',      handle:'@bloom.wire',     cat:'Hybrid'      },
+        { id:'29', w:4288,h:2848, hue:290, title:'NULL SPACE 29',    handle:'@void.signal',    cat:'Digital'     },
+        { id:'30', w:5472,h:3648, hue:55,  title:'CHROME 028',       handle:'@chromeritual',   cat:'Generative'  },
+        { id:'31', w:4000,h:3000, hue:200, title:'DEEP FIELD 38',    handle:'@deepfield',      cat:'Digital'     },
+        { id:'32', w:3504,h:2336, hue:345, title:'DECAY 060',        handle:'@static.ghost',   cat:'Hybrid'      },
+        { id:'33', w:2800,h:4200, hue:110, title:'ORGANIC 033',      handle:'@bloom.wire',     cat:'Generative'  },
+        { id:'34', w:3200,h:2133, hue:255, title:'NULL SPACE 34',    handle:'@void.signal',    cat:'Digital'     },
+        { id:'35', w:4500,h:3000, hue:20,  title:'CHROME 035',       handle:'@chromeritual',   cat:'Traditional' },
+        { id:'36', w:2200,h:3300, hue:175, title:'DEEP FIELD 41',    handle:'@deepfield',      cat:'Digital'     },
+        { id:'37', w:3600,h:2400, hue:310, title:'DECAY 037',        handle:'@static.ghost',   cat:'Generative'  },
+        { id:'38', w:1800,h:2700, hue:80,  title:'ORGANIC 038',      handle:'@bloom.wire',     cat:'Hybrid'      },
+        { id:'39', w:4800,h:3200, hue:235, title:'NULL SPACE 39',    handle:'@void.signal',    cat:'Digital'     },
+        { id:'40', w:2600,h:3900, hue:40,  title:'CHROME 040',       handle:'@chromeritual',   cat:'Generative'  },
+        { id:'41', w:5000,h:3333, hue:195, title:'DEEP FIELD 47',    handle:'@deepfield',      cat:'Digital'     },
+        { id:'42', w:3300,h:2200, hue:360, title:'DECAY 042',        handle:'@static.ghost',   cat:'Traditional' },
+        { id:'43', w:2100,h:3150, hue:130, title:'ORGANIC 043',      handle:'@bloom.wire',     cat:'Hybrid'      },
+        { id:'44', w:4400,h:2933, hue:275, title:'NULL SPACE 44',    handle:'@void.signal',    cat:'Digital'     },
+        { id:'45', w:3700,h:5550, hue:65,  title:'CHROME 045',       handle:'@chromeritual',   cat:'Generative'  },
+        { id:'46', w:2900,h:1933, hue:215, title:'DEEP FIELD 52',    handle:'@deepfield',      cat:'Digital'     },
+        { id:'47', w:5100,h:3400, hue:335, title:'DECAY 047',        handle:'@static.ghost',   cat:'Hybrid'      },
+        { id:'48', w:2300,h:3450, hue:100, title:'ORGANIC 048',      handle:'@bloom.wire',     cat:'Generative'  },
+        { id:'49', w:4100,h:2733, hue:250, title:'NULL SPACE 49',    handle:'@void.signal',    cat:'Digital'     },
+        { id:'50', w:3900,h:5850, hue:45,  title:'CHROME 050',       handle:'@chromeritual',   cat:'Traditional' },
+        { id:'51', w:2700,h:1800, hue:185, title:'DEEP FIELD 55',    handle:'@deepfield',      cat:'Digital'     },
+        { id:'52', w:5300,h:3533, hue:315, title:'DECAY 052',        handle:'@static.ghost',   cat:'Generative'  },
+        { id:'53', w:1900,h:2850, hue:125, title:'ORGANIC 053',      handle:'@bloom.wire',     cat:'Hybrid'      },
+        { id:'54', w:4700,h:3133, hue:270, title:'NULL SPACE 54',    handle:'@void.signal',    cat:'Digital'     },
+        { id:'55', w:3100,h:4650, hue:55,  title:'CHROME 055',       handle:'@chromeritual',   cat:'Generative'  },
+        { id:'56', w:5600,h:3733, hue:205, title:'DEEP FIELD 61',    handle:'@deepfield',      cat:'Digital'     },
+        { id:'57', w:2000,h:3000, hue:350, title:'DECAY 057b',       handle:'@static.ghost',   cat:'Traditional' },
+        { id:'58', w:4300,h:2867, hue:115, title:'ORGANIC 058',      handle:'@bloom.wire',     cat:'Hybrid'      },
+        { id:'59', w:3800,h:2533, hue:260, title:'NULL SPACE 59',    handle:'@void.signal',    cat:'Digital'     },
+        { id:'60', w:2500,h:3750, hue:30,  title:'CHROME 060',       handle:'@chromeritual',   cat:'Generative'  },
+        { id:'61', w:4600,h:3067, hue:190, title:'DEEP FIELD 67',    handle:'@deepfield',      cat:'Digital'     },
+        { id:'62', w:3200,h:4800, hue:325, title:'DECAY 062',        handle:'@static.ghost',   cat:'Hybrid'      },
+        { id:'63', w:5400,h:3600, hue:85,  title:'ORGANIC 063',      handle:'@bloom.wire',     cat:'Generative'  },
+        { id:'64', w:2800,h:1867, hue:245, title:'NULL SPACE 64',    handle:'@void.signal',    cat:'Digital'     },
+    ];
+    return items;
+})();
+
+var BATCH_SIZE   = 12;   /* cards per load — fills ~3 screens                */
+var COL_COUNT    = 4;    /* columns on desktop                                */
+var MAX_W        = 400;  /* approx rendered column width for height estimate  */
+var isLoggedIn   = true; /* gates full card UI: dropdown, like, action button */
+var _page        = 0;
+var _loading     = false;
+var _exhausted   = false;
+
+/* Track last hue in each column for balancing */
+var _colLastHue  = [0, 90, 180, 270]; /* start spread at 90° apart */
+var _colHeights  = [0, 0, 0, 0];      /* approximate px height per column */
+
+/* Hue distance (circular, 0-180) */
+function hueDist(a, b) {
+    var d = Math.abs(a - b) % 360;
+    return d > 180 ? 360 - d : d;
+}
+
+/* ── Colour-balancing column picker ──
+   Returns the column index that maximises
+   hue distance from the incoming card's hue,
+   with a secondary tiebreak on shortest column height */
+function pickColumn(cardHue) {
+    var ncols = getColCount();
+    var best = 0, bestScore = -1;
+    for (var c = 0; c < ncols; c++) {
+        var hScore = hueDist(cardHue, _colLastHue[c]);
+        /* Weight: 70% hue distance, 30% height balance */
+        var maxH   = Math.max.apply(null, _colHeights.slice(0, ncols)) || 1;
+        var hBal   = 1 - (_colHeights[c] / maxH);
+        var score  = hScore * 0.7 + hBal * 0.3 * 180;
+        if (score > bestScore) { bestScore = score; best = c; }
+    }
+    return best;
+}
+
+/* ── Pre-sort a batch to maximise hue spread ──
+   Greedy: pick the card whose hue is furthest
+   from the last placed card each step           */
+function sortBatch(cards) {
+    if (cards.length <= 1) return cards;
+    var sorted = [];
+    var pool   = cards.slice();
+    /* Start with the card most different from the
+       current last hue of column 0 as the anchor */
+    var anchor = 0, bestD = -1;
+    for (var i = 0; i < pool.length; i++) {
+        var d = hueDist(pool[i].hue, _colLastHue[0]);
+        if (d > bestD) { bestD = d; anchor = i; }
+    }
+    sorted.push(pool.splice(anchor, 1)[0]);
+    while (pool.length) {
+        var last = sorted[sorted.length - 1].hue;
+        var best2 = 0, bestD2 = -1;
+        for (var j = 0; j < pool.length; j++) {
+            var d2 = hueDist(pool[j].hue, last);
+            if (d2 > bestD2) { bestD2 = d2; best2 = j; }
+        }
+        sorted.push(pool.splice(best2, 1)[0]);
+    }
+    return sorted;
+}
+
+/* ── Responsive column count ── */
+function getColCount() {
+    return window.innerWidth <= 480 ? 1
+         : window.innerWidth <= 900 ? 2
+         : 4;
+}
+
+/* ── Build a single card element ── */
+function makeCard(item, colIdx, delay) {
+
+    var aspect = item.h / item.w;
+    var colW   = (document.getElementById('col-0').offsetWidth || MAX_W);
+    var imgH   = Math.round(colW * aspect);
+    /* Clamp: min 120px, max 560px to avoid extreme slivers/giants */
+    imgH = Math.max(120, Math.min(560, imgH));
+
+    var card = document.createElement('div');
+    card.className = 'card';
+    card.style.animationDelay = (delay * 60) + 'ms';
+    card.style.minHeight = imgH + 'px';
+
+    /* Three-dot SVG — horizontal, matching heart proportions */
+    var dotsIcon =
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">' +
+        '<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>' +
+        '</svg>';
+
+    /* Heart SVG */
+    var heartIcon =
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+        'stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+        '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 ' +
+        '7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+
+    /* Comment SVG (for fragments) */
+    var wandIcon =
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+        'stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+        '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>' +
+        '</svg>';
+
+    /* Electricity / bolt SVG (for projects) */
+    var boltIcon =
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+        'stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+        '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>';
+
+    /* Third icon — alternate wand/bolt per card for demo */
+    var thirdIcon = (item.id % 2 === 0) ? wandIcon : boltIcon;
+
+    /* Click card body to open modal */
+    card.addEventListener('click', function() { openModal(item); });
+
+    if (isLoggedIn) {
+        card.innerHTML =
+            /* Dropdown menu */
+            '<div class="card-dropdown" id="dd-' + item.id + '">' +
+            '<button class="card-dropdown-item">Post</button>' +
+            '<button class="card-dropdown-item">Share</button>' +
+            '<button class="card-dropdown-item">Download</button>' +
+            '<button class="card-dropdown-item">Edit</button>' +
+            '<button class="card-dropdown-item">Archive</button>' +
+            '</div>' +
+            /* Three-dot menu button */
+            '<button class="card-menu" onclick="toggleCardMenu(\'' + item.id + '\',event)">' + dotsIcon + '</button>' +
+            /* Like */
+            '<button class="card-like" onclick="toggleLike(this,event)">' + heartIcon + '</button>' +
+            /* Wand or bolt */
+            '<button class="card-action" onclick="cardAction(this,event)">' + thirdIcon + '</button>';
+    } else {
+        card.innerHTML =
+            '<button class="card-like" onclick="toggleLike(this,event)">' + heartIcon + '</button>';
+    }
+
+    return { el: card, height: imgH };
+}
+
+/* ── Load and insert one batch ── */
+function loadBatch() {
+    if (_loading || _exhausted) return;
+    _loading = true;
+    document.getElementById('loadIndicator').style.display = 'flex';
+
+    /* Simulate async API fetch with a small delay */
+    setTimeout(function() {
+        var start = _page * BATCH_SIZE;
+        var items = CARD_POOL.slice(start, start + BATCH_SIZE);
+
+        if (!items.length) {
+            _exhausted = true;
+            document.getElementById('loadIndicator').innerHTML =
+                '<span style="color:var(--text-dim)">You\'ve seen everything · <a href="#" style="color:var(--accent-glow);text-decoration:none;" onclick="resetFeed()">Start over</a></span>';
+            _loading = false;
+            return;
+        }
+
+        /* Sort batch for maximum hue spread */
+        var sorted = sortBatch(items.slice());
+        var ncols  = getColCount();
+
+        sorted.forEach(function(item, i) {
+            var col    = pickColumn(item.hue);
+            var built  = makeCard(item, col, i);
+            document.getElementById('col-' + col).appendChild(built.el);
+            /* Update tracking — +gap +2px border */
+            _colLastHue[col]  = item.hue;
+            _colHeights[col] += built.height + 8; /* col-gap 6px + 2px border */
+        });
+
+        _page++;
+        _loading = false;
+        document.getElementById('loadIndicator').style.display = 'none';
+
+        /* Pre-load next batch if we're still above the 3000px buffer */
+        checkBuffer();
+    }, 320); /* realistic network delay feel */
+}
+
+/* ── Buffer check: keep ~3 screen-heights pre-rendered ── */
+function checkBuffer() {
+    var scroller = document.querySelector('.feed-wrap');
+    if (!scroller) return;
+    var docH    = scroller.scrollHeight;
+    var viewH   = scroller.clientHeight;
+    var scrollY = scroller.scrollTop;
+    /* If remaining scroll distance < 2.5× viewport, load more */
+    if (docH - (scrollY + viewH) < viewH * 2.5) {
+        loadBatch();
+    }
+}
+
+/* ── Intersection Observer on sentinel ── */
+var observer = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting) loadBatch();
+}, { root: document.querySelector('.feed-wrap'), rootMargin: '800px' }); /* trigger 800px before sentinel enters view */
+
+observer.observe(document.getElementById('sentinel'));
+
+/* Also trigger on scroll for fast scrollers */
+var _scrollTimer;
+var _feedScroller = document.querySelector('.feed-wrap');
+if (_feedScroller) {
+    _feedScroller.addEventListener('scroll', function() {
+        clearTimeout(_scrollTimer);
+        _scrollTimer = setTimeout(checkBuffer, 80);
+    }, { passive: true });
+}
+
+/* ── Responsive reflow: reset column heights on resize ── */
+var _resizeTimer;
+window.addEventListener('resize', function() {
+    clearTimeout(_resizeTimer);
+    _resizeTimer = setTimeout(function() {
+        _colHeights = [0, 0, 0, 0];
+    }, 200);
+});
+
+/* ── Like toggle ── */
+function toggleLike(btn, e) {
+    e.stopPropagation();
+    btn.classList.toggle('liked');
+}
+
+/* ── Card three-dot dropdown ── */
+function toggleCardMenu(id, e) {
+    e.stopPropagation();
+    /* Close any other open dropdown first */
+    document.querySelectorAll('.card-dropdown.open').forEach(function(d) {
+        if (d.id !== 'dd-' + id) d.classList.remove('open');
+    });
+    var dd = document.getElementById('dd-' + id);
+    if (dd) dd.classList.toggle('open');
+}
+
+/* Close card dropdowns when clicking elsewhere */
+document.addEventListener('click', function() {
+    document.querySelectorAll('.card-dropdown.open').forEach(function(d) {
+        d.classList.remove('open');
+    });
+    document.getElementById('modalDropdown').classList.remove('open');
+});
+
+/* ── Third action (comment/bolt) — toggles active yellow ── */
+function cardAction(btn, e) {
+    e.stopPropagation();
+    btn.classList.toggle('active');
+}
+
+/* ── Modal ── */
+function openModal(item) {
+    /* Populate content area */
+    document.getElementById('modalContent').innerHTML =
+        '<div style="background:var(--surface-elevated);border-radius:8px;min-height:300px;' +
+        'display:flex;align-items:center;justify-content:center;' +
+        'color:var(--text-dim);font-size:13px;letter-spacing:0.06em;text-transform:uppercase;">' +
+        item.title + '</div>' +
+        '<div style="margin-top:20px;font-size:13px;color:var(--text-dim);">' +
+        '<strong style="color:var(--text-main);">' + item.title + '</strong><br>' +
+        item.handle + ' &nbsp;·&nbsp; ' + item.cat +
+        '</div>';
+    document.getElementById('cardModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+    if (e && e.target !== document.getElementById('cardModal')) return;
+    document.getElementById('cardModal').classList.remove('open');
+    document.getElementById('modalDropdown').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+/* Modal three-dot dropdown */
+function toggleModalMenu(e) {
+    e.stopPropagation();
+    document.getElementById('modalDropdown').classList.toggle('open');
+}
+
+/* ── Reset ── */
+function resetFeed() {
+    _page = 0; _exhausted = false;
+    _colLastHue = [0, 90, 180, 270];
+    _colHeights = [0, 0, 0, 0];
+    for (var c = 0; c < 4; c++) {
+        document.getElementById('col-' + c).innerHTML = '';
+    }
+    document.getElementById('loadIndicator').innerHTML =
+        '<div class="load-spin"></div><span>Loading more</span>';
+    loadBatch();
+    return false;
+}
+
+/* ── Initial load ── */
+loadBatch();
+
+/* ══════════════════════════════════════════════════════
+   Feed layout toggle — Fragments (multi-column masonry)
+   vs Posts (single 820px / 600px-tall column newsfeed).
+══════════════════════════════════════════════════════ */
+
+var ICON_MULTI  = '<rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="8" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>';
+var ICON_SINGLE = '<rect x="6" y="3" width="12" height="18" rx="1"/>';
+var _feedLayout = 'single'; /* 'multi' (Fragments) | 'single' (Posts) */
+
+var POST_POOL = (function() {
+    var items = [];
+    var titles = ['Status Update','Open Studio Note','Behind the Scenes','Quick Thought','Field Note','Process Log','Late Night Take','Collector Q&A','Weekly Recap','Studio Visit'];
+    var handles = ['@deepfield','@chromeritual','@bloom.wire','@void.signal','@static.ghost'];
+    for (var i = 1; i <= 24; i++) {
+        items.push({
+            id: 'post-' + i, w: 1600, h: 1000, hue: (i * 37) % 360,
+            title: titles[i % titles.length] + ' ' + i,
+            handle: handles[i % handles.length], cat: 'Post'
+        });
+    }
+    return items;
+})();
+
+var _postsPage = 0, _postsLoading = false, _postsExhausted = false;
+var POSTS_BATCH = 8;
+
+function purgeFragmentsGrid() {
+    for (var c = 0; c < 4; c++) {
+        var col = document.getElementById('col-' + c);
+        if (col) col.innerHTML = '';
+    }
+    _page = 0; _loading = false; _exhausted = false;
+    _colLastHue = [0, 90, 180, 270];
+    _colHeights = [0, 0, 0, 0];
+}
+
+function purgePostsFeed() {
+    var singleCol = document.getElementById('feedSingleCol');
+    if (singleCol) singleCol.innerHTML = '<div id="userPostsContainer"></div>';
+    _postsPage = 0; _postsLoading = false; _postsExhausted = false;
+}
+
+function makePostCard(item) {
+    var card = document.createElement('div');
+    card.className = 'card';
+    card.style.minHeight = '600px';
+
+    var dotsIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>';
+    var heartIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+    var wandIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+
+    card.addEventListener('click', function() { openModal(item); });
+
+    card.innerHTML =
+        '<div class="card-dropdown" id="dd-' + item.id + '">' +
+        '<button class="card-dropdown-item">Post</button>' +
+        '<button class="card-dropdown-item">Comment</button>' +
+        '<button class="card-dropdown-item">Share</button>' +
+        '<button class="card-dropdown-item">Edit</button>' +
+        '<button class="card-dropdown-item">Archive</button>' +
+        '<button class="card-dropdown-item danger">Report</button></div>' +
+        '<button class="card-menu" onclick="toggleCardMenu(\'' + item.id + '\',event)">' + dotsIcon + '</button>' +
+        '<button class="card-like" onclick="toggleLike(this,event)">' + heartIcon + '</button>' +
+        '<button class="card-action" onclick="cardAction(this,event)">' + wandIcon + '</button>';
+
+    return card;
+}
+
+function loadPostsBatch() {
+    if (_postsLoading || _postsExhausted || _feedLayout !== 'single') return;
+    _postsLoading = true;
+    document.getElementById('loadIndicator').style.display = 'flex';
+
+    setTimeout(function() {
+        var start = _postsPage * POSTS_BATCH;
+        var items = POST_POOL.slice(start, start + POSTS_BATCH);
+        var singleCol = document.getElementById('feedSingleCol');
+
+        if (!items.length) {
+            _postsExhausted = true;
+            document.getElementById('loadIndicator').innerHTML = '<span style="color:var(--text-dim)">You\'ve seen everything</span>';
+            _postsLoading = false;
+            return;
+        }
+
+        items.forEach(function(item) { singleCol.appendChild(makePostCard(item)); });
+
+        _postsPage++;
+        _postsLoading = false;
+        document.getElementById('loadIndicator').style.display = 'none';
+    }, 320);
+}
+
+function toggleFeedLayout() {
+    var masonry   = document.getElementById('masonry');
+    var singleCol = document.getElementById('feedSingleCol');
+    var icon      = document.getElementById('layoutToggleIcon');
+    var btn       = document.getElementById('layoutToggleBtn');
+    var headerEl  = document.getElementById('feed-header');
+
+    if (_feedLayout === 'multi') {
+        purgeFragmentsGrid();
+        masonry.style.display   = 'none';
+        singleCol.style.display = '';
+        _feedLayout = 'single';
+        icon.innerHTML = ICON_SINGLE;
+        btn.title = 'Switch to gallery';
+        headerEl.textContent = 'Posts';
+        renderUserPostsFeed();
+        loadPostsBatch();
+    } else {
+        purgePostsFeed();
+        singleCol.style.display = 'none';
+        masonry.style.display   = '';
+        _feedLayout = 'multi';
+        icon.innerHTML = ICON_MULTI;
+        btn.title = 'Switch to newsfeed';
+        headerEl.textContent = 'Fragments';
+        loadBatch();
+    }
+}
+
+var _origCheckBuffer = checkBuffer;
+checkBuffer = function() {
+    if (_feedLayout === 'single') {
+        var scroller = document.querySelector('.feed-wrap');
+        if (!scroller) return;
+        var docH = scroller.scrollHeight, viewH = scroller.clientHeight, scrollY = scroller.scrollTop;
+        if (docH - (scrollY + viewH) < viewH * 2.5) loadPostsBatch();
+    } else {
+        _origCheckBuffer();
+    }
+};
+
+</script>
+
+<!-- CARD DETAIL MODAL -->
+<div class="modal-backdrop" id="cardModal" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-bar">
+            <!-- Three-dot menu left of close -->
+            <div class="modal-btn" id="modalMenuBtn" onclick="toggleModalMenu(event)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle>
+                </svg>
+                <div class="modal-dropdown" id="modalDropdown">
+                    <button class="modal-dropdown-item">Post</button>
+                    <button class="modal-dropdown-item">Share</button>
+                    <button class="modal-dropdown-item">Download</button>
+                    <button class="modal-dropdown-item">Edit</button>
+                    <button class="modal-dropdown-item">Archive</button>
+                </div>
+            </div>
+            <!-- Close -->
+            <div class="modal-btn" onclick="closeModal()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </div>
+        </div>
+        <div class="modal-content" id="modalContent">
+            <!-- Content injected by openModal() -->
+        </div>
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     POST COMPOSER MODAL
+══════════════════════════════════════════════════════ -->
+<div class="cf-backdrop" id="postComposerBackdrop" onclick="closePostComposer(event)">
+    <div class="cf-modal pc-post-modal" onclick="event.stopPropagation()">
+
+        <!-- Header: close / title / post -->
+        <div class="cf-header">
+            <button class="cf-close-btn" onclick="closePostComposer()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="cf-header-title pc-header-title-center">New Post</div>
+            <button class="cf-btn-create" id="pcPostBtn" style="padding:0.55rem 1.4rem; font-size:14px;" onclick="submitPcPost()" disabled>Post</button>
+        </div>
+
+        <div class="cf-card">
+
+            <!-- Top toolbar: Font Style / Font Color / Font Size / Background -->
+            <div class="pc-toolbar" id="pcToolbar">
+                <button class="pc-tool-btn" onclick="togglePcPanel('font', this)">
+                    <span class="pc-full">Choose Font Style</span><span class="pc-short">Font</span>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <button class="pc-tool-btn" onclick="togglePcPanel('color', this)">
+                    <span class="pc-full">Choose Font Color</span><span class="pc-short">Color</span>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <button class="pc-tool-btn" onclick="togglePcPanel('size', this)">
+                    <span class="pc-full">Choose Font Size</span><span class="pc-short">Size</span>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <button class="pc-tool-btn" onclick="togglePcPanel('bg', this)">
+                    <span class="pc-full">Choose Background</span><span class="pc-short">Background</span>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+
+                <!-- Font style panel -->
+                <div class="pc-dropdown-panel" id="pcPanel-font">
+                    <button class="pc-font-option" style="font-family:Consolas, 'Courier New', monospace;" onclick="selectPcFont(&quot;Consolas, 'Courier New', monospace&quot;, this)">Consolas</button>
+                    <button class="pc-font-option" style="font-family:'Courier New', Courier, monospace;" onclick="selectPcFont(&quot;'Courier New', Courier, monospace&quot;, this)">Courier New</button>
+                    <button class="pc-font-option" style="font-family:Georgia, 'Georgia Pro', serif;" onclick="selectPcFont(&quot;Georgia, 'Georgia Pro', serif&quot;, this)">Georgia</button>
+                    <button class="pc-font-option" style="font-family:'Plus Jakarta Sans', sans-serif;" onclick="selectPcFont(&quot;'Plus Jakarta Sans', sans-serif&quot;, this)">Plus Jakarta Sans</button>
+                    <button class="pc-font-option" style="font-family:'JetBrains Mono', monospace;" onclick="selectPcFont(&quot;'JetBrains Mono', monospace&quot;, this)">JetBrains Mono</button>
+                    <button class="pc-font-option pc-selected" id="pcFontInterBtn" style="font-family:'Inter', sans-serif;" onclick="selectPcFont(&quot;'Inter', sans-serif&quot;, this)">Inter</button>
+                    <button class="pc-font-option" style="font-family:'Quicksand', sans-serif;" onclick="selectPcFont(&quot;'Quicksand', sans-serif&quot;, this)">Quicksand</button>
+                </div>
+
+                <!-- Font size panel -->
+                <div class="pc-dropdown-panel" id="pcPanel-size">
+                    <div class="pc-size-row">
+                        <button class="pc-size-option" onclick="selectPcSize(14, this)">14px</button>
+                        <button class="pc-size-option pc-selected" id="pcSize16Btn" onclick="selectPcSize(16, this)">16px</button>
+                        <button class="pc-size-option" onclick="selectPcSize(18, this)">18px</button>
+                    </div>
+                </div>
+
+                <!-- Font color panel -->
+                <div class="pc-dropdown-panel" id="pcPanel-color">
+                    <div class="pc-color-grid">
+                        <button class="pc-swatch" style="background:var(--pc-red)"    title="Red"    onclick="selectPcColor('var(--pc-red)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-orange)" title="Orange" onclick="selectPcColor('var(--pc-orange)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-yellow)" title="Yellow" onclick="selectPcColor('var(--pc-yellow)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-gold)"   title="Gold"   onclick="selectPcColor('var(--pc-gold)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-lime)"   title="Lime"   onclick="selectPcColor('var(--pc-lime)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-green)"  title="Green"  onclick="selectPcColor('var(--pc-green)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-teal)"   title="Teal"   onclick="selectPcColor('var(--pc-teal)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-cyan)"   title="Cyan"   onclick="selectPcColor('var(--pc-cyan)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-blue)"   title="Blue"   onclick="selectPcColor('var(--pc-blue)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-indigo)" title="Indigo" onclick="selectPcColor('var(--pc-indigo)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-purple)" title="Purple" onclick="selectPcColor('var(--pc-purple)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-pink)"   title="Pink"   onclick="selectPcColor('var(--pc-pink)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-plum)"   title="Plum"   onclick="selectPcColor('var(--pc-plum)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-brown)"  title="Brown"  onclick="selectPcColor('var(--pc-brown)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-black)"  title="Black"  onclick="selectPcColor('var(--pc-black)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-white)"  title="White"  onclick="selectPcColor('var(--pc-white)', this)"></button>
+                    </div>
+                </div>
+
+                <!-- Background color panel -->
+                <div class="pc-dropdown-panel" id="pcPanel-bg">
+                    <div class="pc-color-grid">
+                        <button class="pc-swatch pc-none" title="No background" onclick="selectPcBg('', this)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="20" x2="20" y2="4"></line></svg>
+                        </button>
+                        <button class="pc-swatch" style="background:var(--pc-red)"    title="Red"    onclick="selectPcBg('var(--pc-red)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-orange)" title="Orange" onclick="selectPcBg('var(--pc-orange)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-yellow)" title="Yellow" onclick="selectPcBg('var(--pc-yellow)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-gold)"   title="Gold"   onclick="selectPcBg('var(--pc-gold)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-lime)"   title="Lime"   onclick="selectPcBg('var(--pc-lime)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-green)"  title="Green"  onclick="selectPcBg('var(--pc-green)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-teal)"   title="Teal"   onclick="selectPcBg('var(--pc-teal)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-cyan)"   title="Cyan"   onclick="selectPcBg('var(--pc-cyan)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-blue)"   title="Blue"   onclick="selectPcBg('var(--pc-blue)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-indigo)" title="Indigo" onclick="selectPcBg('var(--pc-indigo)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-purple)" title="Purple" onclick="selectPcBg('var(--pc-purple)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-pink)"   title="Pink"   onclick="selectPcBg('var(--pc-pink)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-plum)"   title="Plum"   onclick="selectPcBg('var(--pc-plum)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-brown)"  title="Brown"  onclick="selectPcBg('var(--pc-brown)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-black)"  title="Black"  onclick="selectPcBg('var(--pc-black)', this)"></button>
+                        <button class="pc-swatch" style="background:var(--pc-white)"  title="White"  onclick="selectPcBg('var(--pc-white)', this)"></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canvas -->
+            <div class="pc-canvas-wrap" id="pcCanvasWrap">
+                <div class="pc-placeholder" id="pcPlaceholder">What's happening right now&hellip;</div>
+                <div class="pc-canvas" id="pcCanvas" contenteditable="true" spellcheck="true" oninput="updatePcCounter()"></div>
+            </div>
+
+            <!-- Bottom dark icon strip -->
+            <div class="pc-bottom-bar">
+                <div class="pc-bottom-icons">
+                    <div class="pc-emoji-wrap">
+                        <button class="pc-icon-btn" title="Emoji" onclick="toggleEmojiPanel()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9" y2="9.01"></line><line x1="15" y1="9" x2="15" y2="9.01"></line></svg>
+                        </button>
+                        <div class="pc-emoji-panel" id="pcEmojiPanel">
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('😀')">😀</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('😂')">😂</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('😍')">😍</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('🥳')">🥳</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('😎')">😎</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('🤔')">🤔</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('😢')">😢</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('😡')">😡</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('🔥')">🔥</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('✨')">✨</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('🎉')">🎉</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('💯')">💯</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('👍')">👍</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('👏')">👏</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('🙌')">🙌</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('❤️')">❤️</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('💔')">💔</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('🌈')">🌈</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('⭐')">⭐</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('🌙')">🌙</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('☀️')">☀️</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('🚀')">🚀</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('🍕')">🍕</button>
+                            <button class="pc-emoji-btn" onclick="insertPcEmoji('🐶')">🐶</button>
+                        </div>
+                    </div>
+
+                    <button class="pc-icon-btn" title="Add image" onclick="triggerPcImageUpload()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                    </button>
+                    <input type="file" id="pcImageInput" accept="image/*" style="display:none" onchange="handlePcImageUpload(event)">
+
+                    <button class="pc-icon-btn" title="Bullet point list" onclick="pcBulletList()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="6" x2="20" y2="6"></line><line x1="9" y1="12" x2="20" y2="12"></line><line x1="9" y1="18" x2="20" y2="18"></line><circle cx="4" cy="6" r="1.3" fill="currentColor" stroke="none"></circle><circle cx="4" cy="12" r="1.3" fill="currentColor" stroke="none"></circle><circle cx="4" cy="18" r="1.3" fill="currentColor" stroke="none"></circle></svg>
+                    </button>
+
+                    <button class="pc-icon-btn" title="Numbered list" onclick="pcNumberedList()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="10" y1="6" x2="20" y2="6"></line><line x1="10" y1="12" x2="20" y2="12"></line><line x1="10" y1="18" x2="20" y2="18"></line><text x="1.5" y="8.2" font-size="7" font-weight="700" fill="currentColor" stroke="none" font-family="sans-serif">1</text><text x="1.5" y="14.2" font-size="7" font-weight="700" fill="currentColor" stroke="none" font-family="sans-serif">2</text><text x="1.5" y="20.2" font-size="7" font-weight="700" fill="currentColor" stroke="none" font-family="sans-serif">3</text></svg>
+                    </button>
+
+                    <button class="pc-icon-btn" title="Insert hyperlink" onclick="pcInsertLink()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11.5 4.5"></path><path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07L12.5 19.5"></path></svg>
+                    </button>
+                </div>
+
+                <div class="pc-bottom-right">
+                    <span class="pc-counter" id="pcCounter">0/5000</span>
+                    <button class="pc-trash-btn" title="Clear post" onclick="clearPcPost()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   POST COMPOSER — open/close
+══════════════════════════════════════════════════════ */
+function openPostComposer() {
+    document.getElementById('postComposerBackdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function () { document.getElementById('pcCanvas').focus(); }, 50);
+}
+
+function closePostComposer(e) {
+    if (e && e.target !== document.getElementById('postComposerBackdrop')) return;
+    document.getElementById('postComposerBackdrop').classList.remove('open');
+    document.body.style.overflow = '';
+    closeAllPcPanels();
+}
+
+/* ── Toolbar dropdown panels ── */
+function closeAllPcPanels() {
+    document.querySelectorAll('.pc-dropdown-panel').forEach(function (p) { p.classList.remove('pc-open'); });
+    document.querySelectorAll('.pc-tool-btn').forEach(function (b) { b.classList.remove('pc-active'); });
+    var emoji = document.getElementById('pcEmojiPanel');
+    if (emoji) emoji.classList.remove('pc-open');
+}
+
+function togglePcPanel(name, btnEl) {
+    var panel = document.getElementById('pcPanel-' + name);
+    var wasOpen = panel.classList.contains('pc-open');
+    closeAllPcPanels();
+    if (wasOpen) return;
+    panel.classList.add('pc-open');
+    btnEl.classList.add('pc-active');
+    var toolbar = document.getElementById('pcToolbar');
+    var left = btnEl.offsetLeft;
+    var maxLeft = toolbar.offsetWidth - panel.offsetWidth;
+    if (left > maxLeft) left = Math.max(0, maxLeft);
+    panel.style.left = left + 'px';
+}
+
+/* ── Force plain-text paste ──
+   Markdown editors and other rich-text sources put their own HTML on the
+   clipboard (lists with their own margins, paragraphs with default browser
+   spacing, sometimes even their own inline background/font colours). If we
+   let that through, it creates the "weird lines and gaps" and can visually
+   mask the background/colour the person picked here. So every paste is
+   reduced to plain text and re-inserted using the same line-break style as
+   normal typing. */
+document.getElementById('pcCanvas').addEventListener('paste', function (e) {
+    e.preventDefault();
+    var text = '';
+    if (e.clipboardData) {
+        text = e.clipboardData.getData('text/plain');
+    } else if (window.clipboardData) {
+        text = window.clipboardData.getData('Text');
+    }
+    var lines = text.split(/\r\n|\r|\n/);
+    var html = lines.map(function (line) {
+        var span = document.createElement('div');
+        span.textContent = line;
+        return span.innerHTML;
+    }).join('<br>');
+    document.execCommand('insertHTML', false, html);
+    updatePcCounter();
+});
+
+/* Close toolbar / emoji panels on outside click */
+document.addEventListener('click', function (e) {
+    if (!e.target.closest('.pc-toolbar') && !e.target.closest('.pc-dropdown-panel')) {
+        document.querySelectorAll('.pc-dropdown-panel').forEach(function (p) { p.classList.remove('pc-open'); });
+        document.querySelectorAll('.pc-tool-btn').forEach(function (b) { b.classList.remove('pc-active'); });
+    }
+    if (!e.target.closest('.pc-emoji-wrap')) {
+        var emoji = document.getElementById('pcEmojiPanel');
+        if (emoji) emoji.classList.remove('pc-open');
+    }
+});
+
+/* ── Font style ── */
+function selectPcFont(fontValue, btnEl) {
+    var canvas = document.getElementById('pcCanvas');
+    var placeholder = document.getElementById('pcPlaceholder');
+    canvas.style.fontFamily = fontValue;
+    placeholder.style.fontFamily = fontValue;
+    document.querySelectorAll('#pcPanel-font .pc-font-option').forEach(function (b) { b.classList.remove('pc-selected'); });
+    btnEl.classList.add('pc-selected');
+    closeAllPcPanels();
+    canvas.focus();
+}
+
+/* ── Font size ── */
+function selectPcSize(px, btnEl) {
+    var canvas = document.getElementById('pcCanvas');
+    var placeholder = document.getElementById('pcPlaceholder');
+    canvas.style.fontSize = px + 'px';
+    placeholder.style.fontSize = px + 'px';
+    document.querySelectorAll('#pcPanel-size .pc-size-option').forEach(function (b) { b.classList.remove('pc-selected'); });
+    btnEl.classList.add('pc-selected');
+    closeAllPcPanels();
+    canvas.focus();
+}
+
+/* ── Font color ── */
+function selectPcColor(value, btnEl) {
+    var canvas = document.getElementById('pcCanvas');
+    canvas.style.color = value;
+    document.querySelectorAll('#pcPanel-color .pc-swatch').forEach(function (s) { s.classList.remove('pc-selected'); });
+    btnEl.classList.add('pc-selected');
+    closeAllPcPanels();
+    canvas.focus();
+}
+
+/* ── Background color ── */
+function selectPcBg(value, btnEl) {
+    document.getElementById('pcCanvasWrap').style.background = value;
+    document.querySelectorAll('#pcPanel-bg .pc-swatch').forEach(function (s) { s.classList.remove('pc-selected'); });
+    btnEl.classList.add('pc-selected');
+    closeAllPcPanels();
+    document.getElementById('pcCanvas').focus();
+}
+
+/* ── Rich content commands ── */
+function pcFocusCanvas() { document.getElementById('pcCanvas').focus(); }
+
+function pcBulletList() {
+    pcFocusCanvas();
+    document.execCommand('insertUnorderedList');
+    updatePcCounter();
+}
+
+function pcNumberedList() {
+    pcFocusCanvas();
+    document.execCommand('insertOrderedList');
+    updatePcCounter();
+}
+
+function pcInsertLink() {
+    var url = prompt('Enter a URL:');
+    if (!url) return;
+    pcFocusCanvas();
+    var sel = window.getSelection();
+    if (!sel || sel.toString().length === 0) {
+        document.execCommand('insertHTML', false, '<a href="' + encodeURI(url) + '" target="_blank" rel="noopener">' + url + '</a>');
+    } else {
+        document.execCommand('createLink', false, url);
+    }
+    updatePcCounter();
+}
+
+/* ── Emoji ── */
+function toggleEmojiPanel() {
+    var panel = document.getElementById('pcEmojiPanel');
+    var wasOpen = panel.classList.contains('pc-open');
+    closeAllPcPanels();
+    if (!wasOpen) panel.classList.add('pc-open');
+}
+
+function insertPcEmoji(emoji) {
+    pcFocusCanvas();
+    document.execCommand('insertText', false, emoji);
+    document.getElementById('pcEmojiPanel').classList.remove('pc-open');
+    updatePcCounter();
+}
+
+/* ── Image upload ── */
+function triggerPcImageUpload() {
+    document.getElementById('pcImageInput').click();
+}
+
+function handlePcImageUpload(evt) {
+    var file = evt.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        pcFocusCanvas();
+        var img = '<img src="' + e.target.result + '" alt="">';
+        document.execCommand('insertHTML', false, img);
+        updatePcCounter();
+    };
+    reader.readAsDataURL(file);
+    evt.target.value = '';
+}
+
+/* ── Character counter / placeholder / Post button state ── */
+function updatePcCounter() {
+    var canvas = document.getElementById('pcCanvas');
+    var counterEl = document.getElementById('pcCounter');
+    var postBtn = document.getElementById('pcPostBtn');
+    var len = canvas.textContent.length;
+    var trimmedLen = canvas.textContent.trim().length;
+    var hasMedia = !!canvas.querySelector('img');
+
+    counterEl.textContent = len + '/5000';
+    counterEl.classList.toggle('pc-over', len > 5000);
+
+    document.getElementById('pcPlaceholder').classList.toggle('pc-hidden', len > 0 || hasMedia);
+    postBtn.disabled = (trimmedLen === 0 && !hasMedia) || len > 5000;
+}
+
+/* ── Clear / reset ── */
+function resetPcComposer() {
+    var canvas = document.getElementById('pcCanvas');
+    canvas.innerHTML = '';
+    canvas.style.fontFamily = "'Inter', sans-serif";
+    canvas.style.fontSize = '16px';
+    canvas.style.color = '';
+    document.getElementById('pcCanvasWrap').style.background = '';
+    document.getElementById('pcPlaceholder').style.fontFamily = "'Inter', sans-serif";
+    document.getElementById('pcPlaceholder').style.fontSize = '16px';
+
+    document.querySelectorAll('.pc-selected').forEach(function (el) { el.classList.remove('pc-selected'); });
+    document.getElementById('pcFontInterBtn').classList.add('pc-selected');
+    document.getElementById('pcSize16Btn').classList.add('pc-selected');
+
+    updatePcCounter();
+}
+
+function clearPcPost() {
+    if (!confirm('Clear this post? This cannot be undone.')) return;
+    resetPcComposer();
+}
+
+/* ══════════════════════════════════════════════════════
+   USER POSTS — persisted to localStorage, rendered on
+   the Posts (single-column) feed only.
+══════════════════════════════════════════════════════ */
+var PC_POSTS_KEY = 'orro-user-posts';
+
+/* Best-guess readable text colour for each background preset,
+   used only when the person didn't explicitly pick a font colour. */
+var PC_BG_CONTRAST = {
+    'var(--pc-red)':    '#ffffff',
+    'var(--pc-orange)': '#111111',
+    'var(--pc-yellow)': '#111111',
+    'var(--pc-gold)':   '#111111',
+    'var(--pc-lime)':   '#111111',
+    'var(--pc-green)':  '#ffffff',
+    'var(--pc-teal)':   '#ffffff',
+    'var(--pc-cyan)':   '#ffffff',
+    'var(--pc-blue)':   '#ffffff',
+    'var(--pc-indigo)': '#ffffff',
+    'var(--pc-purple)': '#ffffff',
+    'var(--pc-pink)':   '#ffffff',
+    'var(--pc-plum)':   '#ffffff',
+    'var(--pc-brown)':  '#ffffff',
+    'var(--pc-black)':  '#ffffff',
+    'var(--pc-white)':  '#111111'
+};
+
+function getUserPosts() {
+    try {
+        var raw = localStorage.getItem(PC_POSTS_KEY);
+        return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+        console.error('Could not read posts from localStorage', e);
+        return [];
+    }
+}
+
+function saveUserPosts(posts) {
+    try {
+        localStorage.setItem(PC_POSTS_KEY, JSON.stringify(posts));
+    } catch (e) {
+        console.error('Could not save post to localStorage', e);
+    }
+}
+
+function formatPcTimeAgo(ts) {
+    var diff = Math.max(0, Date.now() - ts);
+    var sec = Math.floor(diff / 1000);
+    if (sec < 60) return 'Just now';
+    var min = Math.floor(sec / 60);
+    if (min < 60) return min + 'm ago';
+    var hr = Math.floor(min / 60);
+    if (hr < 24) return hr + 'h ago';
+    var day = Math.floor(hr / 24);
+    return day + 'd ago';
+}
+
+/* Contenteditable leaves behind empty <div><br></div> lines (e.g. after pressing
+   Enter, or after inserting an image). Left in place, each one renders as its
+   own little empty "cell" between the real content. Strip any block element
+   that has no text and no media, repeatedly, so nested empties are caught too. */
+function pcCleanHtml(html) {
+    var tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    var changed = true;
+    while (changed) {
+        changed = false;
+        tmp.querySelectorAll('div, p').forEach(function (el) {
+            var isEmpty = el.textContent.trim() === '' && !el.querySelector('img, a, ul, ol');
+            if (isEmpty) {
+                el.parentNode.removeChild(el);
+                changed = true;
+            }
+        });
+    }
+    return tmp.innerHTML;
+}
+
+/* True if a stored post's html actually has visible text or media —
+   used to filter out accidental whitespace-only posts. */
+function pcHtmlHasContent(html) {
+    var tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    return tmp.textContent.trim().length > 0 || !!tmp.querySelector('img');
+}
+
+function makeUserPostCard(postObj) {
+    var card = document.createElement('div');
+    card.className = 'card pc-user-card';
+
+    var dotsIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>';
+    var heartIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+
+    var bg = postObj.background || '';
+    var textColor = postObj.color;
+    if (!textColor) {
+        textColor = (bg && PC_BG_CONTRAST[bg]) ? PC_BG_CONTRAST[bg] : 'var(--text-main)';
+    }
+    var bodyBg = bg || 'var(--surface-elevated)';
+
+    card.innerHTML =
+        '<div class="card-dropdown" id="dd-' + postObj.id + '">' +
+            '<button class="card-dropdown-item">Share</button>' +
+            '<button class="card-dropdown-item danger" onclick="deleteUserPost(\'' + postObj.id + '\', event)">Delete</button>' +
+        '</div>' +
+        '<button class="card-menu" onclick="toggleCardMenu(\'' + postObj.id + '\',event)">' + dotsIcon + '</button>' +
+        '<button class="card-like" onclick="toggleLike(this,event)">' + heartIcon + '</button>' +
+        '<div class="pc-user-card-meta">You &middot; ' + formatPcTimeAgo(postObj.createdAt) + '</div>' +
+        '<div class="pc-user-card-body" style="background:' + bodyBg + ';">' +
+            '<div class="pc-user-card-content" style="font-family:' + (postObj.font || "'Inter', sans-serif") + '; font-size:' + (postObj.size || '16px') + '; color:' + textColor + ';">' +
+                pcCleanHtml(postObj.html) +
+            '</div>' +
+        '</div>';
+
+    return card;
+}
+
+function deleteUserPost(id, e) {
+    if (e) e.stopPropagation();
+    if (!confirm('Delete this post?')) return;
+    var posts = getUserPosts().filter(function (p) { return p.id !== id; });
+    saveUserPosts(posts);
+    renderUserPostsFeed();
+}
+
+/* Renders every stored user post into the Posts (single-column) feed only.
+   Also prunes any accidental whitespace-only entries left over in storage. */
+function renderUserPostsFeed() {
+    var container = document.getElementById('userPostsContainer');
+    if (!container) return;
+    var all = getUserPosts();
+    var posts = all.filter(function (p) { return pcHtmlHasContent(p.html); });
+    if (posts.length !== all.length) saveUserPosts(posts);
+
+    container.innerHTML = '';
+    posts.forEach(function (p) {
+        container.appendChild(makeUserPostCard(p));
+    });
+}
+
+/* ── Submit ── */
+function submitPcPost() {
+    var canvas = document.getElementById('pcCanvas');
+    var len = canvas.textContent.length;
+    var trimmedLen = canvas.textContent.trim().length;
+    var hasMedia = !!canvas.querySelector('img');
+    if ((trimmedLen === 0 && !hasMedia) || len > 5000) return;
+
+    var postObj = {
+        id: 'upost-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
+        html: pcCleanHtml(canvas.innerHTML),
+        font: canvas.style.fontFamily || "'Inter', sans-serif",
+        size: canvas.style.fontSize || '16px',
+        color: canvas.style.color || '',
+        background: document.getElementById('pcCanvasWrap').style.background || '',
+        createdAt: Date.now()
+    };
+
+    var posts = getUserPosts();
+    posts.unshift(postObj);
+    saveUserPosts(posts);
+
+    closePostComposer();
+    resetPcComposer();
+
+    /* Show it: switch to the Posts (single-column) view if not already there */
+    if (_feedLayout !== 'single') {
+        toggleFeedLayout();
+    } else {
+        renderUserPostsFeed();
+    }
+}
+
+/* ── Page opens on the Posts (single-column) newsfeed by default.
+   Mirrors what toggleFeedLayout()'s multi→single branch would do,
+   minus the DOM flips already baked into the initial markup. ── */
+purgeFragmentsGrid();
+renderUserPostsFeed();
+loadPostsBatch();
+</script>
+
+</body>
+</html>
