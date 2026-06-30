@@ -1,93 +1,22 @@
-<p align="center"><svg version="1.2" xmlns="http://www.w3.org/2000/svg" width="235" viewBox="1 2 386 322" fill="currentColor">
-<path d="m0.77 125.78l110.9-110.9 62.29 183.55z"/>
-<path d="m130 3l65 188 191-62z"/>
-<path d="m182.2 215.4l192.6-60.3-123.3 80.1-130.1 88.5z"/>
-</svg></p>
+<img src="https://raw.githubusercontent.com/orroprotocol/core/refs/heads/main/assets/orro_media_edited.jpg">
 
-# ORRO Protocol May 2026 Project Update
+ORRO’S PRINCIPLE OF TECHNOLOGICAL NEUTRALITY
 
-The past six months have been a defining period for ORRO. We’ve plowed through consecutive challenges, and while the project is primarily driven by a two-person team—meaning progress can be measured and deliberate—we have successfully reached the critical milestones required for this Q2 update.
+ORRO adheres to a policy of technological neutrality regarding generative architectures. The apparent tension between this stance and our deployment of anti-scraping and intellectual property protections for human artists is resolved by our underlying objective. These defensive technologies serve as a critical countermeasure against asymmetric data extraction by large language models. Rather than obstructing technological progress, we consider our interventions essential to maintaining a fair, balanced creative economy and supporting the sustainable advancement of human artistry.
 
-We’ve reached a point of high confidence in the protocol's stability. So, what’s changed, and what remains the foundation of the mission?
+ORRO’S COMMITMENT TO CREATIVE EQUITY AND TRUST
 
-## Philosophy
+ORRO aspires to be a globally trusted platform where all members engage with creativity, determination, and mutual respect. Central to our philosophy is the principle of equal opportunity, welcoming creators at every stage of their artistic journey or technical skill level. While we do not expect everybody to be a Leonardo da Vinci or Van Gogh, we maintain strict standards surrounding our platform authority and content moderation. Our moderators are selected for their diligence, passion, and objective fairness. Furthermore, our verified badges are strictly reserved for the select few who meet our highest trust requirements, established through a proven track record of integrity on the platform.
 
-In the interest of maintaining neutrality and avoiding the inflammatory, fast-paced friction common in legacy systems, we have postponed the **Gossip Box** until after the beta phase.
+ORRO’S FRAMEWORK OF STRUCTURAL GRAVITY
 
-Our narrative has evolved: ORRO is a **"Cultural Media"** utility—a space for shared, inclusive appeal—rather than another "social media" platform designed to exploit attention spans and algorithms.
+ORRO models the disruptive potential of decentralized architectures, specifically regarding the mitigation of systemic anxieties surrounding data governance, personal privacy, and identity sovereignty. Rather than imposing rigid frameworks, we encourage unencumberred exploration. Developed as a specialized matrix for time-based digital and post-digital artistic production, the platform exerts a structural gravity. This pull consolidates a network of synchronized practitioners operating within a shared temporal acceleration.
 
-We are committed to a higher tier of service. While ORRO remains fully decentralized and accessible via browser-based wallets for complete anonymity, becoming a **Verified Member** will represent a significant milestone. This verified status will require 2FA (email/password), a consistent minimum balance of **1.0 SOL**, and the connection of an ample storage device—supplementing the 1GB of Google Cloud Storage provided to all new users.
+ORRO'S LONGEVITY AND ABILITY TO ALTER TIME
 
-## Economy
+Finally, let us address the horizon of our longevity. As an emerging initiative, ORRO has intentionally operated below the radar of mainstream public attention—which is a sophisticated corporate way of saying that we haven't shown you very much yet. However, our trajectory is sustained by rigorous perseverance, disciplined execution, and a profound commitment to a highly esteemed cause. We are systematically navigating toward our initial Beta environment deployment later this year, and we will be opening up the special invite system soon.
 
-ORRO has moved away from the tethered \$ORROT model; the ecosystem now operates exclusively on its own internal utility token, **\$ORRO**. This utility token is strictly for platform-internal use and cannot be traded or withdrawn from the site. Furthermore, we have unanimously decided that there will be no ICO or public token sale. While we understand this may disappoint those seeking a pre-release investment opportunity, we were simply not convinced of the traditional token-sale model's relevance in 2026. Hosting a public ICO in the current decentralized landscape felt too much like hosting a NASDAQ investor meeting at an antiquated country fair.
-
-Our model focuses on a **pay-as-you-go** structure for ORRO tools and services. We are targeting traditional artists, digital creators, and post-digital innovators who want to leverage cost-effective, streamlined capabilities to reimagine their workflows and explore a new way of working.
-
-User sovereignty remains a priority: you can withdraw unused funds from your account at any time should you choose to archive it. In the event of archiving—whether for redundancy or preference—all user data, project records, and processing logs will be retained for a minimum of three months to ensure you have ample time to secure your documentation.
-
-## Capability
-
-ORRO is prioritizing its most formidable technical strengths: **Fragmentation** and **Watermarking**. We are engineering these into state-of-the-art, "weaponized" protection and prevention capabilities. Anchored by the Solana blockchain, these tools serve as a definitive defense against unauthorized AI scraping and illicit model training—an effort we expect to bolster with extensive architectural R&D later this year.
-
-The most significant front-end evolution is a complete overhaul of the navigation architecture. Moving away from traditional top-bar placement, the navigation now occupies a high-density, collapsible left-hand sidebar. This shift reflects our new **"Cultural Media"** focus: we have expanded the menu options to prioritize user experience and utility. Our goal is to add measurable value to the creator’s workflow, rather than simply capitalizing on user data.
-
-## Accountability
-
-While the ORRO public beta launch was originally targeted for mid-2026, we have adjusted the timeline to ensure our core features and foundational architecture are hardened and finalized correctly the first time. It is with sustained momentum and excitement that we announce the new launch window: Q1 2027.
-
-Regarding our planned beta feature set, the Communities section is the only other component postponed. We realized that users will have a significantly better experience if this functionality is introduced after the initial beta phase.
-
-By delaying the Communities launch until our user base reaches a critical mass, we ensure that the platform remains high-density and active for first-time users. This strategic move allows us to focus entirely on the quality of individual creator tools during the beta test period before scaling into full-scale community functionality.
-
-## Updated roadmap
-
-Beta stage: Q1/Q2 2027
-
-```mermaid
-flowchart TD
-    A[ORRO Beta Stage\nQ1/Q2 2027] --> B[Core Creative System]
-    A --> C[User & Identity]
-    A --> D[Collaboration & Communication]
-    A --> E[Supporting Tools]
-
-    B --> B1[Projects]
-    B --> B2[Fragments]
-    B --> B3[Certificates]
-    B --> B4[Agreements]
-
-    C --> C1[Profiles]
-    C --> C2[Portfolios]
-    C --> C3[Workspaces]
-
-    D --> D1[Group Messaging]
-
-    E --> E1[Basic Tools]
-```
-
-Platform features:
-
-- Projects
-
-- Fragments
-
-- Certificates
-
-- Agreements
-
-- Profiles
-
-- Portfolios
-
-- Workspaces
-
-- Basic Tools
-
-- Group Messaging
-
-## License
-
-MIT License — see LICENSE for details.
+Stick with us as we plot out course directly toward the initial launch of the Beta test coming up later this year! And although it mightn't have any initial influence on time itself stick with us, because one day, we genuinely intend to alter time itself. And if we fail at that, we’ll at least make sure your calendar invites look incredible.
 
 <p align="center">Built with 💜 by the ORRO Community.</p>
 
